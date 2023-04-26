@@ -6,3 +6,5 @@ Workoutholic is a Java based app/game that would be ran on the Android mobile pl
 |Project Directories | Brief Description|
 |---------------| -----------------|
 |[`/reports`](./reports) | Stores our weekly reports.
+|[`/src`](./src) | Stores our source code files.
+|[`/test`](./test) | Stores our test files.
