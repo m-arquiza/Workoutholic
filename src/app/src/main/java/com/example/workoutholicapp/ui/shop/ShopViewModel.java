@@ -11,4 +11,8 @@ public class ShopViewModel extends ViewModel {
     public void onFoodClick() {
         Log.d("food button", "food clicked!");
     }
+
+    public void onWaterClick() {
+        Log.d("water button", "water clicked!");
+    }
 }
