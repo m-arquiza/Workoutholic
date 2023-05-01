@@ -3,12 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_statistics">
+    app:startDestination="@+id/navigation_buddy">
 
     <fragment
-        android:id="@+id/navigation_statistics"
-        android:name="com.example.workoutholicapp.ui.statistics.StatisticsFragment"
-        android:label="Statistics"
-        tools:layout="@layout/fragment_statistics" />
+        android:id="@+id/navigation_buddy"
+        android:name="com.example.workoutholicapp.ui.buddy.BuddyFragment"
+        android:label="Buddy"
+        tools:layout="@layout/fragment_buddy" />
+
+    <fragment
+        android:id="@+id/navigation_shop"
+        android:name="com.example.workoutholicapp.ui.shop.ShopFragment"
+        android:label="Shop"
+        tools:layout="@layout/fragment_shop" />
 
 </navigation>

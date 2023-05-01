@@ -1,4 +1,4 @@
-package com.example.workoutholicapp.ui.statistics;
+package com.example.workoutholicapp.ui.buddy;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.workoutholicapp.databinding.FragmentStatisticsBinding;
+import com.example.workoutholicapp.databinding.FragmentBuddyBinding;
 
-public class StatisticsFragment extends Fragment {
+public class BuddyFragment extends Fragment {
 
-    private FragmentStatisticsBinding binding;
+    private FragmentBuddyBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        StatisticsViewModel statisticsViewModel =
-                new ViewModelProvider(this).get(StatisticsViewModel.class);
+        BuddyViewModel buddyViewModel =
+                new ViewModelProvider(this).get(BuddyViewModel.class);
 
-        binding = FragmentStatisticsBinding.inflate(inflater, container, false);
+        binding = FragmentBuddyBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textStatistics;
-        statisticsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textBuddy;
+        buddyViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

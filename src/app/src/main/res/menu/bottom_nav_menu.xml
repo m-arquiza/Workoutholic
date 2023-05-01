@@ -2,8 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_statistics"
+        android:id="@+id/navigation_buddy"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="Statistics" />
+        android:title="Buddy" />
+
+    <item
+        android:id="@+id/navigation_shop"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="Shop" />
 
 </menu>
