@@ -27,18 +27,22 @@ public class ShopFragment extends Fragment {
         binding = FragmentShopBinding.bind(root);
 
         Button foodButton = root.findViewById(R.id.food_button);
+        Button waterButton = root.findViewById(R.id.water_button);
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onFoodClick();
+                shopViewModel.onFoodClick();
+            }
+        });
+
+        foodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shopViewModel.onWaterClick();
             }
         });
 
         return root;
-    }
-
-    public void onFoodClick() {
-        shopViewModel.onFoodClick();
     }
 
     @Override

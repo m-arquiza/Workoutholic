@@ -10,37 +10,34 @@
         android:id="@+id/text_shop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="28dp"
-        android:text="Shop"
+        android:layout_marginTop="20dp"
+
+        android:text="SHOP"
         android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/food_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="30sp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.028" />
+        tools:layout_editor_absoluteX="8dp" />
 
     <Button
         android:id="@+id/food_button"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="24dp"
         android:layout_marginBottom="519dp"
         android:onClick="onFoodClick"
         android:text="click for food"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_shop" />
+        app:layout_constraintTop_toBottomOf="@+id/text_shop"
+        app:layout_constraintVertical_bias="1.0" />
 
-    <!--    <Button-->
-    <!--        android:id="@+id/water_button"-->
-    <!--        android:layout_width="130dp"-->
-    <!--        android:layout_height="130dp"-->
-    <!--        android:text="click for water"-->
-    <!--        tools:layout_editor_absoluteX="253dp"-->
-    <!--        tools:layout_editor_absoluteY="82dp" />-->
+    <Button
+        android:id="@+id/water_button"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="519dp"
+        android:text="click for water"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
