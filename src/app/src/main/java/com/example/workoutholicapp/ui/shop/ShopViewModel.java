@@ -1,19 +1,14 @@
 package com.example.workoutholicapp.ui.shop;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+import android.util.Log;
+
 import androidx.lifecycle.ViewModel;
+import android.view.View;
+
 
 public class ShopViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
-
-    public ShopViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is the shop fragment I made");
-    }
-
-    public LiveData<String> getText() {
-        return mText;
+    public void onFoodClick() {
+        Log.d("food button", "food clicked!");
     }
 }
