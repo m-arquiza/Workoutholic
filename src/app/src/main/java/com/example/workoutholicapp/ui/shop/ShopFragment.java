@@ -35,7 +35,7 @@ public class ShopFragment extends Fragment {
             }
         });
 
-        foodButton.setOnClickListener(new View.OnClickListener() {
+        waterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 shopViewModel.onWaterClick();
