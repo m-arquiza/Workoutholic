@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_buddy" />
 
     <fragment
+        android:id="@+id/navigation_entries"
+        android:name="com.example.workoutholicapp.ui.entries.EntriesFragment"
+        android:label="@string/title_entries"
+        tools:layout="@layout/fragment_entries" />
+
+    <fragment
         android:id="@+id/navigation_shop"
         android:name="com.example.workoutholicapp.ui.shop.ShopFragment"
         android:label="Shop"
