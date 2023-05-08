@@ -38,6 +38,14 @@ public class ShopFragment extends Fragment {
     private FragmentShopBinding binding;
     private ShopViewModel shopViewModel;
 
+    private boolean autoFoodOn = false;
+    private boolean autoWaterOn = false;
+    private boolean autoHappyOn = false;
+    private boolean toy1bought = false;
+    private boolean toy2bought = false;
+    private boolean toy3bought = false;
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -90,29 +98,34 @@ public class ShopFragment extends Fragment {
 
         autoFood.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                autoFoodOn = true;
                 autoFood.setEnabled(false);
                 autoFood.setAlpha(0.5f);
                 TextView food = getView().findViewById(R.id.af_activate);
                 food.setText("auto feed on!");
             }
         });
+
         autoWater.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                autoWaterOn = true;
                 autoWater.setEnabled(false);
                 autoWater.setAlpha(0.5f);
-                TextView water = getView().findViewById(R.id.aw_activate);
-                water.setText("auto hydrate on!");
+                TextView food = getView().findViewById(R.id.aw_activate);
+                food.setText("auto hydrate on!");
             }
         });
+
         autoHappy.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                autoHappyOn = true;
                 autoHappy.setEnabled(false);
                 autoHappy.setAlpha(0.5f);
-                TextView happy = getView().findViewById(R.id.ah_activate);
-                happy.setText("auto play on!");
+                TextView food = getView().findViewById(R.id.ah_activate);
+                food.setText("auto play on!");
             }
         });
 
@@ -125,6 +138,7 @@ public class ShopFragment extends Fragment {
         toy1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toy1bought = true;
                 toy1.setEnabled(false);
                 toy1.setAlpha(0.5f);
             }
@@ -132,6 +146,7 @@ public class ShopFragment extends Fragment {
         toy2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toy2bought = true;
                 toy2.setEnabled(false);
                 toy2.setAlpha(0.5f);
             }
@@ -139,12 +154,70 @@ public class ShopFragment extends Fragment {
         toy3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toy3bought = true;
                 toy3.setEnabled(false);
                 toy3.setAlpha(0.5f);
             }
         });
 
+        if (savedInstanceState != null) {
+            autoFoodOn = savedInstanceState.getBoolean("autoFoodOn");
+            if (autoFoodOn) {
+                autoFood.setEnabled(false);
+                autoFood.setAlpha(0.5f);
+                TextView food = root.findViewById(R.id.af_activate);
+                food.setText("auto feed on!");
+            }
+
+            autoWaterOn = savedInstanceState.getBoolean("autoWaterOn");
+            if (autoWaterOn) {
+                autoWater.setEnabled(false);
+                autoWater.setAlpha(0.5f);
+                TextView food = root.findViewById(R.id.aw_activate);
+                food.setText("auto hydrate on!");
+            }
+
+            autoHappyOn = savedInstanceState.getBoolean("autoHappyOn");
+            if (autoHappyOn) {
+                autoHappy.setEnabled(false);
+                autoHappy.setAlpha(0.5f);
+                TextView food = root.findViewById(R.id.ah_activate);
+                food.setText("auto play on!");
+            }
+
+            toy1bought = savedInstanceState.getBoolean("toy1bought");
+            if (toy1bought) {
+                toy1bought = true;
+                toy1.setEnabled(false);
+                toy1.setAlpha(0.5f);
+            }
+
+            toy2bought = savedInstanceState.getBoolean("toy2bought");
+            if (toy2bought) {
+                toy2bought = true;
+                toy2.setEnabled(false);
+                toy2.setAlpha(0.5f);
+            }
+
+            toy3bought = savedInstanceState.getBoolean("toy3bought");
+            if (toy3bought) {
+                toy3bought = true;
+                toy3.setEnabled(false);
+                toy3.setAlpha(0.5f);
+            }
+        }
         return root;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("autoFoodOn", autoFoodOn);
+        outState.putBoolean("autoWaterOn", autoWaterOn);
+        outState.putBoolean("autoHappyOn", autoHappyOn);
+        outState.putBoolean("toy1bought", toy1bought);
+        outState.putBoolean("toy2bought", toy2bought);
+        outState.putBoolean("toy3bought", toy3bought);
     }
 
     @Override

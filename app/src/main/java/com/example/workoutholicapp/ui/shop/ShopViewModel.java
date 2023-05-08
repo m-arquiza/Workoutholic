@@ -47,7 +47,6 @@ public class ShopViewModel extends ViewModel {
     public LiveData<Integer> foodCount() {
         return foodInStorage;
     }
-
     public LiveData<Integer> waterCount() {
         return waterInStorage;
     }
