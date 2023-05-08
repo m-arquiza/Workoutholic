@@ -42,6 +42,7 @@ public class BuddyFragment extends Fragment {
             }
         });
 
+
         return root;
     }
 

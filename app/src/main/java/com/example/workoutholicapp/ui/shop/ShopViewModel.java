@@ -2,28 +2,37 @@ package com.example.workoutholicapp.ui.shop;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 
 public class ShopViewModel extends ViewModel {
 
-    private int foodBought = 0;
-    private int waterBought = 0;
+    private MutableLiveData<Integer> foodInStorage = new MutableLiveData<>(0);
+    private MutableLiveData<Integer> waterInStorage = new MutableLiveData<>(0);
+
+
     public void onFoodClick() {
-        Log.d("food button", "food clicked!");
-        foodBought++;
+        Integer food = foodInStorage.getValue();
+        if (food != null) {
+            foodInStorage.setValue(food+1);
+        }
     }
 
     public void onWaterClick() {
-        Log.d("water button", "water clicked!");
-        waterBought++;
+        Integer water = waterInStorage.getValue();
+        if (water != null) {
+            waterInStorage.setValue(water+1);
+        }
     }
 
-    public int foodCount() {
-        return foodBought;
+    public LiveData<Integer> foodCount() {
+        return foodInStorage;
     }
 
-    public int waterCount() {
-        return waterBought;
+    public LiveData<Integer> waterCount() {
+        return waterInStorage;
     }
+
 }
