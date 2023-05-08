@@ -27,6 +27,24 @@ public class LogPlan {
     }
 
     /**
+     * Loops through plan and add each exercise and its date to
+     * the overall log list
+     *
+     * @param  exercise the exercise list that will be logged
+     * @param  date the current date
+     */
+    public void LogWorkoutPlan(List<Exercise> exercise, String date){
+        Iterator<Exercise> itr = exercise.iterator();
+        while(itr.hasNext()) {
+            Exercise cur = itr.next();
+            Log log = new Log();
+            log.setExercise(cur);
+            log.setDate(date);
+            Loglist.add(log);
+        }
+    }
+
+    /**
      * Searches through the list of all logs based on the date
      *
      * @param  date the date of logs you are looking for
