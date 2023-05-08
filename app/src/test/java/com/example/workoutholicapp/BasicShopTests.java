@@ -1,9 +1,10 @@
 package com.example.workoutholicapp;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import com.example.workoutholicapp.ui.shop.ShopViewModel;
+
+import org.junit.Test;
 
 
 public class BasicShopTests {
