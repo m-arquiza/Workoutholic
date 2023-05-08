@@ -4,19 +4,120 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.buddy.BuddyFragment">
+    tools:context=".ui.buddy.BuddyFragment"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="33dp">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="28dp"
+        android:src="@drawable/shiba"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/text_buddy" />
 
     <TextView
         android:id="@+id/text_buddy"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="100dp"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:text="Shiba's ready to get the day going!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <Button
+        android:id="@+id/dogfood_button"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="76dp"
+        android:layout_marginEnd="2dp"
+        android:text="food"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dogwater_button"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/dogwater_button"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="244dp"
+        android:layout_marginBottom="76dp"
+        android:layout_marginStart="2dp"
+        android:text="drink"
+        android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/dogfood_button" />
+    />
+
+    <Button
+        android:id="@+id/dog_toy2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="116dp"
+        android:text="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/dog_toy3"
+        app:layout_constraintStart_toStartOf="@+id/dog_toy1" />
+
+    <Button
+        android:id="@+id/dog_toy4"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="76dp"
+        android:text="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/dog_toy6" />
+
+    <Button
+        android:id="@+id/dog_toy5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="76dp"
+        android:text="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/dog_toy3"
+        app:layout_constraintStart_toStartOf="@+id/dog_toy1" />
+
+    <Button
+        android:id="@+id/dog_toy6"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="76dp"
+        android:text="6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/dog_toy1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="116dp"
+        android:text="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/dog_toy3" />
+
+    <Button
+        android:id="@+id/dog_toy3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="116dp"
+        android:text="3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
