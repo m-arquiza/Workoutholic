@@ -12,6 +12,13 @@ public class LogPlan {
     public static void main(String[] args){
 
     }
+
+    /**
+     * Adds the exercise and the date to a list of all logs
+     *
+     * @param  exercise the exercise that will be logged
+     * @param  date the current date
+     */
     public void LogExercise(Exercise exercise, String date){
         Log log = new Log();
         log.setExercise(exercise);
@@ -19,6 +26,12 @@ public class LogPlan {
         Loglist.add(log);
     }
 
+    /**
+     * Searches through the list of all logs based on the date
+     *
+     * @param  date the date of logs you are looking for
+     * @return the log that coordinates with that date
+     */
     public Log ViewLog(String date){
         Iterator<Log> itr = Loglist.iterator();
         Log output =null;
