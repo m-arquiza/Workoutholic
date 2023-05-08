@@ -1,5 +1,14 @@
 package com.example.workoutholicapp.backend.ViewWorkout;
 
+/**
+ * This is the Exercise Object
+ * An Exercise object contain all the information
+ * about the exercise, but also additional info
+ * such as the number of reps you have to do for that
+ * exercise
+ *
+ * All getters and setters provided for each param
+ */
 public class Exercise {
     private String name;
     private String type;

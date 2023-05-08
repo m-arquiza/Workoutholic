@@ -15,17 +15,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ViewWorkout {
 
     public static void main(String[] args) {
-
             List<Exercise> list = JSONmapper(View("chest"));
             Iterator<Exercise> itr = list.iterator();
             while(itr.hasNext()){
                 System.out.println(itr.next().getName());
             }
-
-
     }
 
-
+    /**
+     * Gives a Json string of 10 workouts for a specified
+     * muscle group
+     *
+     * @param muscle The muscle group will be looked up
+     * @return Json String containing the exercises
+     */
     public static String View(String muscle){
         OkHttpClient client = new OkHttpClient();
         String url ="https://api.api-ninjas.com/v1/exercises?muscle="+muscle;
@@ -42,6 +45,12 @@ public class ViewWorkout {
         return responseBody;
     }
 
+    /**
+     * Maps a Json string to a list of exercises
+     *
+     * @param  input A json string that woul be obtained in the View method
+     * @return       A List of exercise objects
+     */
     public static List<Exercise> JSONmapper(String input){
         ObjectMapper mapper = new ObjectMapper();
         List<Exercise> exerciseList = null;
