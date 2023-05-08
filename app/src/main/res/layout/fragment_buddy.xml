@@ -112,99 +112,184 @@
         android:layout_width="65dp"
         android:layout_height="50dp"
 
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="36dp"
 
         android:text="104 coins"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageView
+        android:id="@+id/coin"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="3dp"
+        android:src="@drawable/coin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/coin_text" />
+
+    <ImageButton
         android:id="@+id/dogfood_button"
         android:layout_width="60dp"
         android:layout_height="80dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="76dp"
-        android:text="food"
-        android:textSize="8sp"
+
+
+        android:background="#d2f2fc"
+        android:scaleType="fitCenter"
+        android:src="@drawable/food_bowl"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dogwater_button"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <TextView
+        android:id="@+id/dogfood"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+
+        android:gravity="center"
+        android:text="x10"
+        android:textSize="10sp"
+
+        app:layout_constraintEnd_toEndOf="@id/dogfood_button"
+        app:layout_constraintStart_toStartOf="@id/dogfood_button"
+        app:layout_constraintTop_toBottomOf="@id/dogfood_button" />
+
+    <ImageButton
         android:id="@+id/dogwater_button"
         android:layout_width="60dp"
         android:layout_height="80dp"
         android:layout_marginStart="2dp"
         android:layout_marginEnd="244dp"
         android:layout_marginBottom="76dp"
-        android:text="drink"
-        android:textSize="8sp"
+
+        android:background="#d2f2fc"
+        android:scaleType="fitCenter"
+        android:src="@drawable/water_bowl"
+
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dogfood_button" />
     />
 
-    <Button
+
+    <TextView
+        android:id="@+id/dogwater"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+
+        android:gravity="center"
+        android:text="x14"
+        android:textSize="10sp"
+
+        app:layout_constraintEnd_toEndOf="@id/dogwater_button"
+        app:layout_constraintStart_toStartOf="@id/dogwater_button"
+        app:layout_constraintTop_toBottomOf="@id/dogwater_button" />
+
+    <ImageButton
         android:id="@+id/dog_toy2"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="116dp"
-        android:text="2"
+
+        android:background="#d2f2fc"
+        android:scaleType="fitCenter"
+        android:src="@drawable/none"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/dog_toy3"
         app:layout_constraintStart_toStartOf="@+id/dog_toy1" />
 
-    <Button
+    <ImageButton
         android:id="@+id/dog_toy4"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="92dp"
         android:layout_marginBottom="76dp"
-        android:text="4"
+
+        android:padding="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/none"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/dog_toy6" />
 
-    <Button
+    <ImageButton
         android:id="@+id/dog_toy5"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginBottom="76dp"
-        android:text="5"
+
+        android:padding="2dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/none"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/dog_toy3"
         app:layout_constraintStart_toStartOf="@+id/dog_toy1" />
 
-    <Button
+    <ImageButton
         android:id="@+id/dog_toy6"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="76dp"
+        android:padding="2dp"
+
+        android:scaleType="fitXY"
+        android:src="@drawable/none"
         android:text="6"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/dog_toy1"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="92dp"
         android:layout_marginBottom="116dp"
-        android:text="1"
+
+        android:background="#d2f2fc"
+        android:scaleType="fitCenter"
+        android:src="@drawable/toy_ball"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/dog_toy3" />
 
-    <Button
+    <ImageButton
         android:id="@+id/dog_toy3"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="116dp"
-        android:text="3"
+
+        android:background="#d2f2fc"
+        android:scaleType="fitCenter"
+        android:src="@drawable/none"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/toy_ball"
+        android:layout_width="89dp"
+        android:layout_height="101dp"
+        android:src="@drawable/toy_ball"
+
+        android:alpha="0.0"
+
+        android:layout_marginEnd="156dp"
+        android:layout_marginTop="185dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" /> />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
