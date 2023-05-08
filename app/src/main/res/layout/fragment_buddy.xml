@@ -14,7 +14,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="28dp"
         android:src="@drawable/shiba"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/text_buddy" />
@@ -23,23 +22,111 @@
         android:id="@+id/text_buddy"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="136dp"
+        android:text="Shiba's ready to get the day going!"
         android:textAlignment="center"
         android:textSize="20sp"
-        android:text="Shiba's ready to get the day going!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/hunger_bar"
+        android:layout_width="15dp"
+        android:layout_height="80dp"
+
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+
+        android:background="#c73649"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/hunger_text"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="2dp"
+
+        android:text="hunger"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hunger_bar" />
+
+    <View
+        android:id="@+id/thirst_bar"
+        android:layout_width="15dp"
+        android:layout_height="80dp"
+
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="25dp"
+
+        android:background="#3666c7"
+        app:layout_constraintStart_toStartOf="@+id/hunger_bar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/thirst_text"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="2dp"
+
+        android:text="thirst"
+
+        app:layout_constraintStart_toStartOf="@+id/hunger_text"
+        app:layout_constraintTop_toBottomOf="@+id/thirst_bar" />
+
+    <View
+        android:id="@+id/happiness_bar"
+        android:layout_width="15dp"
+        android:layout_height="80dp"
+
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="25dp"
+
+        android:background="#a536c7"
+        app:layout_constraintStart_toStartOf="@+id/thirst_bar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/happiness_text"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="2dp"
+
+        android:text="happiness"
+
+        app:layout_constraintStart_toStartOf="@+id/thirst_text"
+        app:layout_constraintTop_toBottomOf="@+id/happiness_bar" />
+
+    <TextView
+        android:id="@+id/coin_text"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="40dp"
+
+        android:text="104 coins"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/dogfood_button"
         android:layout_width="60dp"
         android:layout_height="80dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="76dp"
         android:layout_marginEnd="2dp"
+        android:layout_marginBottom="76dp"
         android:text="food"
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,9 +137,9 @@
         android:id="@+id/dogwater_button"
         android:layout_width="60dp"
         android:layout_height="80dp"
+        android:layout_marginStart="2dp"
         android:layout_marginEnd="244dp"
         android:layout_marginBottom="76dp"
-        android:layout_marginStart="2dp"
         android:text="drink"
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
