@@ -4,6 +4,11 @@ import com.example.workoutholicapp.backend.ViewWorkout.Exercise;
 
 import java.util.List;
 
+/**
+ * A workout plan consists of a list of exercises and the
+ * name of the plan
+ *
+ */
 public class WorkoutPlan {
     private String name;
     private List<Exercise> list;

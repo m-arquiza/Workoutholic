@@ -21,12 +21,28 @@ public class WorkoutPlans {
             System.out.println(itr.next().getName());
         }
     }
+
+    /**
+     * Creates a workout plan and adds that to the list of
+     * all the workout plans
+     *
+     * @param  inputList List of exercises to be made into a workout plan
+     * @param  name the name of that plan
+     */
     public static void Create(List<Exercise> inputList, String name){
         WorkoutPlan plan = new WorkoutPlan();
         plan.setList(inputList);
         plan.setName(name);
         workoutplans.add(plan);
     }
+
+    /**
+     * Searches for a workout plan in the current list of plans
+     * using the name of the plan
+     *
+     * @param  input the name of the plan you are searching for
+     * @return List<Exercises> that coordinates to the name
+     */
     public static List<Exercise> Choose(String input){
         Iterator<WorkoutPlan> itr = workoutplans.iterator();
         List<Exercise> output =null;
