@@ -4,41 +4,170 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.shop.ShopFragment">
+    tools:context=".ui.shop.ShopFragment"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="-15dp">
+
 
     <TextView
         android:id="@+id/text_shop"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="4dp"
 
         android:text="SHOP"
         android:textAlignment="center"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/text_basics"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+
+        android:text="Basics"
+        android:textAlignment="center"
         android:textSize="30sp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="8dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/food_button"
         android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="519dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="448dp"
         android:onClick="onFoodClick"
         android:text="click for food"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_shop"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/text_basics"
+        app:layout_constraintVertical_bias="0.014" />
 
     <Button
         android:id="@+id/water_button"
         android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="519dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="448dp"
         android:onClick="onWaterClick"
         android:text="click for water"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_basics"
+        app:layout_constraintVertical_bias="0.014" />
+
+
+    <TextView
+        android:id="@+id/text_special"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="212dp"
+
+        android:text="Special"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/auto_happy"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="28dp"
+        android:text="Auto Happy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_special" />
+
+    <Button
+        android:id="@+id/auto_water"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="Auto Water"
+        app:layout_constraintEnd_toEndOf="@id/auto_happy"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="@id/auto_feed"
+        app:layout_constraintTop_toBottomOf="@+id/text_special" />
+
+    <Button
+        android:id="@+id/auto_feed"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="24dp"
+        android:text="Auto Feed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_special" />
+
+
+    <TextView
+        android:id="@+id/text_toys"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="360dp"
+
+        android:text="Toys"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/toy1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="24dp"
+        android:text="Toy 1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_toys" />
+
+    <Button
+        android:id="@+id/toy2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="Toy 2"
+        app:layout_constraintEnd_toEndOf="@id/auto_happy"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="@id/auto_feed"
+        app:layout_constraintTop_toBottomOf="@+id/text_toys" />
+
+    <Button
+        android:id="@+id/toy3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="28dp"
+        android:text="Toy 3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_toys" />
+
+
+    <TextView
+        android:id="@+id/coming_soon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="516dp"
+
+        android:text="and more coming soon!"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

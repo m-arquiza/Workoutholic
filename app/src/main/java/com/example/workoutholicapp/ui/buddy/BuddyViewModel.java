@@ -1,19 +1,23 @@
 package com.example.workoutholicapp.ui.buddy;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class BuddyViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    private int foodBought = 0;
+    private int waterBought = 0;
 
-    public BuddyViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is the buddy fragment I made");
+    public void onFoodClick() {
+        Log.d("food button", "food clicked!");
+        foodBought++;
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public void onWaterClick() {
+        Log.d("water button", "water clicked!");
+        waterBought++;
     }
 }
