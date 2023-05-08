@@ -5,8 +5,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,17 +24,74 @@ public class EntriesFragment extends Fragment {
 
     private FragmentEntriesBinding binding;
     private PopupWindow popupWindow;
+    private Button entryButton;
+    private boolean hasEntry;
+    private View root;
+    private EntriesViewModel entriesViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        EntriesViewModel entriesViewModel =
+        entriesViewModel =
                 new ViewModelProvider(this).get(EntriesViewModel.class);
 
         binding = FragmentEntriesBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        root = binding.getRoot();
 
-        if(true) {
-            newWorkoutEntry(entriesViewModel, inflater);
+        entryButton = root.findViewById(R.id.entry_button);
+
+        this.hasEntry = false;
+
+        entriesViewModel.setMuscle("Chest");
+        System.out.println(entriesViewModel.getMuscle());
+
+        if(!this.hasEntry) {
+            entryButton.setVisibility(View.VISIBLE);
+            entryButton.setOnClickListener(v -> {
+                View popupView = inflater.inflate(R.layout.popup_layout, null);
+                // Specify the length and width through constants
+                int width = LinearLayout.LayoutParams.MATCH_PARENT;
+                int height = LinearLayout.LayoutParams.MATCH_PARENT;
+
+                // Make Inactive Items Outside Of PopupWindow
+                boolean focusable = true;
+
+                // Create a window with our parameters
+                popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+                // Set the location of the window on the screen
+                popupWindow.showAtLocation(root, Gravity.CENTER, 0, 0);
+
+                // Close button on the top right
+                Button entryCloseButton = popupView.findViewById(R.id.entryClose_button);
+                entryCloseButton.setOnClickListener(v2 -> popupWindow.dismiss());
+
+                // Create a Drop Down Spinner
+                Spinner workoutSpinner = popupView.findViewById(R.id.workout_spinner);
+                String[] items = new String[]{"Select...", "Chest", "Back", "Legs"};
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(),
+                        android.R.layout.simple_spinner_dropdown_item, items);
+
+                workoutSpinner.setAdapter(adapter);
+                workoutSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        entriesViewModel.setMuscle((String)parent.getItemAtPosition(position));
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
+
+                // Confirm Button
+                Button entryDoneButton = popupView.findViewById(R.id.entryDone_button);
+                entryDoneButton.setOnClickListener(v2 -> popupWindow.dismiss());
+
+                this.hasEntry = true;
+                showEntry();
+            });
+        } else {
+            showEntry();
         }
 
         return root;
@@ -42,20 +103,9 @@ public class EntriesFragment extends Fragment {
         binding = null;
     }
 
-    public void newWorkoutEntry(EntriesViewModel entriesViewModel, LayoutInflater inflater) {
-        // Create our Popup Window if a user wants to create a new workout entry.
-        final TextView textView = binding.textEntries;
-        entriesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
-        textView.setOnClickListener(view -> {
-            View popupView = inflater.inflate(R.layout.popup_layout, null);
-            popupWindow = new PopupWindow(popupView,
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
-
-            // Initialize the closeButton
-            Button closeButton = popupView.findViewById(R.id.close_button);
-            closeButton.setOnClickListener(view123 -> popupWindow.dismiss());
-            popupWindow.showAtLocation(getView(), Gravity.CENTER, 0, 0);
-        });
+    public void showEntry() {
+        TextView entry = root.findViewById(R.id.entry);
+        entry.setText(entriesViewModel.getMuscle());
+        entry.setBackgroundResource(R.drawable.border);
     }
 }

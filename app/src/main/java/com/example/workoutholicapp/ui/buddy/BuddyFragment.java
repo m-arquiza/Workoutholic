@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,8 +28,8 @@ public class BuddyFragment extends Fragment {
         binding = FragmentBuddyBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        Button foodButton = root.findViewById(R.id.dogfood_button);
-        Button waterButton = root.findViewById(R.id.dogwater_button);
+        ImageButton foodButton = root.findViewById(R.id.dogfood_button);
+        ImageButton waterButton = root.findViewById(R.id.dogwater_button);
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,6 +41,19 @@ public class BuddyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 buddyViewModel.onWaterClick();
+            }
+        });
+
+        ImageButton ball = root.findViewById(R.id.dog_toy1);
+        ball.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImageView ball = getView().findViewById(R.id.toy_ball);
+                if (ball.getAlpha() == 0.0f) {
+                    ball.setAlpha(1.0f);
+                } else {
+                    ball.setAlpha(0.0f);
+                }
             }
         });
 
