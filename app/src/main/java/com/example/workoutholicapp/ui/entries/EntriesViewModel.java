@@ -1,19 +1,21 @@
 package com.example.workoutholicapp.ui.entries;
 
+import android.util.Log;
+import android.view.LayoutInflater;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class EntriesViewModel extends ViewModel {
+    private String muscle;
 
-    private final MutableLiveData<String> mText;
 
-    public EntriesViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("Create New Entry:");
+    public void setMuscle(String muscle) {
+        this.muscle = muscle;
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public String getMuscle() {
+        return this.muscle;
     }
 }
