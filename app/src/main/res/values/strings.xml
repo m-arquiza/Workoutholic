@@ -3,4 +3,6 @@
     <string name="title_buddy">Buddy</string>
     <string name="title_shop">Shop</string>
     <string name="title_entries">Entries</string>
+    <string name="WorkoutEntry">New Workout Entry</string>
+    <string name="EntryCreate">Create New Entry!</string>
 </resources>

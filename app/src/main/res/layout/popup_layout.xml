@@ -1,25 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background='@color/white'>
 
     <TextView
-        android:layout_width="308dp"
+        android:id='@+id/topBar'
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:background='@color/purple_500'
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id='@+id/entryTitle'
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="New Workout Entry"
-        android:textSize="30sp" />
+        android:layout_marginTop='10dp'
+        android:text="@string/WorkoutEntry"
+        android:textStyle='bold'
+        android:textAlignment='center'
+        android:textColor='@color/black'
+        android:textSize="35sp"
+
+        app:layout_constraintTop_toBottomOf="@+id/topBar" />
+
+    <TextView
+        android:id='@+id/blankLine'
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@+id/entryTitle" />
+
+    <TextView
+        android:id='@+id/workoutSpinnerTitle'
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Muscle Group:"
+        android:textAlignment='center'
+        android:textColor='@color/black'
+        android:textSize="35sp"
+
+        app:layout_constraintTop_toBottomOf="@+id/blankLine" />
+
+    <Spinner
+        android:id='@+id/workout_spinner'
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:spinnerMode='dropdown'
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/workoutSpinnerTitle"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
 
     <Button
-        android:id="@+id/close_button"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="1dp"
-        android:padding="8dp"
-        android:text="X"
-        android:textColor="#D50032"
-        android:textSize="20sp" />
-</RelativeLayout>
+        android:id='@+id/entryClose_button'
+        android:layout_width="50dp"
+        android:layout_height="55dp"
+        android:text='X'
+        android:textSize='25sp'
+        android:textColor='@color/white'
+        android:backgroundTint='@color/purple_500'
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id='@+id/entryDone_button'
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="4dp"
+        android:textSize='25sp'
+        android:text='Complete Entry'
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/blankLine2"
+        tools:ignore="MissingConstraints"
+        />
+
+    <TextView
+        android:id='@+id/blankLine2'
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background='@color/white'
+
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
