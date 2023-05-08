@@ -47,7 +47,7 @@ public class LogPlan {
      * @param  date the date of logs you are looking for
      * @return the log that coordinates with that date
      */
-    public Log ViewLog(String date){
+    public Log ViewLogByDate(String date){
         Iterator<Log> itr = Loglist.iterator();
         Log output =null;
         while(itr.hasNext()){
@@ -56,5 +56,14 @@ public class LogPlan {
             }
         }
         return output;
+    }
+
+    /**
+     * Outputs the current LogList and its contents
+     *
+     * @return the log list
+     */
+    public List<Log> ViewLog(){
+        return Loglist;
     }
 }
