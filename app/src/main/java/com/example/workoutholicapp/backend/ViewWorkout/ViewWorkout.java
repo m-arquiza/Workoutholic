@@ -1,6 +1,8 @@
 package com.example.workoutholicapp.backend.ViewWorkout;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,6 +15,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class ViewWorkout {
+    public List<String> MuscleList = new ArrayList<String>(Arrays.asList(
+            "abdominals",
+            "abductors",
+            "adductors",
+            "biceps",
+            "calves",
+            "chest",
+            "forearms",
+            "glutes",
+            "hamstrings",
+            "lats",
+            "lower_back",
+            "middle_back",
+            "neck",
+            "quadriceps",
+            "traps",
+            "triceps"));
 
     /**
      * Gives a Json string of 10 workouts for a specified
