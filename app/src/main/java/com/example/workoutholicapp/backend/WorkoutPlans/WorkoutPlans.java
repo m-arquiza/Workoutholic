@@ -11,16 +11,6 @@ import java.util.List;
 
 public class WorkoutPlans {
     private static List<WorkoutPlan> workoutplans = new ArrayList<>();
-    public static void main(String[] args){
-        List<Exercise> list = JSONmapper(View("chest"));
-        Create(list,"chest workouts");
-        List<Exercise> test = Choose("chest workouts");
-        System.out.println(test.size());
-        Iterator<Exercise> itr = test.iterator();
-        while(itr.hasNext()){
-            System.out.println(itr.next().getName());
-        }
-    }
 
     /**
      * Creates a workout plan and adds that to the list of

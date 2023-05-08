@@ -9,9 +9,6 @@ import java.util.List;
 
 public class LogPlan {
     private List<Log> Loglist = new ArrayList<>();
-    public static void main(String[] args){
-
-    }
 
     /**
      * Adds the exercise and the date to a list of all logs
