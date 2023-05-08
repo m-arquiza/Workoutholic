@@ -9,9 +9,6 @@ import java.util.List;
 
 public class LogPlan {
     private List<Log> Loglist = new ArrayList<>();
-    public static void main(String[] args){
-
-    }
 
     /**
      * Adds the exercise and the date to a list of all logs
@@ -24,6 +21,24 @@ public class LogPlan {
         log.setExercise(exercise);
         log.setDate(date);
         Loglist.add(log);
+    }
+
+    /**
+     * Loops through plan and add each exercise and its date to
+     * the overall log list
+     *
+     * @param  exercise the exercise list that will be logged
+     * @param  date the current date
+     */
+    public void LogWorkoutPlan(List<Exercise> exercise, String date){
+        Iterator<Exercise> itr = exercise.iterator();
+        while(itr.hasNext()) {
+            Exercise cur = itr.next();
+            Log log = new Log();
+            log.setExercise(cur);
+            log.setDate(date);
+            Loglist.add(log);
+        }
     }
 
     /**
