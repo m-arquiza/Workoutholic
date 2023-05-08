@@ -1,5 +1,7 @@
 package com.example.workoutholicapp;
 
+import com.example.workoutholicapp.backend.ViewWorkout.ViewWorkout;
+
 import org.junit.Test;
 
 public class BasicViewWorkoutTests {

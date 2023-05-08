@@ -44,4 +44,13 @@ public class WorkoutPlans {
         }
         return output;
     }
+
+    /**
+     * Outputs the all the workout plans so far
+     *
+     * @return List<WorkoutPlan> list of all plans
+     */
+    public List<WorkoutPlan> ViewWorkoutPlans(){
+        return workoutplans;
+    }
 }
