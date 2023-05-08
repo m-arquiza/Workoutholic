@@ -14,14 +14,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ViewWorkout {
 
-    public static void main(String[] args) {
-            List<Exercise> list = JSONmapper(View("chest"));
-            Iterator<Exercise> itr = list.iterator();
-            while(itr.hasNext()){
-                System.out.println(itr.next().getName());
-            }
-    }
-
     /**
      * Gives a Json string of 10 workouts for a specified
      * muscle group
