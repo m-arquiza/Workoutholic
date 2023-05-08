@@ -3,11 +3,12 @@ package com.example.workoutholicapp.backend.Logger;
 import com.example.workoutholicapp.backend.ViewWorkout.Exercise;
 import com.example.workoutholicapp.backend.WorkoutPlans.WorkoutPlan;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class LogPlan {
-    private List<Log> Loglist;
+    private List<Log> Loglist = new ArrayList<>();
     public static void main(String[] args){
 
     }
