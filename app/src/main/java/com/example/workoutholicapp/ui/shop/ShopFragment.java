@@ -17,17 +17,37 @@ import com.example.workoutholicapp.databinding.FragmentShopBinding;
 
 public class ShopFragment extends Fragment {
 
+        /* hi ashley! some to dos that I can think of rn:
+            - currently, food and water bought is stored as a variable in the shopviewmodel class.
+              i'd like to be able to use it in the buddy class as well, but i'm a) not able to use
+              shop vars in buddy and b) not able to call buddy component ids in shop. if you could
+              fix that that'd be perf :)
+            - similarly (but also not rly) when i have a toy pressed, nothing happens... i hardcoded
+              a single toy in, but since there's no way for me to indicate that the user alr bought
+              an item in the shop to use in the buddy fragment i didn't create any variables so same idea,
+              if you can give me a way to access that information that helps
+            - vitals do not move in any way. atm i have vital bars set to 80dp height, if you can
+              provide me numbers such that i can change the height of the vitals according to those
+              80 degrees of measurement i would be very grateful
+            - so,,, shop system not implemented. not sure who's doing that, but i can't have items
+              cost things if i have no money to spend LOL so money doesn't go up or down, legit
+              just hardcoded as like 104 or smth
+           and that's all i can think of rn
+        * */
+
     private FragmentShopBinding binding;
     private ShopViewModel shopViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        shopViewModel = new ViewModelProvider(this).get(ShopViewModel.class);
 
+        /* Gets and stores views - binds viewmodel to xml fragment */
+        shopViewModel = new ViewModelProvider(this).get(ShopViewModel.class);
         binding = FragmentShopBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         binding = FragmentShopBinding.bind(root);
 
+        /* On click, updates food and water variable inside ShopViewModel respectively */
         ImageButton foodButton = root.findViewById(R.id.food_button);
         ImageButton  waterButton = root.findViewById(R.id.water_button);
         foodButton.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +63,8 @@ public class ShopFragment extends Fragment {
                 shopViewModel.onWaterClick();
             }
         });
+
+        // Updates text displayed to user about food/water bought
         shopViewModel.foodCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer foodBought) {
@@ -58,6 +80,9 @@ public class ShopFragment extends Fragment {
                 food.setText("water in storage: " + waterBought);
             }
         });
+
+        /* On click, "sets" auto food/water/happy on activate (just grays out/disables button
+        *  and pops up a text to user */
 
         ImageButton autoFood = root.findViewById(R.id.auto_food);
         ImageButton autoWater = root.findViewById(R.id.auto_water);
@@ -90,6 +115,8 @@ public class ShopFragment extends Fragment {
                 happy.setText("auto play on!");
             }
         });
+
+        /* On click, "buys" toy (grays it out. that's all for rn) */
 
         ImageButton toy1 = root.findViewById(R.id.toy1);
         ImageButton toy2 = root.findViewById(R.id.toy2);
