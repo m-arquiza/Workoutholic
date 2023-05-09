@@ -52,7 +52,7 @@ public class EntriesFragment extends Fragment {
         entryButton.setOnClickListener(v -> {
             final boolean[] muscleLogged = {false};
             final boolean[] workoutLogged = {false};
-            final boolean[] weightLogged = {false};
+            final boolean[] repLogged = {false};
 
             View popupView = inflater.inflate(R.layout.popup_layout, null);
             // Specify the length and width through constants
@@ -129,26 +129,26 @@ public class EntriesFragment extends Fragment {
             });
 
             // Create a Weight Drop Down Spinner
-            Spinner weightSpinner = popupView.findViewById(R.id.weight_spinner);
-            List<String> weightList = new ArrayList<>();
-            weightList.add("Select...");
-            for(int i=1; i<=10; i++) {
-                weightList.add(i * 10 + " lbs");
+            Spinner repSpinner = popupView.findViewById(R.id.rep_spinner);
+            List<String> repList = new ArrayList<>();
+            repList.add("Select...");
+            for(int i=1; i<=20; i++) {
+                repList.add(String.valueOf((i)));
             }
 
-            ArrayAdapter<String> weightAdapter = new ArrayAdapter<>(requireContext(),
-                    android.R.layout.simple_spinner_dropdown_item, weightList);
+            ArrayAdapter<String> repAdapter = new ArrayAdapter<>(requireContext(),
+                    android.R.layout.simple_spinner_dropdown_item, repList);
 
-            weightSpinner.setAdapter(weightAdapter);
+            repSpinner.setAdapter(repAdapter);
 
-            weightSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            repSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     if(position == 0) {
-                        weightLogged[0] = false;
+                        repLogged[0] = false;
                     } else {
-                        entriesViewModel.setWeight((String) parent.getItemAtPosition(position));
-                        weightLogged[0] = true;
+                        entriesViewModel.setRep((String) parent.getItemAtPosition(position));
+                        repLogged[0] = true;
                     }
                 }
                 @Override
@@ -159,7 +159,7 @@ public class EntriesFragment extends Fragment {
             // Confirm Button
             Button entryDoneButton = popupView.findViewById(R.id.entryDone_button);
             entryDoneButton.setOnClickListener(v2 -> {
-                if(muscleLogged[0] && workoutLogged[0] & weightLogged[0]) {
+                if(muscleLogged[0] && workoutLogged[0] & repLogged[0]) {
                     popupWindow.dismiss();
                     this.hasEntry = true;
                     updateViews();
@@ -192,7 +192,7 @@ public class EntriesFragment extends Fragment {
             entry.setVisibility(View.VISIBLE);
             entry.setText("Group: " + entriesViewModel.getMuscle() +
                           " \n Workout: " + entriesViewModel.getWorkout() +
-                          " \n Weight: " + entriesViewModel.getWeight());
+                          " \n Repetitions: " + entriesViewModel.getRep());
             entry.setLines(3);
 
             Button deleteEntry_button = root.findViewById(R.id.deleteEntry_button);

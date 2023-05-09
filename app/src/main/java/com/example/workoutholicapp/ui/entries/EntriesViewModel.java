@@ -14,7 +14,7 @@ import java.util.Locale;
 public class EntriesViewModel extends ViewModel {
     private String muscle;
     private String workout;
-    private String weight;
+    private String rep;
 
 
     public void setMuscle(String muscle) {
@@ -27,9 +27,9 @@ public class EntriesViewModel extends ViewModel {
 
     public void setWorkout(String workout) { this.workout = workout; }
 
-    public void setWeight(String weight) { this.weight = weight; }
+    public void setRep(String rep) { this.rep = rep; }
 
-    public String getWeight() { return this.weight; }
+    public String getRep() { return this.rep; }
 
     public String getWorkout() { return this.workout; }
 

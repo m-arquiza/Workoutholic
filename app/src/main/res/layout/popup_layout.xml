@@ -89,12 +89,12 @@
         tools:ignore="HardcodedText,MissingConstraints" />
 
     <TextView
-        android:id='@+id/weightSpinnerTitle'
+        android:id='@+id/repSpinnerTitle'
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:paddingTop="25dp"
 
-        android:text="Weight:"
+        android:text="Repetitions:"
         android:textAlignment='center'
         android:textColor='@color/black'
         android:textSize="30sp"
@@ -103,14 +103,14 @@
         app:layout_constraintTop_toBottomOf="@+id/workout_spinner" />
 
     <Spinner
-        android:id='@+id/weight_spinner'
+        android:id='@+id/rep_spinner'
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:spinnerMode='dropdown'
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weightSpinnerTitle"
+        app:layout_constraintTop_toBottomOf="@+id/repSpinnerTitle"
         tools:ignore="HardcodedText,MissingConstraints" />
 
 
