@@ -37,9 +37,7 @@ import java.util.concurrent.Future;
 import okhttp3.Response;
 
 public class EntriesFragment extends Fragment {
-
     private FragmentEntriesBinding binding;
-    private PopupWindow popupWindow;
     private boolean hasEntry;
     private View root;
     private EntriesViewModel entriesViewModel;
@@ -71,14 +69,15 @@ public class EntriesFragment extends Fragment {
             boolean focusable = true;
 
             // Create a window with our parameters
-            popupWindow = new PopupWindow(popupView, width, height, focusable);
+            PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
             // Set the location of the window on the screen
             popupWindow.showAtLocation(root, Gravity.CENTER, 0, 0);
 
             // Display current date
             TextView date = popupView.findViewById(R.id.date);
-            date.setText(new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault()).format(new Date()));
+            date.setText("Date: " +
+                    new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault()).format(new Date()));
 
             // Close button on the top right
             Button entryCloseButton = popupView.findViewById(R.id.entryClose_button);
