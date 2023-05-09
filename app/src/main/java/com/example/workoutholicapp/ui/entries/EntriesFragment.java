@@ -84,13 +84,25 @@ public class EntriesFragment extends Fragment {
             Button entryCloseButton = popupView.findViewById(R.id.entryClose_button);
             entryCloseButton.setOnClickListener(v2 -> popupWindow.dismiss());
 
+            // Create the ArrayLists for muscle, exercise, and rep.
+            List<String> muscleList = new ArrayList<>();
+            muscleList.add("Select...");
+
             List<String> exerciseList = new ArrayList<>();
             exerciseList.add("Select...");
 
+            List<String> repList = new ArrayList<>();
+            repList.add("Select...");
+
+            // Create a Weight Drop Down Spinner
+            Spinner repSpinner = popupView.findViewById(R.id.rep_spinner);
+
             // Create a Muscle Group Drop Down Spinner
             Spinner muscleSpinner = popupView.findViewById(R.id.muscle_spinner);
-            List<String> muscleList = new ArrayList<>();
-            muscleList.add("Select...");
+
+            // Create a Workout Group Drop Down Spinner
+            Spinner workoutSpinner = popupView.findViewById(R.id.workout_spinner);
+
             muscleList.addAll(ViewWorkout.muscleList());
             ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(),
                     android.R.layout.simple_spinner_dropdown_item, muscleList);
@@ -101,6 +113,14 @@ public class EntriesFragment extends Fragment {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     if(position == 0) {
                         muscleLogged[0] = false;
+
+                        exerciseList.clear();
+                        exerciseList.add("Select...");
+
+                        ArrayAdapter<String> workoutAdapter = new ArrayAdapter<>(requireContext(),
+                                android.R.layout.simple_spinner_dropdown_item, exerciseList);
+
+                        workoutSpinner.setAdapter(workoutAdapter);
                     } else {
                         entriesViewModel.setMuscle((String) parent.getItemAtPosition(position));
                         muscleLogged[0] = true;
@@ -111,9 +131,17 @@ public class EntriesFragment extends Fragment {
                             assert response.body() != null;
                             exercise[0] = ViewWorkout.JSONmapper(response.body().string());
 
+                            exerciseList.clear();
+                            exerciseList.add("Select...");
+
                             for(int i=0; i < exercise[0].size(); i++) {
                                 exerciseList.add(exercise[0].get(i).getName());
                             }
+
+                            ArrayAdapter<String> workoutAdapter = new ArrayAdapter<>(requireContext(),
+                                    android.R.layout.simple_spinner_dropdown_item, exerciseList);
+
+                            workoutSpinner.setAdapter(workoutAdapter);
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -124,9 +152,6 @@ public class EntriesFragment extends Fragment {
                 public void onNothingSelected(AdapterView<?> parent) {
                 }
             });
-
-            // Create a Workout Group Drop Down Spinner
-            Spinner workoutSpinner = popupView.findViewById(R.id.workout_spinner);
 
             ArrayAdapter<String> workoutAdapter = new ArrayAdapter<>(requireContext(),
                     android.R.layout.simple_spinner_dropdown_item, exerciseList);
@@ -148,10 +173,6 @@ public class EntriesFragment extends Fragment {
                 }
             });
 
-            // Create a Weight Drop Down Spinner
-            Spinner repSpinner = popupView.findViewById(R.id.rep_spinner);
-            List<String> repList = new ArrayList<>();
-            repList.add("Select...");
             for(int i=1; i<=20; i++) {
                 repList.add(String.valueOf((i)));
             }
