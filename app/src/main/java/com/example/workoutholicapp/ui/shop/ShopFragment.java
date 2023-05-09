@@ -63,7 +63,13 @@ public class ShopFragment extends Fragment {
                 shopViewModel.onWaterClick();
             }
         });
-
+        shopViewModel.moneyCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer amount) {
+                TextView money = getView().findViewById(R.id.coin_text4);
+                money.setText(String.format("%d coins", amount));
+            }
+        });
         // Updates text displayed to user about food/water bought
         shopViewModel.foodCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override

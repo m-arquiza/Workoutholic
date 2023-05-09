@@ -16,6 +16,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.workoutholicapp.R;
 import com.example.workoutholicapp.databinding.FragmentBuddyBinding;
+import com.example.workoutholicapp.ui.shop.ShopViewModel;
+
+import org.w3c.dom.Text;
 
 public class BuddyFragment extends Fragment {
 
@@ -25,12 +28,14 @@ public class BuddyFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         BuddyViewModel buddyViewModel =
                 new ViewModelProvider(this).get(BuddyViewModel.class);
+        ShopViewModel shopViewModel = new ViewModelProvider(this).get(ShopViewModel.class);
 
         binding = FragmentBuddyBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         ImageButton foodButton = root.findViewById(R.id.dogfood_button);
         ImageButton waterButton = root.findViewById(R.id.dogwater_button);
+
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +49,15 @@ public class BuddyFragment extends Fragment {
                 buddyViewModel.onWaterClick();
             }
         });
+
+        shopViewModel.moneyCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer amount) {
+                TextView money = getView().findViewById(R.id.coin_text);
+                money.setText(String.format("%d coins", amount));
+            }
+        });
+
 
         buddyViewModel.foodCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
                     @Override

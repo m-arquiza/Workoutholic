@@ -28,21 +28,27 @@ public class ShopViewModel extends ViewModel {
 
     private MutableLiveData<Integer> foodInStorage = new MutableLiveData<>(0);
     private MutableLiveData<Integer> waterInStorage = new MutableLiveData<>(0);
+    private static MutableLiveData<Integer> totalMoney = new MutableLiveData<>(150);
 
 
     public void onFoodClick() {
         Integer food = foodInStorage.getValue();
-        if (food != null) {
+        Integer money = totalMoney.getValue();
+        if (food != null && money > 10) {
             foodInStorage.setValue(food+1);
+            totalMoney.setValue(money - 10);
         }
     }
 
     public void onWaterClick() {
         Integer water = waterInStorage.getValue();
+        Integer money = totalMoney.getValue();
         if (water != null) {
             waterInStorage.setValue(water+1);
+            totalMoney.setValue(money - 20);
         }
     }
+
 
     public LiveData<Integer> foodCount() {
         return foodInStorage;
@@ -51,5 +57,7 @@ public class ShopViewModel extends ViewModel {
     public LiveData<Integer> waterCount() {
         return waterInStorage;
     }
+
+    public LiveData<Integer> moneyCount() { return totalMoney; }
 
 }
