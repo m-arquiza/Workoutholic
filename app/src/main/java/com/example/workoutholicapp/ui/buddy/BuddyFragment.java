@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.workoutholicapp.R;
@@ -43,6 +44,25 @@ public class BuddyFragment extends Fragment {
                 buddyViewModel.onWaterClick();
             }
         });
+
+        buddyViewModel.foodCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer foodStorage) {
+                        TextView food = getView().findViewById(R.id.dogfood);
+                        food.setText("x" + foodStorage);
+                    }
+                }
+        );
+
+        buddyViewModel.waterCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer waterStorage) {
+                        TextView water = getView().findViewById(R.id.dogwater);
+                        water.setText("x" + waterStorage);
+                    }
+                }
+        );
+
 
         ImageButton ball = root.findViewById(R.id.dog_toy1);
         ball.setOnClickListener(new View.OnClickListener() {

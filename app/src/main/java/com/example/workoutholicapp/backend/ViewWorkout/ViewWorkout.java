@@ -1,6 +1,8 @@
 package com.example.workoutholicapp.backend.ViewWorkout;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,19 +15,31 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class ViewWorkout {
+    public List<String> MuscleList = new ArrayList<String>(Arrays.asList(
+            "abdominals",
+            "abductors",
+            "adductors",
+            "biceps",
+            "calves",
+            "chest",
+            "forearms",
+            "glutes",
+            "hamstrings",
+            "lats",
+            "lower_back",
+            "middle_back",
+            "neck",
+            "quadriceps",
+            "traps",
+            "triceps"));
 
-    public static void main(String[] args) {
-
-            List<Exercise> list = JSONmapper(View("chest"));
-            Iterator<Exercise> itr = list.iterator();
-            while(itr.hasNext()){
-                System.out.println(itr.next().getName());
-            }
-
-
-    }
-
-
+    /**
+     * Gives a Json string of 10 workouts for a specified
+     * muscle group
+     *
+     * @param muscle The muscle group will be looked up
+     * @return Json String containing the exercises
+     */
     public static String View(String muscle){
         OkHttpClient client = new OkHttpClient();
         String url ="https://api.api-ninjas.com/v1/exercises?muscle="+muscle;
@@ -42,6 +56,12 @@ public class ViewWorkout {
         return responseBody;
     }
 
+    /**
+     * Maps a Json string to a list of exercises
+     *
+     * @param  input A json string that woul be obtained in the View method
+     * @return       A List of exercise objects
+     */
     public static List<Exercise> JSONmapper(String input){
         ObjectMapper mapper = new ObjectMapper();
         List<Exercise> exerciseList = null;
