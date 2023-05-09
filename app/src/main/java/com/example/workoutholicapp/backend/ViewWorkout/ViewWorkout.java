@@ -15,23 +15,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class ViewWorkout {
-    public List<String> MuscleList = new ArrayList<String>(Arrays.asList(
-            "abdominals",
-            "abductors",
-            "adductors",
-            "biceps",
-            "calves",
-            "chest",
-            "forearms",
-            "glutes",
-            "hamstrings",
-            "lats",
-            "lower_back",
-            "middle_back",
-            "neck",
-            "quadriceps",
-            "traps",
-            "triceps"));
+    public static List<String> muscleList() {
+        return new ArrayList<String>(Arrays.asList(
+                "abdominals",
+                "abductors",
+                "adductors",
+                "biceps",
+                "calves",
+                "chest",
+                "forearms",
+                "glutes",
+                "hamstrings",
+                "lats",
+                "lower_back",
+                "middle_back",
+                "neck",
+                "quadriceps",
+                "traps",
+                "triceps"));
+    }
 
     /**
      * Gives a Json string of 10 workouts for a specified
