@@ -111,7 +111,7 @@ public class EntriesFragment extends Fragment {
                             assert response.body() != null;
                             exercise[0] = ViewWorkout.JSONmapper(response.body().string());
 
-                            for(int i=1; i<= exercise[0].size(); i++) {
+                            for(int i=0; i < exercise[0].size(); i++) {
                                 exerciseList.add(exercise[0].get(i).getName());
                             }
 

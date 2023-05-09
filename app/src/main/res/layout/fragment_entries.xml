@@ -49,7 +49,7 @@
 
     <TextView
         android:id="@+id/entry"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="100dp"
 
         android:background="@drawable/border"
