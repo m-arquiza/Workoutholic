@@ -3,6 +3,7 @@ package com.example.workoutholicapp.ui.entries;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,14 +21,20 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.workoutholicapp.R;
+import com.example.workoutholicapp.backend.ViewWorkout.Exercise;
 import com.example.workoutholicapp.backend.ViewWorkout.ViewWorkout;
 import com.example.workoutholicapp.databinding.FragmentEntriesBinding;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.Future;
+
+import okhttp3.Response;
 
 public class EntriesFragment extends Fragment {
 
@@ -53,6 +60,7 @@ public class EntriesFragment extends Fragment {
             final boolean[] muscleLogged = {false};
             final boolean[] workoutLogged = {false};
             final boolean[] repLogged = {false};
+            final List<Exercise>[] exercise = new List[]{new ArrayList<>()};
 
             View popupView = inflater.inflate(R.layout.popup_layout, null);
             // Specify the length and width through constants
@@ -76,6 +84,9 @@ public class EntriesFragment extends Fragment {
             Button entryCloseButton = popupView.findViewById(R.id.entryClose_button);
             entryCloseButton.setOnClickListener(v2 -> popupWindow.dismiss());
 
+            List<String> exerciseList = new ArrayList<>();
+            exerciseList.add("Select...");
+
             // Create a Muscle Group Drop Down Spinner
             Spinner muscleSpinner = popupView.findViewById(R.id.muscle_spinner);
             List<String> muscleList = new ArrayList<>();
@@ -93,6 +104,20 @@ public class EntriesFragment extends Fragment {
                     } else {
                         entriesViewModel.setMuscle((String) parent.getItemAtPosition(position));
                         muscleLogged[0] = true;
+
+                        Future<Response> futureResponse = ViewWorkout.getRequest(entriesViewModel.getMuscle());
+                        try {
+                            Response response = futureResponse.get();
+                            assert response.body() != null;
+                            exercise[0] = ViewWorkout.JSONmapper(response.body().string());
+
+                            for(int i=1; i<= exercise[0].size(); i++) {
+                                exerciseList.add(exercise[0].get(i).getName());
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
                 @Override
@@ -102,14 +127,9 @@ public class EntriesFragment extends Fragment {
 
             // Create a Workout Group Drop Down Spinner
             Spinner workoutSpinner = popupView.findViewById(R.id.workout_spinner);
-            List<String> placeholder = new ArrayList<>();
-            placeholder.add("Select...");
-            for(int i=1; i<=10; i++) {
-                placeholder.add("workout " + i);
-            }
 
             ArrayAdapter<String> workoutAdapter = new ArrayAdapter<>(requireContext(),
-                    android.R.layout.simple_spinner_dropdown_item, placeholder);
+                    android.R.layout.simple_spinner_dropdown_item, exerciseList);
 
             workoutSpinner.setAdapter(workoutAdapter);
 
