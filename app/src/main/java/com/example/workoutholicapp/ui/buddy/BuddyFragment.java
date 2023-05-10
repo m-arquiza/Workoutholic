@@ -1,35 +1,37 @@
 package com.example.workoutholicapp.ui.buddy;
 
+import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
+import com.example.workoutholicapp.MainActivity;
 import com.example.workoutholicapp.R;
 import com.example.workoutholicapp.databinding.FragmentBuddyBinding;
-import com.example.workoutholicapp.ui.shop.ShopViewModel;
-
-import org.w3c.dom.Text;
+import com.example.workoutholicapp.ui.MainViewModel;
 
 public class BuddyFragment extends Fragment {
 
     private FragmentBuddyBinding binding;
+    private MainViewModel mainViewModel;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        MainActivity activity = (MainActivity) requireActivity();
+        mainViewModel = activity.getMainViewModel();
+    }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        BuddyViewModel buddyViewModel =
-                new ViewModelProvider(this).get(BuddyViewModel.class);
-        ShopViewModel shopViewModel = new ViewModelProvider(this).get(ShopViewModel.class);
-
         binding = FragmentBuddyBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -39,43 +41,31 @@ public class BuddyFragment extends Fragment {
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buddyViewModel.onFoodClick();
+                mainViewModel.onFoodClick(false);
             }
         });
 
         waterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buddyViewModel.onWaterClick();
+                mainViewModel.onWaterClick(false);
             }
         });
 
-        shopViewModel.moneyCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer amount) {
-                TextView money = getView().findViewById(R.id.coin_text);
-                money.setText(String.format("%d coins", amount));
-            }
+        mainViewModel.foodCount().observe(getViewLifecycleOwner(), value -> {
+            TextView food = getView().findViewById(R.id.dogfood);
+            food.setText("x" + value);
         });
 
+        mainViewModel.waterCount().observe(getViewLifecycleOwner(), value -> {
+            TextView water = getView().findViewById(R.id.dogwater);
+            water.setText("x" + value);
+        });
 
-        buddyViewModel.foodCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-                    @Override
-                    public void onChanged(Integer foodStorage) {
-                        TextView food = getView().findViewById(R.id.dogfood);
-                        food.setText("x" + foodStorage);
-                    }
-                }
-        );
-
-        buddyViewModel.waterCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-                    @Override
-                    public void onChanged(Integer waterStorage) {
-                        TextView water = getView().findViewById(R.id.dogwater);
-                        water.setText("x" + waterStorage);
-                    }
-                }
-        );
+        mainViewModel.moneyAmount().observe(getViewLifecycleOwner(), value -> {
+            TextView money = getView().findViewById(R.id.coin_text);
+            money.setText(value + " coins");
+        });
 
 
         ImageButton ball = root.findViewById(R.id.dog_toy1);
