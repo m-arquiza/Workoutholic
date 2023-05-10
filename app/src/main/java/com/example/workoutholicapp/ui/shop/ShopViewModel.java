@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.workoutholicapp.ui.buddy.BuddyViewModel;
+
 
 public class ShopViewModel extends ViewModel {
         /* hi ashley! some to dos that I can think of rn:

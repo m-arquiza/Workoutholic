@@ -1,6 +1,8 @@
 package com.example.workoutholicapp.ui.buddy;
 
+import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.workoutholicapp.R;
 import com.example.workoutholicapp.databinding.FragmentBuddyBinding;
+import com.example.workoutholicapp.ui.shop.ShopFragment;
 import com.example.workoutholicapp.ui.shop.ShopViewModel;
 
 import org.w3c.dom.Text;
@@ -35,6 +38,8 @@ public class BuddyFragment extends Fragment {
 
         ImageButton foodButton = root.findViewById(R.id.dogfood_button);
         ImageButton waterButton = root.findViewById(R.id.dogwater_button);
+        ImageButton foodButton2 = root.findViewById(R.id.food_button);
+
 
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +68,7 @@ public class BuddyFragment extends Fragment {
                     @Override
                     public void onChanged(Integer foodStorage) {
                         TextView food = getView().findViewById(R.id.dogfood);
+                        Log.d("food on change", "method reached");
                         food.setText("x" + foodStorage);
                     }
                 }

@@ -1,6 +1,8 @@
 package com.example.workoutholicapp.ui.shop;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +14,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.workoutholicapp.MainActivity;
 import com.example.workoutholicapp.R;
 import com.example.workoutholicapp.databinding.FragmentShopBinding;
-
+import com.example.workoutholicapp.ui.buddy.BuddyFragment;
+import com.example.workoutholicapp.ui.buddy.BuddyViewModel;
 public class ShopFragment extends Fragment {
+
 
         /* hi ashley! some to dos that I can think of rn:
             - currently, food and water bought is stored as a variable in the shopviewmodel class.
@@ -37,12 +42,15 @@ public class ShopFragment extends Fragment {
 
     private FragmentShopBinding binding;
     private ShopViewModel shopViewModel;
+    private BuddyViewModel buddyViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         /* Gets and stores views - binds viewmodel to xml fragment */
+        //buddyViewModel = new ViewModelProvider(this).get(BuddyViewModel.class);
         shopViewModel = new ViewModelProvider(this).get(ShopViewModel.class);
+        //buddyViewModel = new ViewModelProvider(this).get(BuddyViewModel.class);
         binding = FragmentShopBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         binding = FragmentShopBinding.bind(root);
@@ -54,6 +62,10 @@ public class ShopFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 shopViewModel.onFoodClick();
+//                buddyViewModel.onFoodClick2();
+//                Intent intent = new Intent(com.example.workoutholicapp.ui.shop, BuddyFragment.class);
+//                finish();
+//                startActivity(intent);
             }
         });
 
@@ -63,13 +75,7 @@ public class ShopFragment extends Fragment {
                 shopViewModel.onWaterClick();
             }
         });
-        shopViewModel.moneyCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer amount) {
-                TextView money = getView().findViewById(R.id.coin_text4);
-                money.setText(String.format("%d coins", amount));
-            }
-        });
+
         // Updates text displayed to user about food/water bought
         shopViewModel.foodCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
@@ -82,13 +88,21 @@ public class ShopFragment extends Fragment {
         shopViewModel.waterCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer waterBought) {
-                TextView food = getView().findViewById(R.id.water_storage);
-                food.setText("water in storage: " + waterBought);
+                TextView water = getView().findViewById(R.id.water_storage);
+                water.setText("water in storage: " + waterBought);
+            }
+        });
+
+        shopViewModel.moneyCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer amount) {
+                TextView water = getView().findViewById(R.id.coin_text3);
+                water.setText(amount + " coins");
             }
         });
 
         /* On click, "sets" auto food/water/happy on activate (just grays out/disables button
-        *  and pops up a text to user */
+         *  and pops up a text to user */
 
         ImageButton autoFood = root.findViewById(R.id.auto_food);
         ImageButton autoWater = root.findViewById(R.id.auto_water);

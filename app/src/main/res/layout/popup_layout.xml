@@ -28,21 +28,37 @@
         app:layout_constraintTop_toBottomOf="@+id/topBar" />
 
     <TextView
-        android:id='@+id/blankLine'
+        android:id='@+id/date'
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:textAlignment='center'
+        android:textColor='@color/black'
+        android:textSize="20sp"
+
         app:layout_constraintTop_toBottomOf="@+id/entryTitle" />
 
     <TextView
         android:id='@+id/workoutSpinnerTitle'
         android:layout_width="match_parent"
         android:layout_height="50dp"
+
         android:text="Muscle Group:"
         android:textAlignment='center'
         android:textColor='@color/black'
         android:textSize="35sp"
 
-        app:layout_constraintTop_toBottomOf="@+id/blankLine" />
+        app:layout_constraintTop_toBottomOf="@+id/date" />
+
+    <TextView
+        android:id='@+id/horizontalLine'
+        android:layout_width="match_parent"
+        android:layout_height='5dp'
+        android:background='@drawable/border'
+        android:text='fuck you'
+
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="152dp" />
 
     <Spinner
         android:id='@+id/workout_spinner'
@@ -78,12 +94,12 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/blankLine2"
+        app:layout_constraintBottom_toTopOf="@+id/blankLine"
         tools:ignore="MissingConstraints"
         />
 
     <TextView
-        android:id='@+id/blankLine2'
+        android:id='@+id/blankLine'
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background='@color/white'

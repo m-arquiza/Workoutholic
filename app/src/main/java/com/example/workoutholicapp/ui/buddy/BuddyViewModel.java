@@ -17,6 +17,13 @@ public class BuddyViewModel extends ViewModel {
 
     private static MutableLiveData<Integer> totalMoney = new MutableLiveData<>(150);
 
+    public void onFoodClick2() {
+        Log.d("food button", "food clicked");
+        Integer food = foodStorage.getValue();
+        Log.d("food value", food.toString());
+        foodStorage.setValue(food + 1);
+    }
+
     public void onFoodClick() {
         Log.d("food button", "food clicked!");
         Integer food = foodStorage.getValue();
