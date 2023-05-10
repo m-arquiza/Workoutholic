@@ -37,6 +37,8 @@ public class BuddyFragment extends Fragment {
 
         ImageButton foodButton = root.findViewById(R.id.dogfood_button);
         ImageButton waterButton = root.findViewById(R.id.dogwater_button);
+        ImageButton foodButton2 = root.findViewById(R.id.food_button);
+
 
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override

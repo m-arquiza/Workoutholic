@@ -9,6 +9,15 @@ import androidx.lifecycle.ViewModel;
 
 public class EntriesViewModel extends ViewModel {
     private String muscle;
+    private String date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+public class EntriesViewModel extends ViewModel {
+    private String muscle;
+    private String workout;
+    private String rep;
 
 
     public void setMuscle(String muscle) {
@@ -17,5 +26,26 @@ public class EntriesViewModel extends ViewModel {
 
     public String getMuscle() {
         return this.muscle;
+    }
+
+
+    public void setDate(String date) {
+        this.date = "05/08/2023";
+    }
+
+    public String getDate() {
+        return this.date;
+
+    public void setWorkout(String workout) { this.workout = workout; }
+
+    public void setRep(String rep) { this.rep = rep; }
+
+    public String getRep() { return this.rep; }
+
+    public String getWorkout() { return this.workout; }
+
+    public String getDate() {
+        String date = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault()).format(new Date());
+        return date;
     }
 }

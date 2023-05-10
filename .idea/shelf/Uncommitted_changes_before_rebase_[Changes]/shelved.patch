@@ -1,0 +1,194 @@
+Index: app/src/main/java/com/example/workoutholicapp/ui/buddy/BuddyViewModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.workoutholicapp.ui.buddy;\r\n\r\nimport android.util.Log;\r\n\r\nimport androidx.lifecycle.LiveData;\r\nimport androidx.lifecycle.MutableLiveData;\r\nimport androidx.lifecycle.ViewModel;\r\n\r\nimport com.example.workoutholicapp.ui.shop.ShopViewModel;\r\n\r\npublic class BuddyViewModel extends ViewModel {\r\n\r\n    //    private int foodBought = 0;\r\n//    private int waterBought = 0;\r\n    private MutableLiveData<Integer> foodStorage = new MutableLiveData<>(10);\r\n    private MutableLiveData<Integer> waterStorage = new MutableLiveData<>(10);\r\n\r\n    private static MutableLiveData<Integer> totalMoney = new MutableLiveData<>(150);\r\n\r\n    public void onFoodClick() {\r\n        Log.d(\"food button\", \"food clicked!\");\r\n        Integer food = foodStorage.getValue();\r\n        if (food != null && food != 0) {\r\n            foodStorage.setValue(food-1);\r\n        }\r\n    }\r\n\r\n    public void onWaterClick() {\r\n        Log.d(\"water button\", \"water clicked!\");\r\n        Integer water = waterStorage.getValue();\r\n        if (waterStorage != null && water != 0) {\r\n            waterStorage.setValue(water - 1);\r\n        }\r\n    }\r\n\r\n    public LiveData<Integer> foodCount() {\r\n        return foodStorage;\r\n    }\r\n\r\n    public LiveData<Integer> waterCount() {\r\n        return waterStorage;\r\n    }\r\n\r\n    public LiveData<Integer> moneyCount() {\r\n        return totalMoney;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/workoutholicapp/ui/buddy/BuddyViewModel.java b/app/src/main/java/com/example/workoutholicapp/ui/buddy/BuddyViewModel.java
+--- a/app/src/main/java/com/example/workoutholicapp/ui/buddy/BuddyViewModel.java	(revision f281af42478f23bcb41452987742e3f4d8147b87)
++++ b/app/src/main/java/com/example/workoutholicapp/ui/buddy/BuddyViewModel.java	(date 1683623190012)
+@@ -15,12 +15,17 @@
+     private MutableLiveData<Integer> foodStorage = new MutableLiveData<>(10);
+     private MutableLiveData<Integer> waterStorage = new MutableLiveData<>(10);
+ 
+-    private static MutableLiveData<Integer> totalMoney = new MutableLiveData<>(150);
+ 
++    public void onShopChange() {
++        Integer food = foodStorage.getValue();
++        if (food != null) {
++            foodStorage.setValue(food + 1);
++        }
++    }
+     public void onFoodClick() {
+         Log.d("food button", "food clicked!");
+         Integer food = foodStorage.getValue();
+-        if (food != null && food != 0) {
++         if (food != null && food != 0) {
+             foodStorage.setValue(food-1);
+         }
+     }
+@@ -41,7 +46,4 @@
+         return waterStorage;
+     }
+ 
+-    public LiveData<Integer> moneyCount() {
+-        return totalMoney;
+-    }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/example/workoutholicapp/ui/shop/ShopViewModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.workoutholicapp.ui.shop;\r\n\r\nimport android.util.Log;\r\n\r\nimport androidx.lifecycle.LiveData;\r\nimport androidx.lifecycle.MutableLiveData;\r\nimport androidx.lifecycle.ViewModel;\r\n\r\n\r\npublic class ShopViewModel extends ViewModel {\r\n        /* hi ashley! some to dos that I can think of rn:\r\n            - currently, food and water bought is stored as a variable in the shopviewmodel class.\r\n              i'd like to be able to use it in the buddy class as well, but i'm a) not able to use\r\n              shop vars in buddy and b) not able to call buddy component ids in shop. if you could\r\n              fix that that'd be perf :)\r\n            - similarly (but also not rly) when i have a toy pressed, nothing happens... i hardcoded\r\n              a single toy in, but since there's no way for me to indicate that the user alr bought\r\n              an item in the shop to use in the buddy fragment i didn't create any variables so same idea,\r\n              if you can give me a way to access that information that helps\r\n            - vitals do not move in any way. atm i have vital bars set to 80dp height, if you can\r\n              provide me numbers such that i can change the height of the vitals according to those\r\n              80 degrees of measurement i would be very grateful\r\n            - so,,, shop system not implemented. not sure who's doing that, but i can't have items\r\n              cost things if i have no money to spend LOL so money doesn't go up or down, legit\r\n              just hardcoded as like 104 or smth\r\n           and that's all i can think of rn\r\n        * */\r\n\r\n    private MutableLiveData<Integer> foodInStorage = new MutableLiveData<>(0);\r\n    private MutableLiveData<Integer> waterInStorage = new MutableLiveData<>(0);\r\n    private static MutableLiveData<Integer> totalMoney = new MutableLiveData<>(150);\r\n\r\n\r\n    public void onFoodClick() {\r\n        Integer food = foodInStorage.getValue();\r\n        Integer money = totalMoney.getValue();\r\n        if (food != null && money > 10) {\r\n            foodInStorage.setValue(food+1);\r\n            totalMoney.setValue(money - 10);\r\n        }\r\n    }\r\n\r\n    public void onWaterClick() {\r\n        Integer water = waterInStorage.getValue();\r\n        Integer money = totalMoney.getValue();\r\n        if (water != null) {\r\n            waterInStorage.setValue(water+1);\r\n            totalMoney.setValue(money - 20);\r\n        }\r\n    }\r\n\r\n\r\n    public LiveData<Integer> foodCount() {\r\n        return foodInStorage;\r\n    }\r\n\r\n    public LiveData<Integer> waterCount() {\r\n        return waterInStorage;\r\n    }\r\n\r\n    public LiveData<Integer> moneyCount() { return totalMoney; }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/workoutholicapp/ui/shop/ShopViewModel.java b/app/src/main/java/com/example/workoutholicapp/ui/shop/ShopViewModel.java
+--- a/app/src/main/java/com/example/workoutholicapp/ui/shop/ShopViewModel.java	(revision f281af42478f23bcb41452987742e3f4d8147b87)
++++ b/app/src/main/java/com/example/workoutholicapp/ui/shop/ShopViewModel.java	(date 1683622950517)
+@@ -8,6 +8,7 @@
+ 
+ 
+ public class ShopViewModel extends ViewModel {
++    // next goal: when something is bought in shop, it appears in inventory
+         /* hi ashley! some to dos that I can think of rn:
+             - currently, food and water bought is stored as a variable in the shopviewmodel class.
+               i'd like to be able to use it in the buddy class as well, but i'm a) not able to use
+@@ -30,11 +31,13 @@
+     private MutableLiveData<Integer> waterInStorage = new MutableLiveData<>(0);
+     private static MutableLiveData<Integer> totalMoney = new MutableLiveData<>(150);
+ 
++    private static MutableLiveData<Integer> foodBought = new MutableLiveData<>(0);
++
+ 
+     public void onFoodClick() {
+         Integer food = foodInStorage.getValue();
+         Integer money = totalMoney.getValue();
+-        if (food != null && money > 10) {
++        if (food != null && money >= 10) {
+             foodInStorage.setValue(food+1);
+             totalMoney.setValue(money - 10);
+         }
+@@ -43,7 +46,7 @@
+     public void onWaterClick() {
+         Integer water = waterInStorage.getValue();
+         Integer money = totalMoney.getValue();
+-        if (water != null) {
++        if (water != null && money >= 20) {
+             waterInStorage.setValue(water+1);
+             totalMoney.setValue(money - 20);
+         }
+Index: app/src/main/res/layout/fragment_shop.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".ui.shop.ShopFragment\"\r\n    tools:layout_editor_absoluteX=\"0dp\"\r\n    tools:layout_editor_absoluteY=\"-15dp\">\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/text_shop\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"4dp\"\r\n\r\n        android:text=\"SHOP\"\r\n        android:textAlignment=\"center\"\r\n        android:textSize=\"50sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/text_basics\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"72dp\"\r\n\r\n        android:text=\"Basics\"\r\n        android:textAlignment=\"center\"\r\n        android:textSize=\"30sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <ImageButton\r\n        android:id=\"@+id/food_button\"\r\n        android:layout_width=\"130dp\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_marginStart=\"48dp\"\r\n        android:layout_marginBottom=\"448dp\"\r\n        android:onClick=\"onFoodClick\"\r\n\r\n        android:src=\"@drawable/food_icon\"\r\n        android:scaleType=\"fitCenter\"\r\n        android:background=\"#d2f2fc\"\r\n\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/text_basics\"\r\n        app:layout_constraintVertical_bias=\"0.014\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/food_storage\"\r\n        android:layout_width=\"130dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"2dp\"\r\n\r\n        android:text=\"food in storage: 0\"\r\n\r\n        android:textSize=\"13sp\"\r\n        app:layout_constraintEnd_toEndOf=\"@id/food_button\"\r\n        app:layout_constraintStart_toStartOf=\"@id/food_button\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/food_button\"/>\r\n\r\n    <ImageButton\r\n        android:id=\"@+id/water_button\"\r\n        android:layout_width=\"130dp\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_marginEnd=\"48dp\"\r\n        android:layout_marginBottom=\"448dp\"\r\n\r\n        android:src=\"@drawable/water_icon\"\r\n        android:scaleType=\"fitCenter\"\r\n        android:background=\"#d2f2fc\"\r\n\r\n        android:text=\"click for water\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/text_basics\"\r\n        app:layout_constraintVertical_bias=\"0.014\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/water_storage\"\r\n        android:layout_width=\"130dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"2dp\"\r\n\r\n        android:text=\"water in storage: 0\"\r\n\r\n        android:textSize=\"13sp\"\r\n        app:layout_constraintEnd_toEndOf=\"@+id/water_button\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/water_button\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/water_button\"/>\r\n\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/text_special\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"252dp\"\r\n\r\n        android:text=\"Special\"\r\n        android:textAlignment=\"center\"\r\n        android:textSize=\"30sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <ImageButton\r\n        android:id=\"@+id/auto_water\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_marginStart=\"15dp\"\r\n        android:layout_marginTop=\"8dp\"\r\n\r\n        android:layout_marginEnd=\"15dp\"\r\n        android:background=\"#d2f2fc\"\r\n        android:scaleType=\"fitCenter\"\r\n\r\n        android:src=\"@drawable/auto_water\"\r\n        app:layout_constraintEnd_toEndOf=\"@id/auto_happy\"\r\n        app:layout_constraintHorizontal_bias=\"0.506\"\r\n        app:layout_constraintStart_toStartOf=\"@id/auto_food\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/text_special\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/aw_activate\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"2dp\"\r\n\r\n        android:textSize=\"13sp\"\r\n        app:layout_constraintEnd_toEndOf=\"@id/auto_water\"\r\n        app:layout_constraintStart_toStartOf=\"@id/auto_water\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/auto_water\"/>\r\n\r\n    <ImageButton\r\n    android:id=\"@+id/auto_food\"\r\n    android:layout_width=\"100dp\"\r\n    android:layout_height=\"100dp\"\r\n    android:layout_marginStart=\"24dp\"\r\n\r\n    android:layout_marginTop=\"8dp\"\r\n    android:background=\"#d2f2fc\"\r\n    android:scaleType=\"fitCenter\"\r\n\r\n    android:src=\"@drawable/auto_food\"\r\n    app:layout_constraintStart_toStartOf=\"parent\"\r\n    app:layout_constraintTop_toBottomOf=\"@+id/text_special\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/af_activate\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"2dp\"\r\n\r\n        android:textSize=\"13sp\"\r\n        app:layout_constraintEnd_toEndOf=\"@id/auto_food\"\r\n        app:layout_constraintStart_toStartOf=\"@id/auto_food\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/auto_food\"/>\r\n\r\n    <ImageButton\r\n    android:id=\"@+id/auto_happy\"\r\n    android:layout_width=\"100dp\"\r\n    android:layout_height=\"100dp\"\r\n    android:layout_marginTop=\"8dp\"\r\n\r\n    android:layout_marginEnd=\"28dp\"\r\n    android:background=\"#d2f2fc\"\r\n    android:scaleType=\"fitCenter\"\r\n\r\n    android:src=\"@drawable/auto_toy\"\r\n    app:layout_constraintEnd_toEndOf=\"parent\"\r\n    app:layout_constraintTop_toBottomOf=\"@+id/text_special\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/ah_activate\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"2dp\"\r\n\r\n        android:textSize=\"13sp\"\r\n        app:layout_constraintEnd_toEndOf=\"@id/auto_happy\"\r\n        app:layout_constraintStart_toStartOf=\"@id/auto_happy\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/auto_happy\"/>\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/text_toys\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"448dp\"\r\n\r\n        android:text=\"Toys\"\r\n        android:textAlignment=\"center\"\r\n        android:textSize=\"30sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/coming_soon\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"672dp\"\r\n\r\n        android:text=\"and more coming soon!\"\r\n        android:textAlignment=\"center\"\r\n        android:textSize=\"25dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <ImageButton\r\n        android:id=\"@+id/toy2\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_marginStart=\"15dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n\r\n        android:layout_marginEnd=\"15dp\"\r\n        android:background=\"#d2f2fc\"\r\n        android:scaleType=\"fitCenter\"\r\n\r\n        android:src=\"@drawable/toy_bone\"\r\n        app:layout_constraintEnd_toEndOf=\"@id/auto_happy\"\r\n        app:layout_constraintHorizontal_bias=\"0.506\"\r\n        app:layout_constraintStart_toStartOf=\"@id/auto_food\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/text_toys\" />\r\n\r\n    <ImageButton\r\n        android:id=\"@+id/toy1\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_marginStart=\"24dp\"\r\n\r\n        android:layout_marginTop=\"16dp\"\r\n        android:background=\"#d2f2fc\"\r\n        android:scaleType=\"fitCenter\"\r\n\r\n        android:src=\"@drawable/toy_ball\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/text_toys\" />\r\n\r\n    <ImageButton\r\n        android:id=\"@+id/toy3\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n\r\n        android:layout_marginEnd=\"28dp\"\r\n        android:background=\"#d2f2fc\"\r\n        android:scaleType=\"fitCenter\"\r\n\r\n        android:src=\"@drawable/toy_stick\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/text_toys\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_shop.xml b/app/src/main/res/layout/fragment_shop.xml
+--- a/app/src/main/res/layout/fragment_shop.xml	(revision f281af42478f23bcb41452987742e3f4d8147b87)
++++ b/app/src/main/res/layout/fragment_shop.xml	(date 1683607562271)
+@@ -24,6 +24,19 @@
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+ 
++    <TextView
++        android:id="@+id/coin_text4"
++        android:layout_width="65dp"
++        android:layout_height="50dp"
++
++        android:layout_marginTop="44dp"
++        android:layout_marginEnd="4dp"
++
++        android:text="104 coins"
++
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
+     <TextView
+         android:id="@+id/text_basics"
+         android:layout_width="0dp"
+Index: app/src/main/java/com/example/workoutholicapp/ui/buddy/BuddyFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.workoutholicapp.ui.buddy;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.ImageButton;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.lifecycle.Observer;\r\nimport androidx.lifecycle.ViewModelProvider;\r\n\r\nimport com.example.workoutholicapp.R;\r\nimport com.example.workoutholicapp.databinding.FragmentBuddyBinding;\r\nimport com.example.workoutholicapp.ui.shop.ShopViewModel;\r\n\r\nimport org.w3c.dom.Text;\r\n\r\npublic class BuddyFragment extends Fragment {\r\n\r\n    private FragmentBuddyBinding binding;\r\n\r\n    public View onCreateView(@NonNull LayoutInflater inflater,\r\n                             ViewGroup container, Bundle savedInstanceState) {\r\n        BuddyViewModel buddyViewModel =\r\n                new ViewModelProvider(this).get(BuddyViewModel.class);\r\n        ShopViewModel shopViewModel = new ViewModelProvider(this).get(ShopViewModel.class);\r\n\r\n        binding = FragmentBuddyBinding.inflate(inflater, container, false);\r\n        View root = binding.getRoot();\r\n\r\n        ImageButton foodButton = root.findViewById(R.id.dogfood_button);\r\n        ImageButton waterButton = root.findViewById(R.id.dogwater_button);\r\n\r\n        foodButton.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                buddyViewModel.onFoodClick();\r\n            }\r\n        });\r\n\r\n        waterButton.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                buddyViewModel.onWaterClick();\r\n            }\r\n        });\r\n\r\n        shopViewModel.moneyCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {\r\n            @Override\r\n            public void onChanged(Integer amount) {\r\n                TextView money = getView().findViewById(R.id.coin_text);\r\n                money.setText(String.format(\"%d coins\", amount));\r\n            }\r\n        });\r\n\r\n\r\n        buddyViewModel.foodCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {\r\n                    @Override\r\n                    public void onChanged(Integer foodStorage) {\r\n                        TextView food = getView().findViewById(R.id.dogfood);\r\n                        food.setText(\"x\" + foodStorage);\r\n                    }\r\n                }\r\n        );\r\n\r\n        buddyViewModel.waterCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {\r\n                    @Override\r\n                    public void onChanged(Integer waterStorage) {\r\n                        TextView water = getView().findViewById(R.id.dogwater);\r\n                        water.setText(\"x\" + waterStorage);\r\n                    }\r\n                }\r\n        );\r\n\r\n\r\n        ImageButton ball = root.findViewById(R.id.dog_toy1);\r\n        ball.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                ImageView ball = getView().findViewById(R.id.toy_ball);\r\n                if (ball.getAlpha() == 0.0f) {\r\n                    ball.setAlpha(1.0f);\r\n                } else {\r\n                    ball.setAlpha(0.0f);\r\n                }\r\n            }\r\n        });\r\n\r\n        return root;\r\n    }\r\n\r\n    @Override\r\n    public void onDestroyView() {\r\n        super.onDestroyView();\r\n        binding = null;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/workoutholicapp/ui/buddy/BuddyFragment.java b/app/src/main/java/com/example/workoutholicapp/ui/buddy/BuddyFragment.java
+--- a/app/src/main/java/com/example/workoutholicapp/ui/buddy/BuddyFragment.java	(revision f281af42478f23bcb41452987742e3f4d8147b87)
++++ b/app/src/main/java/com/example/workoutholicapp/ui/buddy/BuddyFragment.java	(date 1683623284877)
+@@ -35,6 +35,14 @@
+ 
+         ImageButton foodButton = root.findViewById(R.id.dogfood_button);
+         ImageButton waterButton = root.findViewById(R.id.dogwater_button);
++        ImageButton invFoodButton = root.findViewById(R.id.food_button);
++
++//        invFoodButton.setOnClickListener(new View.OnClickListener() {
++//            @Override
++//            public void onClick(View view) {
++//                buddyViewModel.onShopChange();
++//            }
++//        });
+ 
+         foodButton.setOnClickListener(new View.OnClickListener() {
+             @Override
+@@ -58,6 +66,23 @@
+             }
+         });
+ 
++        shopViewModel.moneyCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
++            @Override
++            public void onChanged(Integer integer) {
++                TextView food = getView().findViewById(R.id.dogfood);
++                food.setText("hi");
++            }
++        });
++
++//        shopViewModel.foodCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
++//            @Override
++//            public void onChanged(Integer foodInStorage) {
++//                TextView food = getView().findViewById(R.id.dogfood);
++//                food.setText("x" + foodInStorage);
++//
++//            }
++//        });
++
+ 
+         buddyViewModel.foodCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+                     @Override
+Index: app/src/main/java/com/example/workoutholicapp/ui/shop/ShopFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.workoutholicapp.ui.shop;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.ImageButton;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.lifecycle.Observer;\r\nimport androidx.lifecycle.ViewModelProvider;\r\n\r\nimport com.example.workoutholicapp.R;\r\nimport com.example.workoutholicapp.databinding.FragmentShopBinding;\r\n\r\npublic class ShopFragment extends Fragment {\r\n\r\n        /* hi ashley! some to dos that I can think of rn:\r\n            - currently, food and water bought is stored as a variable in the shopviewmodel class.\r\n              i'd like to be able to use it in the buddy class as well, but i'm a) not able to use\r\n              shop vars in buddy and b) not able to call buddy component ids in shop. if you could\r\n              fix that that'd be perf :)\r\n            - similarly (but also not rly) when i have a toy pressed, nothing happens... i hardcoded\r\n              a single toy in, but since there's no way for me to indicate that the user alr bought\r\n              an item in the shop to use in the buddy fragment i didn't create any variables so same idea,\r\n              if you can give me a way to access that information that helps\r\n            - vitals do not move in any way. atm i have vital bars set to 80dp height, if you can\r\n              provide me numbers such that i can change the height of the vitals according to those\r\n              80 degrees of measurement i would be very grateful\r\n            - so,,, shop system not implemented. not sure who's doing that, but i can't have items\r\n              cost things if i have no money to spend LOL so money doesn't go up or down, legit\r\n              just hardcoded as like 104 or smth\r\n           and that's all i can think of rn\r\n        * */\r\n\r\n    private FragmentShopBinding binding;\r\n    private ShopViewModel shopViewModel;\r\n\r\n    public View onCreateView(@NonNull LayoutInflater inflater,\r\n                             ViewGroup container, Bundle savedInstanceState) {\r\n\r\n        /* Gets and stores views - binds viewmodel to xml fragment */\r\n        shopViewModel = new ViewModelProvider(this).get(ShopViewModel.class);\r\n        binding = FragmentShopBinding.inflate(inflater, container, false);\r\n        View root = binding.getRoot();\r\n        binding = FragmentShopBinding.bind(root);\r\n\r\n        /* On click, updates food and water variable inside ShopViewModel respectively */\r\n        ImageButton foodButton = root.findViewById(R.id.food_button);\r\n        ImageButton  waterButton = root.findViewById(R.id.water_button);\r\n        foodButton.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                shopViewModel.onFoodClick();\r\n            }\r\n        });\r\n\r\n        waterButton.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                shopViewModel.onWaterClick();\r\n            }\r\n        });\r\n        shopViewModel.moneyCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {\r\n            @Override\r\n            public void onChanged(Integer amount) {\r\n                TextView money = getView().findViewById(R.id.coin_text4);\r\n                money.setText(String.format(\"%d coins\", amount));\r\n            }\r\n        });\r\n        // Updates text displayed to user about food/water bought\r\n        shopViewModel.foodCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {\r\n            @Override\r\n            public void onChanged(Integer foodBought) {\r\n                TextView food = getView().findViewById(R.id.food_storage);\r\n                food.setText(\"food in storage: \" + foodBought);\r\n            }\r\n        });\r\n\r\n        shopViewModel.waterCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {\r\n            @Override\r\n            public void onChanged(Integer waterBought) {\r\n                TextView food = getView().findViewById(R.id.water_storage);\r\n                food.setText(\"water in storage: \" + waterBought);\r\n            }\r\n        });\r\n\r\n        /* On click, \"sets\" auto food/water/happy on activate (just grays out/disables button\r\n        *  and pops up a text to user */\r\n\r\n        ImageButton autoFood = root.findViewById(R.id.auto_food);\r\n        ImageButton autoWater = root.findViewById(R.id.auto_water);\r\n        ImageButton autoHappy = root.findViewById(R.id.auto_happy);\r\n\r\n        autoFood.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                autoFood.setEnabled(false);\r\n                autoFood.setAlpha(0.5f);\r\n                TextView food = getView().findViewById(R.id.af_activate);\r\n                food.setText(\"auto feed on!\");\r\n            }\r\n        });\r\n        autoWater.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                autoWater.setEnabled(false);\r\n                autoWater.setAlpha(0.5f);\r\n                TextView water = getView().findViewById(R.id.aw_activate);\r\n                water.setText(\"auto hydrate on!\");\r\n            }\r\n        });\r\n        autoHappy.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                autoHappy.setEnabled(false);\r\n                autoHappy.setAlpha(0.5f);\r\n                TextView happy = getView().findViewById(R.id.ah_activate);\r\n                happy.setText(\"auto play on!\");\r\n            }\r\n        });\r\n\r\n        /* On click, \"buys\" toy (grays it out. that's all for rn) */\r\n\r\n        ImageButton toy1 = root.findViewById(R.id.toy1);\r\n        ImageButton toy2 = root.findViewById(R.id.toy2);\r\n        ImageButton toy3 = root.findViewById(R.id.toy3);\r\n\r\n        toy1.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                toy1.setEnabled(false);\r\n                toy1.setAlpha(0.5f);\r\n            }\r\n        });\r\n        toy2.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                toy2.setEnabled(false);\r\n                toy2.setAlpha(0.5f);\r\n            }\r\n        });\r\n        toy3.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                toy3.setEnabled(false);\r\n                toy3.setAlpha(0.5f);\r\n            }\r\n        });\r\n\r\n        return root;\r\n    }\r\n\r\n    @Override\r\n    public void onDestroyView() {\r\n        super.onDestroyView();\r\n        binding = null;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/workoutholicapp/ui/shop/ShopFragment.java b/app/src/main/java/com/example/workoutholicapp/ui/shop/ShopFragment.java
+--- a/app/src/main/java/com/example/workoutholicapp/ui/shop/ShopFragment.java	(revision f281af42478f23bcb41452987742e3f4d8147b87)
++++ b/app/src/main/java/com/example/workoutholicapp/ui/shop/ShopFragment.java	(date 1683622725297)
+@@ -14,6 +14,7 @@
+ 
+ import com.example.workoutholicapp.R;
+ import com.example.workoutholicapp.databinding.FragmentShopBinding;
++import com.example.workoutholicapp.ui.buddy.BuddyViewModel;
+ 
+ public class ShopFragment extends Fragment {
+ 
+@@ -37,12 +38,15 @@
+ 
+     private FragmentShopBinding binding;
+     private ShopViewModel shopViewModel;
++    private BuddyViewModel buddyViewModel;
+ 
+     public View onCreateView(@NonNull LayoutInflater inflater,
+                              ViewGroup container, Bundle savedInstanceState) {
+ 
+         /* Gets and stores views - binds viewmodel to xml fragment */
+         shopViewModel = new ViewModelProvider(this).get(ShopViewModel.class);
++        buddyViewModel = new ViewModelProvider(this).get(BuddyViewModel.class);
++
+         binding = FragmentShopBinding.inflate(inflater, container, false);
+         View root = binding.getRoot();
+         binding = FragmentShopBinding.bind(root);
