@@ -18,9 +18,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.workoutholicapp.MainActivity;
 import com.example.workoutholicapp.R;
 import com.example.workoutholicapp.databinding.FragmentShopBinding;
+import com.example.workoutholicapp.ui.FoodViewModel;
 import com.example.workoutholicapp.ui.buddy.BuddyFragment;
 import com.example.workoutholicapp.ui.buddy.BuddyViewModel;
-public class ShopFragment extends Fragment {
 
 import com.example.workoutholicapp.R;
 import com.example.workoutholicapp.databinding.FragmentShopBinding;
@@ -48,6 +48,7 @@ public class ShopFragment extends Fragment {
     private FragmentShopBinding binding;
     private ShopViewModel shopViewModel;
     private BuddyViewModel buddyViewModel;
+    private FoodViewModel foodViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class ShopFragment extends Fragment {
         /* Gets and stores views - binds viewmodel to xml fragment */
         //buddyViewModel = new ViewModelProvider(this).get(BuddyViewModel.class);
         shopViewModel = new ViewModelProvider(this).get(ShopViewModel.class);
+        foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
         //buddyViewModel = new ViewModelProvider(this).get(BuddyViewModel.class);
         shopViewModel = new ViewModelProvider(this).get(ShopViewModel.class);
         binding = FragmentShopBinding.inflate(inflater, container, false);
@@ -67,7 +69,7 @@ public class ShopFragment extends Fragment {
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shopViewModel.onFoodClick();
+                foodViewModel.onFoodClick(true);
 //                buddyViewModel.onFoodClick2();
 //                Intent intent = new Intent(com.example.workoutholicapp.ui.shop, BuddyFragment.class);
 //                finish();
@@ -84,13 +86,23 @@ public class ShopFragment extends Fragment {
         });
 
         // Updates text displayed to user about food/water bought
-        shopViewModel.foodCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer foodBought) {
-                TextView food = getView().findViewById(R.id.food_storage);
-                food.setText("food in storage: " + foodBought);
-            }
-        });
+//        shopViewModel.foodCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+//            @Override
+//            public void onChanged(Integer foodBought) {
+//                TextView food = getView().findViewById(R.id.food_storage);
+//                food.setText("food in storage: " + foodBought);
+//            }
+//        });
+
+        foodViewModel.foodCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer foodStorage) {
+                        TextView food = getView().findViewById(R.id.food_storage);
+                        Log.d("food on change", "method reached");
+                        food.setText("food in storage:" + foodStorage);
+                    }
+                }
+        );
 
         shopViewModel.waterCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
@@ -107,8 +119,6 @@ public class ShopFragment extends Fragment {
                 TextView water = getView().findViewById(R.id.coin_text3);
                 water.setText(amount + " coins");
 
-                TextView food = getView().findViewById(R.id.water_storage);
-                food.setText("water in storage: " + waterBought);
 
             }
         });
