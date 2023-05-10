@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.workoutholicapp.MainActivity;
 import com.example.workoutholicapp.R;
 import com.example.workoutholicapp.databinding.FragmentBuddyBinding;
 import com.example.workoutholicapp.ui.FoodViewModel;
@@ -27,13 +28,21 @@ import org.w3c.dom.Text;
 public class BuddyFragment extends Fragment {
 
     private FragmentBuddyBinding binding;
+    private FoodViewModel foodViewModel;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        MainActivity activity = (MainActivity) requireActivity();
+        foodViewModel = activity.getFoodViewModel();
+    }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         BuddyViewModel buddyViewModel =
                 new ViewModelProvider(this).get(BuddyViewModel.class);
-        ShopViewModel shopViewModel = new ViewModelProvider(this).get(ShopViewModel.class);
-        FoodViewModel foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
+        ShopViewModel shopViewModel = new ViewModelProvider(requireActivity()).get(ShopViewModel.class);
+        //FoodViewModel foodViewModel = new ViewModelProvider(requireActivity()).get(FoodViewModel.class);
         binding = FragmentBuddyBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -52,36 +61,31 @@ public class BuddyFragment extends Fragment {
         waterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buddyViewModel.onWaterClick();
+                foodViewModel.onWaterClick(false);
             }
         });
 
-        shopViewModel.moneyCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer amount) {
-                TextView money = getView().findViewById(R.id.coin_text);
-                money.setText(String.format("%d coins", amount));
-            }
+//        shopViewModel.moneyCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+//            @Override
+//            public void onChanged(Integer amount) {
+//                TextView money = getView().findViewById(R.id.coin_text);
+//                money.setText(String.format("%d coins", amount));
+//            }
+//        });
+        foodViewModel.foodCount().observe(getViewLifecycleOwner(), value -> {
+            TextView food = getView().findViewById(R.id.dogfood);
+            food.setText("x" + value);
         });
 
-        foodViewModel.foodCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-                    @Override
-                    public void onChanged(Integer foodStorage) {
-                        TextView food = getView().findViewById(R.id.dogfood);
-                        Log.d("food on change", "method reached");
-                        food.setText("x" + foodStorage);
-                    }
-                }
-        );
+        foodViewModel.waterCount().observe(getViewLifecycleOwner(), value -> {
+            TextView water = getView().findViewById(R.id.dogwater);
+            water.setText("x" + value);
+        });
 
-        buddyViewModel.waterCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-                    @Override
-                    public void onChanged(Integer waterStorage) {
-                        TextView water = getView().findViewById(R.id.dogwater);
-                        water.setText("x" + waterStorage);
-                    }
-                }
-        );
+        foodViewModel.moneyAmount().observe(getViewLifecycleOwner(), value -> {
+            TextView money = getView().findViewById(R.id.coin_text);
+            money.setText(value + " coins");
+        });
 
 
         ImageButton ball = root.findViewById(R.id.dog_toy1);
