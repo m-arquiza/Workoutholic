@@ -2,12 +2,12 @@ package com.example.workoutholicapp.backend.ViewWorkout;
 
 import android.os.AsyncTask;
 import android.util.Log;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -21,6 +21,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class ViewWorkout {
+    public List<String> MuscleList = new ArrayList<String>(Arrays.asList(
+            "abdominals",
+            "abductors",
+            "adductors",
+            "biceps",
+            "calves",
+            "chest",
+            "forearms",
+            "glutes",
+            "hamstrings",
+            "lats",
+            "lower_back",
+            "middle_back",
+            "neck",
+            "quadriceps",
+            "traps",
+            "triceps"));
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
     private static final OkHttpClient client = new OkHttpClient();
 

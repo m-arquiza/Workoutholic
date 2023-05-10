@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.workoutholicapp.ui.buddy.BuddyViewModel;
+
 
 public class ShopViewModel extends ViewModel {
         /* hi ashley! some to dos that I can think of rn:
@@ -28,21 +30,41 @@ public class ShopViewModel extends ViewModel {
 
     private MutableLiveData<Integer> foodInStorage = new MutableLiveData<>(0);
     private MutableLiveData<Integer> waterInStorage = new MutableLiveData<>(0);
+    private static MutableLiveData<Integer> totalMoney = new MutableLiveData<>(150);
+
 
 
     public void onFoodClick() {
         Integer food = foodInStorage.getValue();
+
+        Integer money = totalMoney.getValue();
+        if (food != null && money > 10) {
+            foodInStorage.setValue(food+1);
+            totalMoney.setValue(money - 10);
+
         if (food != null) {
             foodInStorage.setValue(food+1);
+
         }
     }
 
     public void onWaterClick() {
         Integer water = waterInStorage.getValue();
+
+        Integer money = totalMoney.getValue();
+        if (water != null) {
+            waterInStorage.setValue(water+1);
+            totalMoney.setValue(money - 20);
+        }
+    }
+
+
+
         if (water != null) {
             waterInStorage.setValue(water+1);
         }
     }
+
 
     public LiveData<Integer> foodCount() {
         return foodInStorage;
@@ -51,5 +73,8 @@ public class ShopViewModel extends ViewModel {
     public LiveData<Integer> waterCount() {
         return waterInStorage;
     }
+
+    public LiveData<Integer> moneyCount() { return totalMoney; }
+
 
 }
