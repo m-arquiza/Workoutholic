@@ -23,11 +23,11 @@ public class MainViewModel extends ViewModel {
     }
 
     public void onWaterClick(boolean isShop) {
-        Integer water = foodStorage.getValue();
+        Integer water = waterStorage.getValue();
         Integer money = totalMoney.getValue();
         if (isShop && money >= 10) {
             waterStorage.setValue(water+1);
-            totalMoney.setValue(money - 20);
+            totalMoney.setValue(money - 10);
         } else if (water != null && water != 0) {
             waterStorage.setValue(water-1);
         }

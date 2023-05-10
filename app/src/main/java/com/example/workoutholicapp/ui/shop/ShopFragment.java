@@ -46,7 +46,7 @@ public class ShopFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         MainActivity activity = (MainActivity) requireActivity();
-        mainViewModel = activity.getFoodViewModel();
+        mainViewModel = activity.getMainViewModel();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
