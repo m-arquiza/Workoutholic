@@ -266,6 +266,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_toys" />
 
+
     <TextView
         android:id="@+id/coin_text3"
         android:layout_width="65dp"
@@ -278,5 +279,6 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
