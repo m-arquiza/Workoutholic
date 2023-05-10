@@ -3,7 +3,6 @@ package com.example.workoutholicapp;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -11,17 +10,17 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.workoutholicapp.databinding.ActivityMainBinding;
-import com.example.workoutholicapp.ui.FoodViewModel;
+import com.example.workoutholicapp.ui.MainViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private FoodViewModel foodViewModel;
+    private MainViewModel mainViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        foodViewModel = new ViewModelProvider(this).get(FoodViewModel.class);
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -38,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public FoodViewModel getFoodViewModel() {
-        return foodViewModel;
+    public MainViewModel getMainViewModel() {
+        return mainViewModel;
     }
 
 }
