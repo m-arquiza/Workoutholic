@@ -75,7 +75,11 @@ To do this you can create a new configuration.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-
+### How to Test 
+With testing our app we use JUnit testing which is an open source framework used to test Java programs 
+In this case, you can create automated tests withing in 
+- app/src/test/java/com/example/workoutholicapp
+Then these tests can be run automatically to debug the app.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
