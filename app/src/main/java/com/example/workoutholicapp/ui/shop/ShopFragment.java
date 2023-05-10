@@ -1,6 +1,5 @@
 package com.example.workoutholicapp.ui.shop;
 
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +37,7 @@ public class ShopFragment extends Fragment {
         * */
 
     private FragmentShopBinding binding;
+
     private MainViewModel mainViewModel;
 
 
@@ -64,6 +64,7 @@ public class ShopFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mainViewModel.onFoodClick(true);
+
             }
         });
 
@@ -73,6 +74,7 @@ public class ShopFragment extends Fragment {
                 mainViewModel.onWaterClick(true);
             }
         });
+
 
 
         mainViewModel.foodCount().observe(getViewLifecycleOwner(), value -> {

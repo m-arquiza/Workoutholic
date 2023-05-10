@@ -1,5 +1,6 @@
 package com.example.workoutholicapp.ui.buddy;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +18,6 @@ import com.example.workoutholicapp.R;
 import com.example.workoutholicapp.databinding.FragmentBuddyBinding;
 import com.example.workoutholicapp.ui.MainViewModel;
 
-
 public class BuddyFragment extends Fragment {
 
     private FragmentBuddyBinding binding;
@@ -28,7 +28,7 @@ public class BuddyFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         MainActivity activity = (MainActivity) requireActivity();
-        mainViewModel = activity.getFoodViewModel();
+        mainViewModel = activity.getMainViewModel();
     }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

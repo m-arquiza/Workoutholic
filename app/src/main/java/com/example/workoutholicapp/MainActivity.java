@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public MainViewModel getFoodViewModel() {
+    public MainViewModel getMainViewModel() {
         return mainViewModel;
     }
 
