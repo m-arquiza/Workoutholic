@@ -9,12 +9,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
-import com.example.workoutholicapp.MainActivity;
 import com.example.workoutholicapp.R;
 import com.example.workoutholicapp.databinding.FragmentShopBinding;
-import com.example.workoutholicapp.ui.MainViewModel;
-
 
 public class ShopFragment extends Fragment {
 
@@ -37,22 +36,13 @@ public class ShopFragment extends Fragment {
         * */
 
     private FragmentShopBinding binding;
-
-    private MainViewModel mainViewModel;
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        MainActivity activity = (MainActivity) requireActivity();
-        mainViewModel = activity.getMainViewModel();
-    }
+    private ShopViewModel shopViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         /* Gets and stores views - binds viewmodel to xml fragment */
+        shopViewModel = new ViewModelProvider(this).get(ShopViewModel.class);
         binding = FragmentShopBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         binding = FragmentShopBinding.bind(root);
@@ -63,35 +53,36 @@ public class ShopFragment extends Fragment {
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainViewModel.onFoodClick(true);
-
+                shopViewModel.onFoodClick();
             }
         });
 
         waterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainViewModel.onWaterClick(true);
+                shopViewModel.onWaterClick();
             }
         });
 
-
-
-        mainViewModel.foodCount().observe(getViewLifecycleOwner(), value -> {
-            TextView food = getView().findViewById(R.id.food_storage);
-            food.setText("food in storage: " + value);
+        // Updates text displayed to user about food/water bought
+        shopViewModel.foodCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer foodBought) {
+                TextView food = getView().findViewById(R.id.food_storage);
+                food.setText("food in storage: " + foodBought);
+            }
         });
 
-        mainViewModel.waterCount().observe(getViewLifecycleOwner(), value -> {
-            TextView water = getView().findViewById(R.id.water_storage);
-            water.setText("water in storage: " + value);
+        shopViewModel.waterCount().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer waterBought) {
+                TextView food = getView().findViewById(R.id.water_storage);
+                food.setText("water in storage: " + waterBought);
+            }
         });
 
-        mainViewModel.moneyAmount().observe(getViewLifecycleOwner(), value -> {
-            TextView money = getView().findViewById(R.id.coin_text2);
-            money.setText(value + " coins");
-        });
-
+        /* On click, "sets" auto food/water/happy on activate (just grays out/disables button
+        *  and pops up a text to user */
 
         ImageButton autoFood = root.findViewById(R.id.auto_food);
         ImageButton autoWater = root.findViewById(R.id.auto_water);

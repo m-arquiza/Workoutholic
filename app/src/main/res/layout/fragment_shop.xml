@@ -143,18 +143,18 @@
         app:layout_constraintTop_toBottomOf="@id/auto_water"/>
 
     <ImageButton
-        android:id="@+id/auto_food"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="24dp"
+    android:id="@+id/auto_food"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_marginStart="24dp"
 
-        android:layout_marginTop="8dp"
-        android:background="#d2f2fc"
-        android:scaleType="fitCenter"
+    android:layout_marginTop="8dp"
+    android:background="#d2f2fc"
+    android:scaleType="fitCenter"
 
-        android:src="@drawable/auto_food"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_special" />
+    android:src="@drawable/auto_food"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/text_special" />
 
     <TextView
         android:id="@+id/af_activate"
@@ -168,18 +168,18 @@
         app:layout_constraintTop_toBottomOf="@id/auto_food"/>
 
     <ImageButton
-        android:id="@+id/auto_happy"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="8dp"
+    android:id="@+id/auto_happy"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_marginTop="8dp"
 
-        android:layout_marginEnd="28dp"
-        android:background="#d2f2fc"
-        android:scaleType="fitCenter"
+    android:layout_marginEnd="28dp"
+    android:background="#d2f2fc"
+    android:scaleType="fitCenter"
 
-        android:src="@drawable/auto_toy"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_special" />
+    android:src="@drawable/auto_toy"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/text_special" />
 
     <TextView
         android:id="@+id/ah_activate"
@@ -265,19 +265,5 @@
         android:src="@drawable/toy_stick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_toys" />
-
-
-    <TextView
-        android:id="@+id/coin_text2"
-        android:layout_width="65dp"
-        android:layout_height="50dp"
-
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="28dp"
-        android:text="150 coins"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
