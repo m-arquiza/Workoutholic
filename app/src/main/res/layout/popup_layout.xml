@@ -34,46 +34,19 @@
         android:textAlignment='center'
         android:textColor='@color/black'
         android:textSize="20sp"
-
         android:gravity='center'
-
 
         app:layout_constraintTop_toBottomOf="@+id/entryTitle" />
 
     <TextView
-
-        android:id='@+id/workoutSpinnerTitle'
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-
         android:id='@+id/muscleSpinnerTitle'
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:paddingTop="25dp"
 
-
         android:text="Muscle Group:"
         android:textAlignment='center'
         android:textColor='@color/black'
-        android:textSize="35sp"
-
-        app:layout_constraintTop_toBottomOf="@+id/date" />
-
-    <TextView
-        android:id='@+id/horizontalLine'
-        android:layout_width="match_parent"
-        android:layout_height='5dp'
-        android:background='@drawable/border'
-        android:text='fuck you'
-
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="152dp" />
-
-    <Spinner
-        android:id='@+id/workout_spinner'
-        android:layout_width="200dp"
-
         android:textSize="30sp"
         android:textStyle="bold"
 
@@ -108,7 +81,6 @@
     <Spinner
         android:id='@+id/workout_spinner'
         android:layout_width="250dp"
-
         android:layout_height="50dp"
         android:spinnerMode='dropdown'
 
@@ -116,7 +88,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/workoutSpinnerTitle"
         tools:ignore="HardcodedText,MissingConstraints" />
-
 
     <TextView
         android:id='@+id/repSpinnerTitle'
@@ -144,7 +115,6 @@
         tools:ignore="HardcodedText,MissingConstraints" />
 
 
-
     <Button
         android:id='@+id/entryClose_button'
         android:layout_width="50dp"
@@ -162,33 +132,20 @@
         android:layout_width="200dp"
         android:layout_height="100dp"
         android:layout_marginBottom="4dp"
-
-        android:textSize='25sp'
-
         android:textSize='20sp'
-
         android:text='Complete Entry'
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintBottom_toTopOf="@+id/blankLine"
-
         app:layout_constraintBottom_toTopOf="@+id/warning"
-
         tools:ignore="MissingConstraints"
         />
 
     <TextView
-
-        android:id='@+id/blankLine'
-
         android:id='@+id/warning'
-
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background='@color/white'
-
 
         android:textColor="@color/salmon_red"
         android:textSize='20sp'
