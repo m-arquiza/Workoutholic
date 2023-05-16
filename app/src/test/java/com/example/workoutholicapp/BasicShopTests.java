@@ -12,18 +12,18 @@ public class BasicShopTests {
     @Test
     public void testFoodClick() {
         MainViewModel vm = new MainViewModel();
-        vm.onFoodClick(true);
-        vm.onFoodClick(true);
-        vm.onFoodClick(true);
+        vm.shopFoodClick();
+        vm.shopFoodClick();
+        vm.shopFoodClick();
         assertEquals(3, vm.foodCount());
     }
 
     @Test
     public void testWaterClick() {
         MainViewModel vm = new MainViewModel();
-        vm.onFoodClick(true);
-        vm.onFoodClick(true);
-        vm.onFoodClick(true);
+        vm.shopWaterClick();
+        vm.shopWaterClick();
+        vm.shopWaterClick();
         assertEquals(3, vm.waterCount());
     }
 }
