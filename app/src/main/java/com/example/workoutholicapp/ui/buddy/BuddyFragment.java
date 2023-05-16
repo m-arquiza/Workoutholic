@@ -41,14 +41,14 @@ public class BuddyFragment extends Fragment {
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainViewModel.onFoodClick(false);
+                mainViewModel.buddyFoodClick();
             }
         });
 
         waterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainViewModel.onWaterClick(false);
+                mainViewModel.buddyWaterClick();
             }
         });
 
@@ -90,3 +90,4 @@ public class BuddyFragment extends Fragment {
         binding = null;
     }
 }
+

@@ -41,8 +41,8 @@
     <TextView
         android:id='@+id/muscleSpinnerTitle'
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:paddingTop="25dp"
+        android:layout_height="65dp"
+        android:paddingTop="15dp"
 
         android:text="Muscle Group:"
         android:textAlignment='center'
@@ -66,8 +66,8 @@
     <TextView
         android:id='@+id/workoutSpinnerTitle'
         android:layout_width="250dp"
-        android:layout_height="75dp"
-        android:paddingTop="25dp"
+        android:layout_height="65dp"
+        android:paddingTop="15dp"
 
         android:text="Workout:"
         android:textAlignment='center'
@@ -92,8 +92,8 @@
     <TextView
         android:id='@+id/repSpinnerTitle'
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:paddingTop="25dp"
+        android:layout_height="65dp"
+        android:paddingTop="15dp"
 
         android:text="Repetitions:"
         android:textAlignment='center'
@@ -144,11 +144,11 @@
     <TextView
         android:id='@+id/warning'
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:background='@color/white'
 
-        android:textColor="@color/salmon_red"
-        android:textSize='20sp'
+        android:textColor="@color/red"
+        android:textSize='15sp'
         android:textStyle='bold'
         android:paddingBottom="10dp"
         android:gravity='center'

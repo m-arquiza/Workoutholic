@@ -57,7 +57,6 @@
         android:layout_height="100dp"
         android:layout_marginStart="48dp"
         android:layout_marginBottom="448dp"
-        android:onClick="onClick"
 
         android:src="@drawable/food_icon"
         android:scaleType="fitCenter"
