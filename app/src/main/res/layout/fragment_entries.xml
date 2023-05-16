@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/entriesParent_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.entries.EntriesFragment">
@@ -21,8 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.133" />
 
-    <TextView
-        android:id="@+id/entryDate"
+    <TextView android:id="@+id/entryDate"
         android:layout_width="150dp"
         android:layout_height="50dp"
 
@@ -31,9 +31,9 @@
         android:gravity="center"
         android:background="@drawable/border"
 
-        tools:ignore="MissingConstraints"
         app:layout_constraintBottom_toTopOf="@+id/entry"
-        app:layout_constraintStart_toStartOf="@+id/entry" />
+        app:layout_constraintStart_toStartOf="@+id/entry"
+        />
 
     <Button
         android:id="@+id/deleteEntry_button"
@@ -43,6 +43,7 @@
         android:text='x'
         android:textSize='25sp'
         android:background="@drawable/border"
+        android:backgroundTint="@color/red"
 
         app:layout_constraintBottom_toTopOf="@+id/entry"
         app:layout_constraintEnd_toEndOf="@+id/entry"
@@ -54,15 +55,14 @@
         android:layout_width="350dp"
         android:layout_height="100dp"
 
-        android:layout_marginTop="96dp"
         android:background="@drawable/border"
         android:gravity="center"
         android:lineSpacingExtra="5dp"
         android:textColor="@color/black"
-
         android:textSize="20sp"
+
+        android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/entry_button" />
 

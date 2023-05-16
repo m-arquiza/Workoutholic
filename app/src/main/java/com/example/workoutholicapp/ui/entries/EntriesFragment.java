@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -41,6 +42,7 @@ public class EntriesFragment extends Fragment {
     private boolean hasEntry;
     private View root;
     private EntriesViewModel entriesViewModel;
+    private int entriesCount;
 
     @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -52,6 +54,7 @@ public class EntriesFragment extends Fragment {
         root = binding.getRoot();
 
         this.hasEntry = false;
+        entriesCount = 1;
 
         Button entryButton = root.findViewById(R.id.entry_button);
         entryButton.setOnClickListener(v -> {
@@ -202,6 +205,7 @@ public class EntriesFragment extends Fragment {
                 if(muscleLogged[0] && workoutLogged[0] & repLogged[0]) {
                     popupWindow.dismiss();
                     this.hasEntry = true;
+                    entriesCount++;
                     updateViews();
                 } else {
                     TextView warning = popupView.findViewById(R.id.warning);
@@ -221,7 +225,7 @@ public class EntriesFragment extends Fragment {
         binding = null;
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "ResourceAsColor"})
     private void updateViews() {
         if (this.hasEntry) {
             TextView entryDate = root.findViewById(R.id.entryDate);
@@ -240,12 +244,90 @@ public class EntriesFragment extends Fragment {
 
             deleteEntry_button.setOnClickListener(v -> {
                 hasEntry = false;
+                entriesCount--;
                 updateViews();
             });
+
+            if(entriesCount > 1) {
+                ConstraintLayout parent = root.findViewById(R.id.entriesParent_layout);
+
+                List<TextView> entries = new ArrayList<>();
+                entries.add(entry);
+
+                for(int i=1; i<entriesCount; i++) {
+                    TextView newEntry = setTextView(entry);
+                    newEntry.setId(View.generateViewId());
+                    newEntry.setTextSize(20);
+                    newEntry.setLineSpacing(entry.getLineSpacingExtra(), entry.getLineSpacingMultiplier());
+                    entries.add(newEntry);
+
+                    ConstraintLayout.LayoutParams entryLayoutParams = new ConstraintLayout.LayoutParams(
+                            dpToPixel(350),
+                            dpToPixel(100)
+                    );
+
+                    entryLayoutParams.startToStart = parent.getId();
+                    entryLayoutParams.endToEnd = parent.getId();
+                    entryLayoutParams.topToBottom = entries.get(i - 1).getId();
+                    entryLayoutParams.topMargin = dpToPixel(100);
+                    newEntry.setLayoutParams(entryLayoutParams);
+                    parent.addView(newEntry);
+
+                    TextView newEntryDate = setTextView(entryDate);
+                    newEntryDate.setTextSize(20);
+
+                    ConstraintLayout.LayoutParams dateLayoutParams = new ConstraintLayout.LayoutParams(
+                            dpToPixel(150),
+                            dpToPixel(50)
+                    );
+
+                    dateLayoutParams.bottomToTop = newEntry.getId();
+                    dateLayoutParams.startToStart = newEntry.getId();
+                    newEntryDate.setLayoutParams(dateLayoutParams);
+                    parent.addView(newEntryDate);
+
+                    Button newDeleteEntry_button = setButton(deleteEntry_button);
+                    newDeleteEntry_button.setTextSize(25);
+                    newDeleteEntry_button.setTextColor(Color.WHITE);
+
+                    ConstraintLayout.LayoutParams buttonLayoutParams = new ConstraintLayout.LayoutParams(
+                            dpToPixel(50),
+                            dpToPixel(50)
+                    );
+
+                    buttonLayoutParams.bottomToTop = newEntry.getId();
+                    buttonLayoutParams.endToEnd = newEntry.getId();
+                    newDeleteEntry_button.setLayoutParams(buttonLayoutParams);
+                    parent.addView(newDeleteEntry_button);
+                }
+            }
         } else {
             root.findViewById(R.id.entryDate).setVisibility(View.GONE);
             root.findViewById(R.id.deleteEntry_button).setVisibility(View.GONE);
             root.findViewById(R.id.entry).setVisibility(View.GONE);
         }
+    }
+
+    public TextView setTextView(TextView source) {
+        TextView dest = new TextView(getContext());
+
+        dest.setTextColor(source.getTextColors());
+        dest.setBackground(source.getBackground());
+        dest.setGravity(source.getGravity());
+
+        return dest;
+    }
+
+    public Button setButton(Button source) {
+        Button dest = new Button(getContext());
+
+        dest.setBackground(source.getBackground());
+        dest.setText("x");
+
+        return dest;
+    }
+
+    public int dpToPixel(int dp) {
+        return (int) (dp * getResources().getDisplayMetrics().density);
     }
 }
