@@ -63,15 +63,14 @@ public class ShopFragment extends Fragment {
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainViewModel.onFoodClick(true);
-
+                mainViewModel.shopFoodClick();
             }
         });
 
         waterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainViewModel.onWaterClick(true);
+                mainViewModel.shopWaterClick();
             }
         });
 
@@ -162,3 +161,4 @@ public class ShopFragment extends Fragment {
         binding = null;
     }
 }
+
