@@ -3,7 +3,6 @@ package com.example.workoutholicapp;
 import static org.junit.Assert.assertEquals;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-
 import com.example.workoutholicapp.ui.MainViewModel;
 
 import org.junit.Rule;
@@ -15,6 +14,7 @@ public class BasicShopTests {
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
     @Test
+
     public void testNoFoodWater() {
         MainViewModel vm = new MainViewModel();
         int food = vm.foodCount().getValue();
