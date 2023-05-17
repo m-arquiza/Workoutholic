@@ -33,8 +33,8 @@ Gradle and the application might not work effectively if you do not have Java Ve
 
 ## Testing
 ### How to test the software
-If testing in an Android app development environment, run the tests that are named after the class for which you would like to test. (For example, if you would like to test the shop functionalities, run the tests under BasicShopTests.java) If testing the entire software, run the tests on every class.\ 
-If testing in GitHub, push code to the repository and refer to the GitHub Actions tab in the repository to view all tests in the CI/CD pipeline that have passed/have failed. \
+If testing in an Android app development environment, run the tests that are named after the class for which you would like to test. (For example, if you would like to test the shop functionalities, run the tests under BasicShopTests.java) If testing the entire software, run the tests on every class.\
+If testing in GitHub, push code to the repository and refer to the GitHub Actions tab in the repository to view all tests in the CI/CD pipeline that have passed/have failed.\
 Manual testing is also possible by running the app (refer to User Documentation) and performing tests, such as button functionality tests, in the app environment. 
 
 ### How to Add New Tests
