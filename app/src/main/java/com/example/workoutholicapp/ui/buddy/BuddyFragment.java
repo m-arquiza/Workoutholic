@@ -24,12 +24,17 @@ public class BuddyFragment extends Fragment {
     private MainViewModel mainViewModel;
     private static boolean[] toyOn = new boolean[6];
 
+    private MainActivity activity;
+    private int hungerLevel; // displayed in vitals
+    private int thirstLevel; // displayed in vitals
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        MainActivity activity = (MainActivity) requireActivity();
+        activity = (MainActivity) requireActivity();
         mainViewModel = activity.getMainViewModel();
+        hungerLevel = 0;
+        thirstLevel = 0;
     }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +47,27 @@ public class BuddyFragment extends Fragment {
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // changes thirst level based on how much food dog is fed
+                View hunger = getView().findViewById(R.id.hunger_bar);
+                View hunger2 = getView().findViewById(R.id.hunger_bar2);
+                View hunger3 = getView().findViewById(R.id.hunger_bar3);
+                View hunger4 = getView().findViewById(R.id.hunger_bar4);
+                if (hungerLevel < 4 && mainViewModel.foodCount().getValue() > 0) {
+                    if (hungerLevel == 0) {
+                        hunger4.setAlpha(1.0f);
+                    } else if (hungerLevel == 1) {
+                        hunger4.setAlpha(0.0f);
+                        hunger3.setAlpha(1.0f);
+                    } else if (hungerLevel == 2) {
+                        hunger3.setAlpha(0.0f);
+                        hunger2.setAlpha(1.0f);
+                    } else if (hungerLevel == 3) {
+                        hunger2.setAlpha(0.0f);
+                        hunger.setAlpha(1.0f);
+                    }
+                    hungerLevel++;
+                }
+
                 mainViewModel.buddyFoodClick();
             }
         });
@@ -49,6 +75,26 @@ public class BuddyFragment extends Fragment {
         waterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // changes thirst level based on how much water dog is fed
+                View thirst = getView().findViewById(R.id.thirst_bar);
+                View thirst2 = getView().findViewById(R.id.thirst_bar2);
+                View thirst3 = getView().findViewById(R.id.thirst_bar3);
+                View thirst4 = getView().findViewById(R.id.thirst_bar4);
+                if (thirstLevel < 4 && mainViewModel.waterCount().getValue() > 0) {
+                    if (thirstLevel == 0) {
+                        thirst4.setAlpha(1.0f);
+                    } else if (thirstLevel == 1) {
+                        thirst4.setAlpha(0.0f);
+                        thirst3.setAlpha(1.0f);
+                    } else if (thirstLevel == 2) {
+                        thirst3.setAlpha(0.0f);
+                        thirst2.setAlpha(1.0f);
+                    } else if (thirstLevel == 3) {
+                        thirst2.setAlpha(0.0f);
+                        thirst.setAlpha(1.0f);
+                    }
+                    thirstLevel++;
+                }
                 mainViewModel.buddyWaterClick();
             }
         });
@@ -92,6 +138,8 @@ public class BuddyFragment extends Fragment {
         });
 
 
+
+        // dog "plays with" ball if ball is currently selected
         ImageButton ball = root.findViewById(R.id.dog_toy1);
         ball.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,10 +204,45 @@ public class BuddyFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        // changes hunger level bar based on hunger value
+        super.onViewCreated(view, savedInstanceState);
+        View hunger = getView().findViewById(R.id.hunger_bar);
+        View hunger2 = getView().findViewById(R.id.hunger_bar2);
+        View hunger3 = getView().findViewById(R.id.hunger_bar3);
+        View hunger4 = getView().findViewById(R.id.hunger_bar4);
+        if (hungerLevel == 1) {
+            hunger4.setAlpha(1.0f);
+        } else if (hungerLevel == 2) {
+            hunger3.setAlpha(1.0f);
+        } else if (hungerLevel == 3) {
+            hunger2.setAlpha(1.0f);
+        } else if (hungerLevel == 4) {
+            hunger.setAlpha(1.0f);
+        }
+
+        // changes thirst level bar based on hunger value
+        View thirst = getView().findViewById(R.id.thirst_bar);
+        View thirst2 = getView().findViewById(R.id.thirst_bar2);
+        View thirst3 = getView().findViewById(R.id.thirst_bar3);
+        View thirst4 = getView().findViewById(R.id.thirst_bar4);
+        if (thirstLevel == 1) {
+            thirst4.setAlpha(1.0f);
+        } else if (thirstLevel == 2) {
+            thirst3.setAlpha(1.0f);
+        } else if (thirstLevel == 3) {
+            thirst2.setAlpha(1.0f);
+        } else if (thirstLevel == 4) {
+            thirst.setAlpha(1.0f);
+        }
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
+
 
     public static boolean checkAndChangeToy(int index) {
         for (int i = 0; i < toyOn.length; i++) {
@@ -170,5 +253,14 @@ public class BuddyFragment extends Fragment {
         }
         return false;
     }
+  
+//    public int getHungerLevel() {
+//        return hungerLevel;
+//    }
+//
+//    public int getThirstLevel() {
+//        return thirstLevel;
+//    }
+
 }
 

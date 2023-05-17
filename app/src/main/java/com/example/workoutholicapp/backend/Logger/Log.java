@@ -6,6 +6,11 @@ public class Log {
     private String date;
     private Exercise exercise;
 
+    public Log(String date, Exercise exercise) {
+        this.date = date;
+        this.exercise = exercise;
+    }
+
     public void setDate(String input){
         date = input;
     }

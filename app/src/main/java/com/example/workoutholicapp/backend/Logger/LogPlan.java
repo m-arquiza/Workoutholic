@@ -17,9 +17,7 @@ public class LogPlan {
      * @param  date the current date
      */
     public void LogExercise(Exercise exercise, String date){
-        Log log = new Log();
-        log.setExercise(exercise);
-        log.setDate(date);
+        Log log = new Log(date, exercise);
         Loglist.add(log);
     }
 
@@ -34,9 +32,7 @@ public class LogPlan {
         Iterator<Exercise> itr = exercise.iterator();
         while(itr.hasNext()) {
             Exercise cur = itr.next();
-            Log log = new Log();
-            log.setExercise(cur);
-            log.setDate(date);
+            Log log = new Log(date, cur);
             Loglist.add(log);
         }
     }
