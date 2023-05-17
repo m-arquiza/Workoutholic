@@ -52,9 +52,7 @@ public class ShopFragment extends Fragment {
     private boolean autoFoodOn = false;
     private boolean autoWaterOn = false;
     private boolean autoHappyOn = false;
-    private boolean toy1bought = false;
-    private boolean toy2bought = false;
-    private boolean toy3bought = false;
+    private boolean[] toyOn = new boolean[6];
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -65,9 +63,12 @@ public class ShopFragment extends Fragment {
         View root = binding.getRoot();
         binding = FragmentShopBinding.bind(root);
 
-        /* On click, updates food and water variable inside ShopViewModel respectively */
+
+        /* On click, updates food and water respectively */
         ImageButton foodButton = root.findViewById(R.id.food_button);
         ImageButton waterButton = root.findViewById(R.id.water_button);
+
+        // updates stored food and water
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,8 +83,7 @@ public class ShopFragment extends Fragment {
             }
         });
 
-
-
+        // updates text display in shop
         mainViewModel.foodCount().observe(getViewLifecycleOwner(), value -> {
             TextView food = getView().findViewById(R.id.food_storage);
             food.setText("food in storage: " + value);
@@ -94,16 +94,19 @@ public class ShopFragment extends Fragment {
             water.setText("water in storage: " + value);
         });
 
+        // updates money display
         mainViewModel.moneyAmount().observe(getViewLifecycleOwner(), value -> {
             TextView money = getView().findViewById(R.id.coin_text2);
             money.setText(value + " coins");
         });
 
 
+        /* On click, indicates auto-vital on/off */
         ImageButton autoFood = root.findViewById(R.id.auto_food);
         ImageButton autoWater = root.findViewById(R.id.auto_water);
         ImageButton autoHappy = root.findViewById(R.id.auto_happy);
 
+        // displays indicator
         autoFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,34 +140,43 @@ public class ShopFragment extends Fragment {
             }
         });
 
-        /* On click, "buys" toy (grays it out. that's all for rn) */
 
+        /* On click, adds toy to inventory if nonbought and enough money */
         ImageButton toy1 = root.findViewById(R.id.toy1);
         ImageButton toy2 = root.findViewById(R.id.toy2);
         ImageButton toy3 = root.findViewById(R.id.toy3);
 
+
+
+        // adds toy to inventory
         toy1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toy1bought = true;
-                toy1.setEnabled(false);
-                toy1.setAlpha(0.5f);
+                if (mainViewModel.buyToyClick(1)) {
+                    toyOn[0] = true;
+                    toy1.setEnabled(false);
+                    toy1.setAlpha(0.5f);
+                }
             }
         });
         toy2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toy2bought = true;
-                toy2.setEnabled(false);
-                toy2.setAlpha(0.5f);
+                if (mainViewModel.buyToyClick(2)) {
+                    toyOn[1] = true;
+                    toy2.setEnabled(false);
+                    toy2.setAlpha(0.5f);
+                }
             }
         });
         toy3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toy3bought = true;
-                toy3.setEnabled(false);
-                toy3.setAlpha(0.5f);
+                if (mainViewModel.buyToyClick(3)) {
+                    toyOn[2] = true;
+                    toy3.setEnabled(false);
+                    toy3.setAlpha(0.5f);
+                }
             }
         });
 
@@ -193,25 +205,23 @@ public class ShopFragment extends Fragment {
                 food.setText("auto play on!");
             }
 
-            toy1bought = savedInstanceState.getBoolean("toy1bought");
-            if (toy1bought) {
-                toy1bought = true;
-                toy1.setEnabled(false);
-                toy1.setAlpha(0.5f);
-            }
+            toyOn = savedInstanceState.getBooleanArray("toyOn");
+            for(int i = 0; i < toyOn.length; i++) {
+                if(toyOn[i]) {
+                    if(i == 0){
+                        toy1.setEnabled(false);
+                        toy1.setAlpha(0.5f);
+                    }
+                    if(i == 1){
+                        toy2.setEnabled(false);
+                        toy2.setAlpha(0.5f);
+                    }
+                    if(i == 2){
+                        toy3.setEnabled(false);
+                        toy3.setAlpha(0.5f);
+                    }
 
-            toy2bought = savedInstanceState.getBoolean("toy2bought");
-            if (toy2bought) {
-                toy2bought = true;
-                toy2.setEnabled(false);
-                toy2.setAlpha(0.5f);
-            }
-
-            toy3bought = savedInstanceState.getBoolean("toy3bought");
-            if (toy3bought) {
-                toy3bought = true;
-                toy3.setEnabled(false);
-                toy3.setAlpha(0.5f);
+                }
             }
         }
         return root;
@@ -223,9 +233,7 @@ public class ShopFragment extends Fragment {
         outState.putBoolean("autoFoodOn", autoFoodOn);
         outState.putBoolean("autoWaterOn", autoWaterOn);
         outState.putBoolean("autoHappyOn", autoHappyOn);
-        outState.putBoolean("toy1bought", toy1bought);
-        outState.putBoolean("toy2bought", toy2bought);
-        outState.putBoolean("toy3bought", toy3bought);
+        outState.putBooleanArray("toyOn", toyOn);
     }
 
     @Override
