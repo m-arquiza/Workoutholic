@@ -24,9 +24,12 @@ public class Exercise {
     public String getName(){
         return name;
     }
+    public void setName(String name) { this.name = name; }
     public String getType(){
         return type;
     }
+
+    public void setMuscle(String muscle) { this.muscle = muscle; }
     public String getMuscle(){
         return muscle;
     }
