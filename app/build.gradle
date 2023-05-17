@@ -30,6 +30,7 @@ android {
     dependencies{
         implementation 'com.squareup.okhttp3:okhttp:4.9.1'
         implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
+        testImplementation "androidx.arch.core:core-testing:2.1.0"
     }
     buildFeatures {
         viewBinding true
