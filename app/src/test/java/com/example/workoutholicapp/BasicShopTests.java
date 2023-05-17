@@ -8,7 +8,6 @@ import com.example.workoutholicapp.ui.MainViewModel;
 import org.junit.Rule;
 import org.junit.Test;
 
-
 public class BasicShopTests {
 
     @Rule
