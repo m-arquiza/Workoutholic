@@ -11,6 +11,10 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<Integer> waterStorage = new MutableLiveData<>(0);
     private MutableLiveData<Integer> totalMoney = new MutableLiveData<>(150);
 
+
+    private MutableLiveData<boolean[]> toyStorage = new MutableLiveData<>(new boolean[6]);
+
+
     public void shopFoodClick() { // increases inventory and decreases money
         Integer food = foodStorage.getValue();
         Integer money = totalMoney.getValue();
@@ -40,6 +44,20 @@ public class MainViewModel extends ViewModel {
             waterStorage.setValue(water-1);
         }
     }
+
+    public boolean buyToyClick(int toyNum) {
+        Integer money = totalMoney.getValue();
+        int index = toyNum-1;
+        boolean[] toys = toyStorage.getValue();
+        if (money >= 50 && !toys[index]) {
+            toys[index] = true;
+            toyStorage.setValue(toys);
+            totalMoney.setValue(money - 50);
+            return true;
+        }
+        return false;
+    }
+
     public LiveData<Integer> foodCount() {
         return foodStorage;
     }
@@ -51,5 +69,10 @@ public class MainViewModel extends ViewModel {
     public LiveData<Integer> moneyAmount() {
         return totalMoney;
     }
+
+    public LiveData<boolean[]> toys() {
+        return toyStorage;
+    }
+
 }
 
