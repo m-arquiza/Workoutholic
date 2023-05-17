@@ -2,28 +2,64 @@ package com.example.workoutholicapp;
 
 import static org.junit.Assert.assertEquals;
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import com.example.workoutholicapp.ui.MainViewModel;
 
+import org.junit.Rule;
 import org.junit.Test;
-
 
 public class BasicShopTests {
 
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
     @Test
-    public void testFoodClick() {
+
+    public void testNoFoodWater() {
         MainViewModel vm = new MainViewModel();
-        vm.shopFoodClick();
-        vm.shopFoodClick();
-        vm.shopFoodClick();
-        assertEquals(3, vm.foodCount());
+        int food = vm.foodCount().getValue();
+        int water = vm.waterCount().getValue();
+        assertEquals(0, food);
+        assertEquals(0, water);
     }
 
     @Test
-    public void testWaterClick() {
+    public void testFoodClickEnoughMoney() {
         MainViewModel vm = new MainViewModel();
-        vm.shopWaterClick();
-        vm.shopWaterClick();
-        vm.shopWaterClick();
-        assertEquals(3, vm.waterCount());
+        for (int i = 0; i < 3; i++) {
+            vm.shopFoodClick();
+        }
+        int food = vm.foodCount().getValue();
+        assertEquals(3, food);
     }
+
+    @Test
+    public void testWaterClickEnoughMoney() {
+        MainViewModel vm = new MainViewModel();
+        for (int i = 0; i < 7; i++) {
+            vm.shopWaterClick();
+        }
+        int water = vm.waterCount().getValue();
+        assertEquals(7, water);
+    }
+
+    @Test
+    public void testWaterClickNotEnoughMoney() {
+        MainViewModel vm = new MainViewModel();
+        for (int i = 0; i < 20; i++) {
+            vm.shopWaterClick();
+        }
+        int water = vm.waterCount().getValue();
+        assertEquals(15, water);
+    }
+
+    @Test
+    public void testFoodClickNotEnoughMoney() {
+        MainViewModel vm = new MainViewModel();
+        for (int i = 0; i < 8; i++) {
+            vm.shopFoodClick();
+        }
+        int food = vm.foodCount().getValue();
+        assertEquals(7, food);
+    }
+
 }
