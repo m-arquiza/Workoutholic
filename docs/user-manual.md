@@ -47,6 +47,9 @@ Workoutholic is a dynamic fitness app that goes beyond conventional workout trac
 
 ### Installation via APK
 1. Install APK from release tab
+  ```sh
+   [git clone https://github.com/m-arquiza/Workoutholic.git](https://github.com/m-arquiza/Workoutholic/releases/tag/Workoutholic)
+   ```
 
 <p align="right">(<a href="#doc-top">back to top</a>)</p>
 
