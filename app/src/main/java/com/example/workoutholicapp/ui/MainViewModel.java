@@ -11,26 +11,51 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<Integer> waterStorage = new MutableLiveData<>(0);
     private MutableLiveData<Integer> totalMoney = new MutableLiveData<>(150);
 
-    public void onFoodClick(boolean isShop) {
+
+    private MutableLiveData<boolean[]> toyStorage = new MutableLiveData<>(new boolean[6]);
+
+
+    public void shopFoodClick() { // increases inventory and decreases money
         Integer food = foodStorage.getValue();
         Integer money = totalMoney.getValue();
-        if (isShop && money >= 20) {
-            foodStorage.setValue(food+1);
+        if (money >= 20) {
+            foodStorage.setValue(food + 1);
             totalMoney.setValue(money - 20);
-        } else if (food != null && food != 0) {
+        }
+    }
+    public void buddyFoodClick() { // decreases inventory
+        Integer food = foodStorage.getValue();
+        if (food != 0) {
             foodStorage.setValue(food-1);
         }
     }
 
-    public void onWaterClick(boolean isShop) {
+    public void shopWaterClick() { // increases inventory and decreases money
         Integer water = waterStorage.getValue();
         Integer money = totalMoney.getValue();
-        if (isShop && money >= 10) {
-            waterStorage.setValue(water+1);
+        if (money >= 10) {
+            waterStorage.setValue(water + 1);
             totalMoney.setValue(money - 10);
-        } else if (water != null && water != 0) {
+        }
+    }
+    public void buddyWaterClick() { // decreases inventory
+        Integer water = waterStorage.getValue();
+        if (water != 0) {
             waterStorage.setValue(water-1);
         }
+    }
+
+    public boolean buyToyClick(int toyNum) {
+        Integer money = totalMoney.getValue();
+        int index = toyNum-1;
+        boolean[] toys = toyStorage.getValue();
+        if (money >= 50 && !toys[index]) {
+            toys[index] = true;
+            toyStorage.setValue(toys);
+            totalMoney.setValue(money - 50);
+            return true;
+        }
+        return false;
     }
 
     public LiveData<Integer> foodCount() {
@@ -44,4 +69,10 @@ public class MainViewModel extends ViewModel {
     public LiveData<Integer> moneyAmount() {
         return totalMoney;
     }
+
+    public LiveData<boolean[]> toys() {
+        return toyStorage;
+    }
+
 }
+
