@@ -1,10 +1,16 @@
 package com.example.workoutholicapp.backend.ViewWorkout;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -15,23 +21,28 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class ViewWorkout {
-    public List<String> MuscleList = new ArrayList<String>(Arrays.asList(
-            "abdominals",
-            "abductors",
-            "adductors",
-            "biceps",
-            "calves",
-            "chest",
-            "forearms",
-            "glutes",
-            "hamstrings",
-            "lats",
-            "lower_back",
-            "middle_back",
-            "neck",
-            "quadriceps",
-            "traps",
-            "triceps"));
+    private static final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private static final OkHttpClient client = new OkHttpClient();
+
+    public static List<String> muscleList() {
+        return new ArrayList<String>(Arrays.asList(
+                "abdominals",
+                "abductors",
+                "adductors",
+                "biceps",
+                "calves",
+                "chest",
+                "forearms",
+                "glutes",
+                "hamstrings",
+                "lats",
+                "lower_back",
+                "middle_back",
+                "neck",
+                "quadriceps",
+                "traps",
+                "triceps"));
+    }
 
     /**
      * Gives a Json string of 10 workouts for a specified
@@ -71,6 +82,18 @@ public class ViewWorkout {
             e.printStackTrace();
         }
         return exerciseList;
+    }
+
+    public static Future<Response> getRequest(String muscle) {
+        String url = "https://api.api-ninjas.com/v1/exercises?muscle="+muscle;
+        Log.d("muscle", "url is: " + url);
+        return executor.submit(() -> {
+            Request request = new Request.Builder()
+                    .url(url)
+                    .header("X-Api-Key", "pu0sVRYfKhVbegE9yYRpLA==pBKp94cR9RE5WLzK")
+                    .build();
+            return client.newCall(request).execute();
+        });
     }
 }
 

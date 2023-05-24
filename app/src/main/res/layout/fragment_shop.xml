@@ -10,6 +10,19 @@
 
 
     <TextView
+        android:id="@+id/coin_text2"
+        android:layout_width="65dp"
+        android:layout_height="50dp"
+
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="36dp"
+
+        android:text="104 coins"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/text_shop"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -44,7 +57,6 @@
         android:layout_height="100dp"
         android:layout_marginStart="48dp"
         android:layout_marginBottom="448dp"
-        android:onClick="onFoodClick"
 
         android:src="@drawable/food_icon"
         android:scaleType="fitCenter"
