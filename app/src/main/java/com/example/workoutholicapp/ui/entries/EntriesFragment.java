@@ -20,12 +20,15 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.workoutholicapp.MainActivity;
 import com.example.workoutholicapp.R;
 import com.example.workoutholicapp.backend.Logger.Log;
 import com.example.workoutholicapp.backend.Logger.LogPlan;
 import com.example.workoutholicapp.backend.ViewWorkout.Exercise;
 import com.example.workoutholicapp.backend.ViewWorkout.ViewWorkout;
 import com.example.workoutholicapp.databinding.FragmentEntriesBinding;
+import com.example.workoutholicapp.ui.MainViewModel;
+import com.example.workoutholicapp.ui.shop.ShopFragment;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -119,6 +122,7 @@ public class EntriesFragment extends Fragment {
                     android.R.layout.simple_spinner_dropdown_item, muscleList);
 
             muscleSpinner.setAdapter(adapter);
+
             muscleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -213,6 +217,8 @@ public class EntriesFragment extends Fragment {
             entryDoneButton.setOnClickListener(v2 -> {
                 if(muscleLogged[0] && workoutLogged[0] & repLogged[0]) {
                     popupWindow.dismiss();
+
+                    ShopFragment.mainViewModel.moneyUpdate(10);
                     logList.add(new Log(dateString, ex));
 
                     if(logList.size() == 1) {

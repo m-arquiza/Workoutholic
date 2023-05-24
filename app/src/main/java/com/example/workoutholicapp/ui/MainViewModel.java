@@ -70,6 +70,10 @@ public class MainViewModel extends ViewModel {
         return totalMoney;
     }
 
+    public void moneyUpdate(int num) {
+        totalMoney.setValue((totalMoney.getValue())+num);
+    }
+
     public LiveData<boolean[]> toys() {
         return toyStorage;
     }

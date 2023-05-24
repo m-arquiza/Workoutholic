@@ -38,7 +38,7 @@ public class ShopFragment extends Fragment {
 
     private FragmentShopBinding binding;
 
-    private MainViewModel mainViewModel;
+    public static MainViewModel mainViewModel;
 
 
     @Override
