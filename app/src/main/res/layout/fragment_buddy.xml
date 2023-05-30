@@ -9,14 +9,6 @@
     tools:layout_editor_absoluteY="33dp">
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/shiba"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/text_buddy" />
 
     <TextView
         android:id="@+id/text_buddy"
@@ -26,17 +18,50 @@
         android:text="Shiba's ready to get the day going!"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:translationZ="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/shiba"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/shiba"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_height="15dp"
+        android:layout_width="200dp"
+
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="25dp"
+        android:translationZ="-2dp"
+
+        android:background="#e8f1fc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/food_icon"
+        android:translationZ="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    
     <View
         android:id="@+id/hunger_bar"
-        android:layout_width="15dp"
-        android:layout_height="80dp"
+        android:layout_height="15dp"
+        android:layout_width="200dp"
 
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="27dp"
+
         android:layout_marginTop="25dp"
 
         android:alpha="0.0"
@@ -48,11 +73,12 @@
 
     <View
         android:id="@+id/hunger_bar2"
-        android:layout_width="15dp"
-        android:layout_height="60dp"
+        android:layout_height="15dp"
+        android:layout_width="150dp"
 
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="27dp"
+
+        android:layout_marginTop="25dp"
 
         android:alpha="0.0"
 
@@ -63,11 +89,12 @@
 
     <View
         android:id="@+id/hunger_bar3"
-        android:layout_width="15dp"
-        android:layout_height="40dp"
+        android:layout_height="15dp"
+        android:layout_width="100dp"
 
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="27dp"
+
+        android:layout_marginTop="25dp"
 
         android:alpha="0.0"
 
@@ -78,11 +105,12 @@
 
     <View
         android:id="@+id/hunger_bar4"
-        android:layout_width="15dp"
-        android:layout_height="20dp"
+        android:layout_height="15dp"
+        android:layout_width="50dp"
 
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="83.75dp"
+        android:layout_marginStart="27dp"
+
+        android:layout_marginTop="25dp"
 
         android:alpha="0.0"
 
@@ -92,112 +120,131 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
-        android:id="@+id/hunger_text"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
 
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="2dp"
-
-        android:text="hunger"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hunger_bar" />
 
     <View
-        android:id="@+id/thirst_bar"
-        android:layout_width="15dp"
-        android:layout_height="80dp"
+        android:layout_height="15dp"
+        android:layout_width="200dp"
 
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="60dp"
+        android:translationZ="-2dp"
+
+        android:background="#e8f1fc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/water_icon"
+        android:translationZ="2dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    
+    <View
+        android:id="@+id/thirst_bar"
+        android:layout_height="15dp"
+        android:layout_width="200dp"
+
+
+        android:layout_marginStart="27dp"
+
+        android:layout_marginTop="60dp"
 
         android:alpha="0.0"
 
         android:background="#3666c7"
-        app:layout_constraintStart_toStartOf="@+id/hunger_bar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <View
         android:id="@+id/thirst_bar2"
-        android:layout_width="15dp"
-        android:layout_height="60dp"
+        android:layout_height="15dp"
+        android:layout_width="150dp"
 
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="27dp"
+
+        android:layout_marginTop="60dp"
 
         android:alpha="0.0"
 
         android:background="#3666c7"
-        app:layout_constraintStart_toStartOf="@+id/hunger_bar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <View
         android:id="@+id/thirst_bar3"
-        android:layout_width="15dp"
-        android:layout_height="40dp"
+        android:layout_height="15dp"
+        android:layout_width="100dp"
 
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="27dp"
+
+        android:layout_marginTop="60dp"
 
         android:alpha="0.0"
 
         android:background="#3666c7"
-        app:layout_constraintStart_toStartOf="@+id/hunger_bar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/thirst_bar4"
-        android:layout_width="15dp"
-        android:layout_height="20dp"
+        android:layout_height="15dp"
+        android:layout_width="50dp"
 
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="83.75dp"
+        android:layout_marginStart="27dp"
+
+        android:layout_marginTop="60dp"
 
         android:alpha="0.0"
 
         android:background="#3666c7"
-        app:layout_constraintStart_toStartOf="@+id/hunger_bar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/thirst_text"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
 
-        android:layout_marginStart="67dp"
-        android:layout_marginTop="2dp"
-
-        android:text="thirst"
-
-        app:layout_constraintStart_toStartOf="@+id/hunger_text"
-        app:layout_constraintTop_toBottomOf="@+id/thirst_bar" />
 
     <View
-        android:id="@+id/happiness_bar"
-        android:layout_width="15dp"
-        android:layout_height="80dp"
+        android:layout_height="15dp"
+        android:layout_width="200dp"
 
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="27dp"
 
-        android:background="#a536c7"
-        app:layout_constraintStart_toStartOf="@+id/thirst_bar"
+        android:layout_marginTop="100dp"
+        android:translationZ="-2dp"
+
+        android:background="#e8f1fc"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/happiness_text"
-        android:layout_width="65dp"
-        android:layout_height="50dp"
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="90dp"
+        android:src="@drawable/happy_icon"
+        android:translationZ="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    
+    <View
+        android:id="@+id/happiness_bar"
+        android:layout_height="15dp"
+        android:layout_width="200dp"
 
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginStart="27dp"
 
-        android:text="happiness"
+        android:layout_marginTop="100dp"
 
-        app:layout_constraintStart_toStartOf="@+id/thirst_text"
-        app:layout_constraintTop_toBottomOf="@+id/happiness_bar" />
+        android:background="#a536c7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <TextView
         android:id="@+id/coin_text"
@@ -228,7 +275,7 @@
         android:layout_height="80dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="2dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="90dp"
 
 
         android:background="#d2f2fc"
@@ -259,7 +306,7 @@
         android:layout_height="80dp"
         android:layout_marginStart="2dp"
         android:layout_marginEnd="244dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="90dp"
 
         android:background="#d2f2fc"
         android:scaleType="fitCenter"
@@ -279,7 +326,7 @@
         android:layout_marginTop="2dp"
 
         android:gravity="center"
-        android:text="x10"
+        android:text="x0"
         android:textSize="10sp"
 
         app:layout_constraintEnd_toEndOf="@id/dogwater_button"
@@ -291,9 +338,9 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="92dp"
-        android:layout_marginBottom="116dp"
-
+        android:layout_marginBottom="136dp"
         android:background="#d2f2fc"
+
         android:scaleType="fitCenter"
         android:src="@drawable/none"
         android:enabled="false"
@@ -305,9 +352,9 @@
         android:id="@+id/dog_toy2"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="116dp"
-
+        android:layout_marginBottom="136dp"
         android:background="#d2f2fc"
+
         android:scaleType="fitCenter"
         android:src="@drawable/none"
         android:enabled="false"
@@ -320,65 +367,20 @@
         android:id="@+id/dog_toy3"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="136dp"
         android:enabled="false"
-
         android:background="#d2f2fc"
+
         android:scaleType="fitCenter"
         android:src="@drawable/none"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageButton
-        android:id="@+id/dog_toy4"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="92dp"
-        android:layout_marginBottom="76dp"
-
-        android:padding="2dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/none"
-        android:enabled="false"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/dog_toy6" />
-
-    <ImageButton
-        android:id="@+id/dog_toy5"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="76dp"
-
-        android:padding="2dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/none"
-        android:enabled="false"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/dog_toy3"
-        app:layout_constraintStart_toStartOf="@+id/dog_toy1" />
-
-    <ImageButton
-        android:id="@+id/dog_toy6"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="76dp"
-        android:padding="2dp"
-
-        android:scaleType="fitXY"
-        android:src="@drawable/none"
-        android:enabled="false"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
 
     <ImageView
-        android:id="@+id/toy"
+        android:id="@+id/toy_ball"
         android:layout_width="89dp"
         android:layout_height="101dp"
         android:src="@drawable/toy_ball"
@@ -388,6 +390,44 @@
         android:layout_marginEnd="156dp"
         android:layout_marginTop="185dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" /> />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/toy_bone"
+        android:layout_width="89dp"
+        android:layout_height="101dp"
+        android:src="@drawable/toy_bone"
+
+        android:alpha="0.0"
+
+        android:layout_marginEnd="156dp"
+        android:layout_marginTop="260dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/toy_stick"
+        android:layout_width="89dp"
+        android:layout_height="101dp"
+        android:src="@drawable/toy_stick"
+
+        android:alpha="0.0"
+
+        android:layout_marginEnd="156dp"
+        android:layout_marginTop="400dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/toy_box"
+        android:layout_width="162dp"
+        android:layout_height="82dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="60dp"
+        android:src="@drawable/toy_box"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
