@@ -228,4 +228,3 @@ public class ShopFragment extends Fragment {
         binding = null;
     }
 }
-

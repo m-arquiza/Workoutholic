@@ -336,4 +336,3 @@ public class BuddyFragment extends Fragment {
 
     public int getThirstLevel() { return thirstLevel; }
 }
-

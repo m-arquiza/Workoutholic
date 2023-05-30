@@ -25,6 +25,7 @@ public class BasicShopTests {
     @Test
     public void testFoodClickEnoughMoney() {
         MainViewModel vm = new MainViewModel();
+        vm.setMoney(150);
         for (int i = 0; i < 3; i++) {
             vm.shopFoodClick();
         }
@@ -35,6 +36,7 @@ public class BasicShopTests {
     @Test
     public void testWaterClickEnoughMoney() {
         MainViewModel vm = new MainViewModel();
+        vm.setMoney(150);
         for (int i = 0; i < 7; i++) {
             vm.shopWaterClick();
         }
@@ -45,21 +47,23 @@ public class BasicShopTests {
     @Test
     public void testWaterClickNotEnoughMoney() {
         MainViewModel vm = new MainViewModel();
-        for (int i = 0; i < 20; i++) {
+        vm.setMoney(150);
+        for (int i = 0; i < 31; i++) {
             vm.shopWaterClick();
         }
         int water = vm.waterCount().getValue();
-        assertEquals(15, water);
+        assertEquals(30, water);
     }
 
     @Test
     public void testFoodClickNotEnoughMoney() {
         MainViewModel vm = new MainViewModel();
-        for (int i = 0; i < 8; i++) {
+        vm.setMoney(150);
+        for (int i = 0; i < 16; i++) {
             vm.shopFoodClick();
         }
         int food = vm.foodCount().getValue();
-        assertEquals(7, food);
+        assertEquals(15, food);
     }
 
 }
