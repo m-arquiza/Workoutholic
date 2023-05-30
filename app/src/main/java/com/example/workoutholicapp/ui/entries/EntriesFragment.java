@@ -44,7 +44,6 @@ import okhttp3.Response;
 
 public class EntriesFragment extends Fragment {
     private FragmentEntriesBinding binding;
-    private boolean hasEntry;
     private View root;
     private EntriesViewModel entriesViewModel;
 
@@ -63,8 +62,7 @@ public class EntriesFragment extends Fragment {
         List<TextView> entries = new ArrayList<>();
         List<TextView> dates = new ArrayList<>();
         List<Button> buttons = new ArrayList<>();
-        logList = new LinkedList<>();
-        this.hasEntry = false;
+        logList = entriesViewModel.getList();
 
         Button entryButton = root.findViewById(R.id.entry_button);
         entryButton.setOnClickListener(v -> {
@@ -218,7 +216,10 @@ public class EntriesFragment extends Fragment {
                 if(muscleLogged[0] && workoutLogged[0] & repLogged[0]) {
                     popupWindow.dismiss();
 
-                    ShopFragment.mainViewModel.moneyUpdate(10);
+                    if(ShopFragment.mainViewModel != null) {
+                        ShopFragment.mainViewModel.moneyUpdate(10);
+                    }
+
                     logList.add(new Log(dateString, ex));
 
                     if(logList.size() == 1) {
@@ -349,8 +350,127 @@ public class EntriesFragment extends Fragment {
             root.findViewById(R.id.entryDate).setVisibility(View.GONE);
             root.findViewById(R.id.deleteEntry_button).setVisibility(View.GONE);
             root.findViewById(R.id.entry).setVisibility(View.GONE);
+        } else {
+            TextView entryDate = root.findViewById(R.id.entryDate);
+            entryDate.setVisibility(View.VISIBLE);
+            entryDate.setText(logList.get(0).getDate());
+
+            TextView entry = root.findViewById(R.id.entry);
+            entry.setVisibility(View.VISIBLE);
+            entry.setText("Group: " + logList.get(0).getExercise().getMuscle() +
+                    " \n Workout: " + logList.get(0).getExercise().getName() +
+                    " \n Repetitions: " + logList.get(0).getExercise().getNumberOfReps());
+            entry.setLines(3);
+
+            Button deleteEntry_button = root.findViewById(R.id.deleteEntry_button);
+            deleteEntry_button.setVisibility(View.VISIBLE);
+
+            entries.add(entry);
+            dates.add(entryDate);
+            buttons.add(deleteEntry_button);
+
+            deleteEntry_button.setOnClickListener(v1 -> {
+                logList.removeFirst();
+
+                if (logList.isEmpty()) {
+                    root.findViewById(R.id.entryDate).setVisibility(View.GONE);
+                    root.findViewById(R.id.deleteEntry_button).setVisibility(View.GONE);
+                    root.findViewById(R.id.entry).setVisibility(View.GONE);
+                } else {
+                    for (int i = 0; i < logList.size(); i++) {
+                        entries.get(i).setText("Group: " + logList.get(i).getExercise().getMuscle() +
+                                " \n Workout: " + logList.get(i).getExercise().getName() +
+                                " \n Repetitions: " + logList.get(i).getExercise().getNumberOfReps());
+                        dates.get(i).setText(logList.get(i).getDate());
+                    }
+
+                    parent.removeView(entries.get(entries.size() - 1));
+                    parent.removeView(dates.get(dates.size() - 1));
+                    parent.removeView(buttons.get(buttons.size() - 1));
+
+                    entries.remove(entries.size() - 1);
+                    dates.remove(dates.size() - 1);
+                    buttons.remove(buttons.size() - 1);
+                }
+            });
+
+            for (int i = 1; i < logList.size(); i++) {
+                int index = logList.size() - 1;
+
+                TextView newEntry = setTextView(entries.get(0));
+                newEntry.setId(View.generateViewId());
+                newEntry.setTextSize(20);
+                newEntry.setText("Group: " + logList.get(index).getExercise().getMuscle() +
+                        " \n Workout: " + logList.get(index).getExercise().getName() +
+                        " \n Repetitions: " + logList.get(index).getExercise().getNumberOfReps());
+                newEntry.setLineSpacing(entries.get(0).getLineSpacingExtra(), entries.get(0).getLineSpacingMultiplier());
+
+                ConstraintLayout.LayoutParams entryLayoutParams = new ConstraintLayout.LayoutParams(
+                        dpToPixel(350),
+                        dpToPixel(100)
+                );
+
+                entryLayoutParams.startToStart = parent.getId();
+                entryLayoutParams.endToEnd = parent.getId();
+                entryLayoutParams.topToBottom = entries.get(index - 1).getId();
+                entryLayoutParams.topMargin = dpToPixel(100);
+                newEntry.setLayoutParams(entryLayoutParams);
+                parent.addView(newEntry);
+
+                TextView newEntryDate = setTextView(dates.get(0));
+                newEntryDate.setTextSize(20);
+                newEntryDate.setText(logList.get(index).getDate());
+
+                ConstraintLayout.LayoutParams dateLayoutParams = new ConstraintLayout.LayoutParams(
+                        dpToPixel(150),
+                        dpToPixel(50)
+                );
+
+                dateLayoutParams.bottomToTop = newEntry.getId();
+                dateLayoutParams.startToStart = newEntry.getId();
+                newEntryDate.setLayoutParams(dateLayoutParams);
+                parent.addView(newEntryDate);
+
+                Button newDeleteEntry_button = setButton(buttons.get(0));
+                newDeleteEntry_button.setTextSize(25);
+                newDeleteEntry_button.setTextColor(Color.WHITE);
+
+                ConstraintLayout.LayoutParams buttonLayoutParams = new ConstraintLayout.LayoutParams(
+                        dpToPixel(50),
+                        dpToPixel(50)
+                );
+
+                buttonLayoutParams.bottomToTop = newEntry.getId();
+                buttonLayoutParams.endToEnd = newEntry.getId();
+                newDeleteEntry_button.setLayoutParams(buttonLayoutParams);
+                parent.addView(newDeleteEntry_button);
+
+                entries.add(newEntry);
+                dates.add(newEntryDate);
+                buttons.add(newDeleteEntry_button);
+
+                newDeleteEntry_button.setOnClickListener(v3 -> {
+                    logList.remove(index);
+                    android.util.Log.d("Tag123", "index is:" + index);
+                    for (int j = index; j < logList.size(); j++) {
+                        entries.get(j).setText("Group: " + logList.get(j).getExercise().getMuscle() +
+                                " \n Workout: " + logList.get(j).getExercise().getName() +
+                                " \n Repetitions: " + logList.get(j).getExercise().getNumberOfReps());
+                        dates.get(j).setText(logList.get(j).getDate());
+                    }
+
+                    parent.removeView(entries.get(entries.size() - 1));
+                    parent.removeView(dates.get(dates.size() - 1));
+                    parent.removeView(buttons.get(buttons.size() - 1));
+
+                    entries.remove(entries.size() - 1);
+                    dates.remove(dates.size() - 1);
+                    buttons.remove(buttons.size() - 1);
+                });
+            }
         }
 
+        entriesViewModel.setList(logList);
         return root;
     }
 
