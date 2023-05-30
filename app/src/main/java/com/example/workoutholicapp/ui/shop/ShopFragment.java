@@ -96,7 +96,7 @@ public class ShopFragment extends Fragment {
 
         // updates money display
         mainViewModel.moneyAmount().observe(getViewLifecycleOwner(), value -> {
-            TextView money = getView().findViewById(R.id.coin_text2);
+            TextView money = getView().findViewById(R.id.coin_text);
             money.setText(value + " coins");
         });
 
