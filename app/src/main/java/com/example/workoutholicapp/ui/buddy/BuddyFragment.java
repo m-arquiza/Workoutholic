@@ -22,7 +22,6 @@ public class BuddyFragment extends Fragment {
 
     private FragmentBuddyBinding binding;
     private MainViewModel mainViewModel;
-    private static boolean[] toyOn = new boolean[6];
 
     private MainActivity activity;
     private int hungerLevel; // displayed in vitals
@@ -144,20 +143,13 @@ public class BuddyFragment extends Fragment {
         ball.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImageView toy = getView().findViewById(R.id.toy);
+                ImageView toy = getView().findViewById(R.id.toy_ball);
                 boolean isEnabled = mainViewModel.toys().getValue()[0];
                 if(isEnabled){
-                    if(checkAndChangeToy(0)){
-                        toy.setImageResource(R.drawable.toy_ball);
+                    if (toy.getAlpha() == 0.0f) {
+                        toy.setAlpha(1.0f);
                     } else {
-                        if (toy.getAlpha() == 0.0f) {
-                            toyOn[0] = true;
-                            toy.setImageResource(R.drawable.toy_ball);
-                            toy.setAlpha(1.0f);
-                        } else {
-                            toyOn[0] = false;
-                            toy.setAlpha(0.0f);
-                        }
+                        toy.setAlpha(0.0f);
                     }
                 }
             }
@@ -167,20 +159,13 @@ public class BuddyFragment extends Fragment {
         bone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImageView toy = getView().findViewById(R.id.toy);
+                ImageView toy = getView().findViewById(R.id.toy_bone);
                 boolean isEnabled = mainViewModel.toys().getValue()[1];
                 if(isEnabled){
-                    if (checkAndChangeToy(1)) {
-                        toy.setImageResource(R.drawable.toy_bone);
+                    if (toy.getAlpha() == 0.0f) {
+                        toy.setAlpha(1.0f);
                     } else {
-                        if (toy.getAlpha() == 0.0f) {
-                            toyOn[1] = true;
-                            toy.setAlpha(1.0f);
-                            toy.setImageResource(R.drawable.toy_bone);
-                        } else {
-                            toyOn[1] = false;
-                            toy.setAlpha(0.0f);
-                        }
+                        toy.setAlpha(0.0f);
                     }
                 }
             }
@@ -190,20 +175,13 @@ public class BuddyFragment extends Fragment {
         stick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImageView toy = getView().findViewById(R.id.toy);
+                ImageView toy = getView().findViewById(R.id.toy_stick);
                 boolean isEnabled = mainViewModel.toys().getValue()[2];
                 if(isEnabled){
-                    if (checkAndChangeToy(2)) {
-                        toy.setImageResource(R.drawable.toy_stick);
+                    if (toy.getAlpha() == 0.0f) {
+                        toy.setAlpha(1.0f);
                     } else {
-                        if (toy.getAlpha() == 0.0f) {
-                            toyOn[2] = true;
-                            toy.setAlpha(1.0f);
-                            toy.setImageResource(R.drawable.toy_stick);
-                        } else {
-                            toyOn[2] = false;
-                            toy.setAlpha(0.0f);
-                        }
+                        toy.setAlpha(0.0f);
                     }
                 }
             }
@@ -251,25 +229,6 @@ public class BuddyFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
-
-    public static boolean checkAndChangeToy(int index) {
-        for (int i = 0; i < toyOn.length; i++) {
-            if (i != index && toyOn[i]) {
-                toyOn[i] = false;
-                return true;
-            }
-        }
-        return false;
-    }
-  
-//    public int getHungerLevel() {
-//        return hungerLevel;
-//    }
-//
-//    public int getThirstLevel() {
-//        return thirstLevel;
-//    }
 
 }
 

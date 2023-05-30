@@ -34,7 +34,7 @@ public class ShopFragment extends Fragment {
     private boolean autoFoodOn = false;
     private boolean autoWaterOn = false;
     private boolean autoHappyOn = false;
-    private boolean[] toyOn = new boolean[6];
+    private boolean[] toyOn = new boolean[3];
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,

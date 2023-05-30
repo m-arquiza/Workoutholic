@@ -12,7 +12,7 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<Integer> totalMoney = new MutableLiveData<>(150);
 
 
-    private MutableLiveData<boolean[]> toyStorage = new MutableLiveData<>(new boolean[6]);
+    private MutableLiveData<boolean[]> toyStorage = new MutableLiveData<>(new boolean[3]);
 
 
     public void shopFoodClick() { // increases inventory and decreases money
