@@ -225,9 +225,7 @@ public class EntriesFragment extends Fragment {
                 if(muscleLogged[0] && workoutLogged[0] & repLogged[0]) {
                     popupWindow.dismiss();
 
-                    if(ShopFragment.mainViewModel != null) {
-                        ShopFragment.mainViewModel.moneyUpdate(10);
-                    }
+                    mainViewModel.moneyUpdate(10);
 
                     logList.add(new Log(dateString, ex));
 
