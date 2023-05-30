@@ -23,9 +23,10 @@ All the source code for our Workoutholic App is contained within the "m-arquiza/
 
 ## Building
 1. Prerequisites
-    1. JDK version 1.8 or newer is installed.
-    2. Development environment that supports Android app development (Android Studio preferred) is installed.
-    3. Repository is cloned and launched in Android Studio.
+    1. JDK version 11
+    2. Gradle version 8.0
+    3. Development environment that supports Android app development (Android Studio preferred) is installed.
+    4. Repository is cloned and launched in Android Studio.
 2. Building
     1. On the left sidebar, click the project tab.
     2. Expand the "Gradle Scripts" folder, then open the "build.gradle" file for the app (e.g., "build.gradle (Module: app)").
