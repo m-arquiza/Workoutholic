@@ -145,16 +145,19 @@ public class BuddyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ImageView toy = getView().findViewById(R.id.toy);
-                if(checkAndChangeToy(0)){
-                    toy.setImageResource(R.drawable.toy_ball);
-                } else {
-                    if (toy.getAlpha() == 0.0f) {
-                        toyOn[0] = true;
+                boolean isEnabled = mainViewModel.toys().getValue()[0];
+                if(isEnabled){
+                    if(checkAndChangeToy(0)){
                         toy.setImageResource(R.drawable.toy_ball);
-                        toy.setAlpha(1.0f);
                     } else {
-                        toyOn[0] = false;
-                        toy.setAlpha(0.0f);
+                        if (toy.getAlpha() == 0.0f) {
+                            toyOn[0] = true;
+                            toy.setImageResource(R.drawable.toy_ball);
+                            toy.setAlpha(1.0f);
+                        } else {
+                            toyOn[0] = false;
+                            toy.setAlpha(0.0f);
+                        }
                     }
                 }
             }
@@ -165,16 +168,19 @@ public class BuddyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ImageView toy = getView().findViewById(R.id.toy);
-                if(checkAndChangeToy(1)){
-                    toy.setImageResource(R.drawable.toy_bone);
-                } else {
-                    if (toy.getAlpha() == 0.0f) {
-                        toyOn[1] = true;
-                        toy.setAlpha(1.0f);
+                boolean isEnabled = mainViewModel.toys().getValue()[1];
+                if(isEnabled){
+                    if (checkAndChangeToy(1)) {
                         toy.setImageResource(R.drawable.toy_bone);
                     } else {
-                        toyOn[1] = false;
-                        toy.setAlpha(0.0f);
+                        if (toy.getAlpha() == 0.0f) {
+                            toyOn[1] = true;
+                            toy.setAlpha(1.0f);
+                            toy.setImageResource(R.drawable.toy_bone);
+                        } else {
+                            toyOn[1] = false;
+                            toy.setAlpha(0.0f);
+                        }
                     }
                 }
             }
@@ -185,16 +191,19 @@ public class BuddyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ImageView toy = getView().findViewById(R.id.toy);
-                if(checkAndChangeToy(2)){
-                    toy.setImageResource(R.drawable.toy_stick);
-                } else {
-                    if (toy.getAlpha() == 0.0f) {
-                        toyOn[2] = true;
-                        toy.setAlpha(1.0f);
+                boolean isEnabled = mainViewModel.toys().getValue()[2];
+                if(isEnabled){
+                    if (checkAndChangeToy(2)) {
                         toy.setImageResource(R.drawable.toy_stick);
                     } else {
-                        toyOn[2] = false;
-                        toy.setAlpha(0.0f);
+                        if (toy.getAlpha() == 0.0f) {
+                            toyOn[2] = true;
+                            toy.setAlpha(1.0f);
+                            toy.setImageResource(R.drawable.toy_stick);
+                        } else {
+                            toyOn[2] = false;
+                            toy.setAlpha(0.0f);
+                        }
                     }
                 }
             }

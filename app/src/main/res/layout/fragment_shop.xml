@@ -303,13 +303,6 @@
 
                         android:text="price: 20 coins"
                         android:textSize="13sp" />
-                    <TextView
-                        android:id="@+id/toy1_bought"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-
-                        android:textSize="13sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -334,13 +327,6 @@
 
                         android:text="price: 50 coins"
                         android:textSize="13sp" />
-                    <TextView
-                        android:id="@+id/toy2_bought"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-
-                        android:textSize="13sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -365,13 +351,6 @@
 
                         android:text="price: 50 coins"
                         android:textSize="13sp" />
-                    <TextView
-                        android:id="@+id/toy3_bought"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-
-                        android:textSize="13sp"/>
                 </LinearLayout>
 
 
@@ -382,102 +361,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="620dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="120dp"
-                    android:orientation="vertical"
-                    android:layout_weight=".33">
-
-                    <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center_horizontal"
-
-                        android:background="#d2f2fc"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/toy_ball" />
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-
-                        android:text="price: 20 coins"
-                        android:textSize="13sp" />
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-
-                        android:textSize="13sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="120dp"
-                    android:orientation="vertical"
-                    android:layout_weight=".33">
-
-                    <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center_horizontal"
-
-                        android:background="#d2f2fc"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/toy_bone" />
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-
-                        android:text="price: 50 coins"
-                        android:textSize="13sp" />
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-
-                        android:textSize="13sp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="120dp"
-                    android:orientation="vertical"
-                    android:layout_weight=".33">
-
-                    <ImageButton
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center_horizontal"
-
-                        android:background="#d2f2fc"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/toy_stick" />
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-
-                        android:text="price: 50 coins"
-                        android:textSize="13sp" />
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-
-                        android:textSize="13sp"/>
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="750dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
