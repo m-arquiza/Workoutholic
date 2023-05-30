@@ -395,14 +395,13 @@ public class EntriesFragment extends Fragment {
             });
 
             for (int i = 1; i < logList.size(); i++) {
-                int index = logList.size() - 1;
 
                 TextView newEntry = setTextView(entries.get(0));
                 newEntry.setId(View.generateViewId());
                 newEntry.setTextSize(20);
-                newEntry.setText("Group: " + logList.get(index).getExercise().getMuscle() +
-                        " \n Workout: " + logList.get(index).getExercise().getName() +
-                        " \n Repetitions: " + logList.get(index).getExercise().getNumberOfReps());
+                newEntry.setText("Group: " + logList.get(i).getExercise().getMuscle() +
+                        " \n Workout: " + logList.get(i).getExercise().getName() +
+                        " \n Repetitions: " + logList.get(i).getExercise().getNumberOfReps());
                 newEntry.setLineSpacing(entries.get(0).getLineSpacingExtra(), entries.get(0).getLineSpacingMultiplier());
 
                 ConstraintLayout.LayoutParams entryLayoutParams = new ConstraintLayout.LayoutParams(
@@ -412,14 +411,14 @@ public class EntriesFragment extends Fragment {
 
                 entryLayoutParams.startToStart = parent.getId();
                 entryLayoutParams.endToEnd = parent.getId();
-                entryLayoutParams.topToBottom = entries.get(index - 1).getId();
+                entryLayoutParams.topToBottom = entries.get(i - 1).getId();
                 entryLayoutParams.topMargin = dpToPixel(100);
                 newEntry.setLayoutParams(entryLayoutParams);
                 parent.addView(newEntry);
 
                 TextView newEntryDate = setTextView(dates.get(0));
                 newEntryDate.setTextSize(20);
-                newEntryDate.setText(logList.get(index).getDate());
+                newEntryDate.setText(logList.get(i).getDate());
 
                 ConstraintLayout.LayoutParams dateLayoutParams = new ConstraintLayout.LayoutParams(
                         dpToPixel(150),
@@ -449,10 +448,11 @@ public class EntriesFragment extends Fragment {
                 dates.add(newEntryDate);
                 buttons.add(newDeleteEntry_button);
 
+                int finalI = i;
                 newDeleteEntry_button.setOnClickListener(v3 -> {
-                    logList.remove(index);
-                    android.util.Log.d("Tag123", "index is:" + index);
-                    for (int j = index; j < logList.size(); j++) {
+                    logList.remove(finalI);
+                    android.util.Log.d("Tag123", "index is:" + finalI);
+                    for (int j = finalI; j < logList.size(); j++) {
                         entries.get(j).setText("Group: " + logList.get(j).getExercise().getMuscle() +
                                 " \n Workout: " + logList.get(j).getExercise().getName() +
                                 " \n Repetitions: " + logList.get(j).getExercise().getNumberOfReps());
