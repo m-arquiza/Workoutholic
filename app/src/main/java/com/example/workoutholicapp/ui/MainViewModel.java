@@ -14,6 +14,8 @@ public class MainViewModel extends ViewModel {
 
     private MutableLiveData<boolean[]> toyStorage = new MutableLiveData<>(new boolean[3]);
 
+    private MutableLiveData<boolean[]> autos = new MutableLiveData<>(new boolean[3]);
+
 
     public void shopFoodClick() { // increases inventory and decreases money
         Integer food = foodStorage.getValue();
@@ -57,6 +59,20 @@ public class MainViewModel extends ViewModel {
         }
         return false;
     }
+
+    public boolean buyAuto(int autoNum) {
+        Integer money = totalMoney.getValue();
+        int index = autoNum-1;
+        boolean[] auto = autos.getValue();
+        if (money >= 100 && !auto[index]) {
+            auto[index] = true;
+            autos.setValue(auto);
+            totalMoney.setValue(money - 100);
+            return true;
+        }
+        return false;
+    }
+
 
     public LiveData<Integer> foodCount() {
         return foodStorage;

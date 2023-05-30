@@ -92,33 +92,39 @@ public class ShopFragment extends Fragment {
         autoFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                autoFoodOn = true;
-                autoFood.setEnabled(false);
-                autoFood.setAlpha(0.5f);
-                TextView food = getView().findViewById(R.id.af_activate);
-                food.setText("auto feed on!");
+                if (mainViewModel.buyAuto(1)) {
+                    autoFoodOn = true;
+                    autoFood.setEnabled(false);
+                    autoFood.setAlpha(0.5f);
+                    TextView food = getView().findViewById(R.id.af_activate);
+                    food.setText("auto feed on!");
+                }
             }
         });
 
         autoWater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                autoWaterOn = true;
-                autoWater.setEnabled(false);
-                autoWater.setAlpha(0.5f);
-                TextView food = getView().findViewById(R.id.aw_activate);
-                food.setText("auto hydrate on!");
+                if (mainViewModel.buyAuto(2)) {
+                    autoWaterOn = true;
+                    autoWater.setEnabled(false);
+                    autoWater.setAlpha(0.5f);
+                    TextView food = getView().findViewById(R.id.aw_activate);
+                    food.setText("auto hydrate on!");
+                }
             }
         });
 
         autoHappy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                autoHappyOn = true;
-                autoHappy.setEnabled(false);
-                autoHappy.setAlpha(0.5f);
-                TextView food = getView().findViewById(R.id.ah_activate);
-                food.setText("auto play on!");
+                if (mainViewModel.buyAuto(3)) {
+                    autoHappyOn = true;
+                    autoHappy.setEnabled(false);
+                    autoHappy.setAlpha(0.5f);
+                    TextView food = getView().findViewById(R.id.ah_activate);
+                    food.setText("auto play on!");
+                }
             }
         });
 
