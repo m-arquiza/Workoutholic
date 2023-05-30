@@ -1,25 +1,19 @@
 package com.example.workoutholicapp.ui.entries;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.workoutholicapp.backend.Logger.LogPlan;
+import com.example.workoutholicapp.backend.Logger.Log;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Locale;
 
 public class EntriesViewModel extends ViewModel {
     private String muscle;
     private String workout;
     private String rep;
-    private final List<Log> logList = new ArrayList<>();
+    private LinkedList<com.example.workoutholicapp.backend.Logger.Log> logList = new LinkedList<>();
 
     public void setMuscle(String muscle) {
         this.muscle = muscle;
@@ -42,5 +36,11 @@ public class EntriesViewModel extends ViewModel {
         return date;
     }
 
+    public void setList(LinkedList<com.example.workoutholicapp.backend.Logger.Log> list) {
+        this.logList = list;
+    }
 
+    public LinkedList<com.example.workoutholicapp.backend.Logger.Log> getList() {
+        return (LinkedList<Log>)this.logList.clone();
+    }
 }
