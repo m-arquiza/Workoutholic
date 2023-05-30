@@ -46,6 +46,7 @@ public class EntriesFragment extends Fragment {
     private FragmentEntriesBinding binding;
     private View root;
     private EntriesViewModel entriesViewModel;
+    private MainViewModel mainViewModel;
 
     private LinkedList<Log> logList;
 
@@ -58,6 +59,14 @@ public class EntriesFragment extends Fragment {
         binding = FragmentEntriesBinding.inflate(inflater, container, false);
         root = binding.getRoot();
         ConstraintLayout parent = root.findViewById(R.id.entriesParent_layout);
+
+        MainActivity activity = (MainActivity) requireActivity();
+        mainViewModel = activity.getMainViewModel();
+
+        mainViewModel.moneyAmount().observe(getViewLifecycleOwner(), value -> {
+            TextView money = root.findViewById(R.id.coin_text);
+            money.setText(value + " coins");
+        });
 
         List<TextView> entries = new ArrayList<>();
         List<TextView> dates = new ArrayList<>();
@@ -299,6 +308,7 @@ public class EntriesFragment extends Fragment {
 
                         dateLayoutParams.bottomToTop = newEntry.getId();
                         dateLayoutParams.startToStart = newEntry.getId();
+                        dateLayoutParams.bottomMargin = 25;
                         newEntryDate.setLayoutParams(dateLayoutParams);
                         parent.addView(newEntryDate);
 
@@ -313,6 +323,7 @@ public class EntriesFragment extends Fragment {
 
                         buttonLayoutParams.bottomToTop = newEntry.getId();
                         buttonLayoutParams.endToEnd = newEntry.getId();
+                        buttonLayoutParams.bottomMargin = 25;
                         newDeleteEntry_button.setLayoutParams(buttonLayoutParams);
                         parent.addView(newDeleteEntry_button);
 
@@ -395,7 +406,6 @@ public class EntriesFragment extends Fragment {
             });
 
             for (int i = 1; i < logList.size(); i++) {
-
                 TextView newEntry = setTextView(entries.get(0));
                 newEntry.setId(View.generateViewId());
                 newEntry.setTextSize(20);
@@ -427,6 +437,7 @@ public class EntriesFragment extends Fragment {
 
                 dateLayoutParams.bottomToTop = newEntry.getId();
                 dateLayoutParams.startToStart = newEntry.getId();
+                dateLayoutParams.bottomMargin = 25;
                 newEntryDate.setLayoutParams(dateLayoutParams);
                 parent.addView(newEntryDate);
 
@@ -441,6 +452,7 @@ public class EntriesFragment extends Fragment {
 
                 buttonLayoutParams.bottomToTop = newEntry.getId();
                 buttonLayoutParams.endToEnd = newEntry.getId();
+                buttonLayoutParams.bottomMargin = 25;
                 newDeleteEntry_button.setLayoutParams(buttonLayoutParams);
                 parent.addView(newDeleteEntry_button);
 
