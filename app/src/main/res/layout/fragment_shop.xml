@@ -8,274 +8,360 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="-15dp">
 
-
-    <TextView
-        android:id="@+id/coin_text2"
-        android:layout_width="65dp"
-        android:layout_height="50dp"
-
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="36dp"
-
-        android:text="104 coins"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/text_shop"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:background="#92b6e8"
 
         android:text="SHOP"
         android:textAlignment="center"
         android:textSize="50sp"
+        android:translationZ="2dp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
+    <ImageView
+        android:id="@+id/coin"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/coin"
+        android:translationZ="2dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/coin_text" />
     <TextView
-        android:id="@+id/text_basics"
-        android:layout_width="0dp"
+        android:id="@+id/coin_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
 
-        android:text="Basics"
-        android:textAlignment="center"
-        android:textSize="30sp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="25dp"
+
+        android:text="104 coins"
+        android:translationZ="2dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/food_button"
-        android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="448dp"
-
-        android:src="@drawable/food_icon"
-        android:scaleType="fitCenter"
-        android:background="#d2f2fc"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_basics"
-        app:layout_constraintVertical_bias="0.014" />
-
-    <TextView
-        android:id="@+id/food_storage"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-
-        android:text="food in storage: 0"
-
-        android:textSize="13sp"
-        app:layout_constraintEnd_toEndOf="@id/food_button"
-        app:layout_constraintStart_toStartOf="@id/food_button"
-        app:layout_constraintTop_toBottomOf="@id/food_button"/>
-
-    <ImageButton
-        android:id="@+id/water_button"
-        android:layout_width="130dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="448dp"
-
-        android:src="@drawable/water_icon"
-        android:scaleType="fitCenter"
-        android:background="#d2f2fc"
-
-        android:text="click for water"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_basics"
-        app:layout_constraintVertical_bias="0.014" />
-
-    <TextView
-        android:id="@+id/water_storage"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-
-        android:text="water in storage: 0"
-
-        android:textSize="13sp"
-        app:layout_constraintEnd_toEndOf="@+id/water_button"
-        app:layout_constraintStart_toStartOf="@+id/water_button"
-        app:layout_constraintTop_toBottomOf="@+id/water_button"/>
 
 
 
-    <TextView
-        android:id="@+id/text_special"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="252dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="70dp">
 
-        android:text="Special"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
-    <ImageButton
-        android:id="@+id/auto_water"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="8dp"
+            <TextView
+                android:id="@+id/text_basics"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="72dp"
 
-        android:layout_marginEnd="15dp"
-        android:background="#d2f2fc"
-        android:scaleType="fitCenter"
+                android:text="Basics"
+                android:textAlignment="center"
+                android:textSize="30sp"/>
 
-        android:src="@drawable/auto_water"
-        app:layout_constraintEnd_toEndOf="@id/auto_happy"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="@id/auto_food"
-        app:layout_constraintTop_toBottomOf="@+id/text_special" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="120dp">
 
-    <TextView
-        android:id="@+id/aw_activate"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight=".5">
 
-        android:textSize="13sp"
-        app:layout_constraintEnd_toEndOf="@id/auto_water"
-        app:layout_constraintStart_toStartOf="@id/auto_water"
-        app:layout_constraintTop_toBottomOf="@id/auto_water"/>
+                    <ImageButton
+                        android:id="@+id/food_button"
+                        android:layout_width="130dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
 
-    <ImageButton
-    android:id="@+id/auto_food"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:layout_marginStart="24dp"
+                        android:src="@drawable/food_icon"
+                        android:scaleType="fitCenter"
+                        android:background="#d2f2fc"
+                        />
 
-    android:layout_marginTop="8dp"
-    android:background="#d2f2fc"
-    android:scaleType="fitCenter"
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
 
-    android:src="@drawable/auto_food"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/text_special" />
+                        android:text="price: 5 coins"
+                        android:textSize="13sp" />
 
-    <TextView
-        android:id="@+id/af_activate"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+                    <TextView
+                        android:id="@+id/food_storage"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
 
-        android:textSize="13sp"
-        app:layout_constraintEnd_toEndOf="@id/auto_food"
-        app:layout_constraintStart_toStartOf="@id/auto_food"
-        app:layout_constraintTop_toBottomOf="@id/auto_food"/>
+                        android:text="food in storage: 0"
+                        android:textSize="13sp" />
 
-    <ImageButton
-    android:id="@+id/auto_happy"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:layout_marginTop="8dp"
+                </LinearLayout>
 
-    android:layout_marginEnd="28dp"
-    android:background="#d2f2fc"
-    android:scaleType="fitCenter"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight=".5">
 
-    android:src="@drawable/auto_toy"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/text_special" />
+                    <ImageButton
+                        android:id="@+id/water_button"
+                        android:layout_width="130dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
 
-    <TextView
-        android:id="@+id/ah_activate"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+                        android:src="@drawable/water_icon"
+                        android:scaleType="fitCenter"
+                        android:background="#d2f2fc" />
 
-        android:textSize="13sp"
-        app:layout_constraintEnd_toEndOf="@id/auto_happy"
-        app:layout_constraintStart_toStartOf="@id/auto_happy"
-        app:layout_constraintTop_toBottomOf="@id/auto_happy"/>
+                    <TextView
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="price: 5 coins"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/water_storage"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="water in storage: 0"
+
+                        android:textSize="13sp" />
 
 
-    <TextView
-        android:id="@+id/text_toys"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="448dp"
 
-        android:text="Toys"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
 
-    <TextView
-        android:id="@+id/coming_soon"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="672dp"
+            </LinearLayout>
 
-        android:text="and more coming soon!"
-        android:textAlignment="center"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/text_special"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="252dp"
 
-    <ImageButton
-        android:id="@+id/toy2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="16dp"
+                android:text="Special"
+                android:textAlignment="center"
+                android:textSize="30sp"/>
 
-        android:layout_marginEnd="15dp"
-        android:background="#d2f2fc"
-        android:scaleType="fitCenter"
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="300dp">
 
-        android:src="@drawable/toy_bone"
-        app:layout_constraintEnd_toEndOf="@id/auto_happy"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="@id/auto_food"
-        app:layout_constraintTop_toBottomOf="@+id/text_toys" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight=".33">
 
-    <ImageButton
-        android:id="@+id/toy1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="24dp"
+                    <ImageButton
+                        android:id="@+id/auto_water"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
 
-        android:layout_marginTop="16dp"
-        android:background="#d2f2fc"
-        android:scaleType="fitCenter"
+                        android:background="#d2f2fc"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/auto_water"/>
 
-        android:src="@drawable/toy_ball"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_toys" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
 
-    <ImageButton
-        android:id="@+id/toy3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
+                        android:text="price: 100 coins"
+                        android:textSize="13sp" />
 
-        android:layout_marginEnd="28dp"
-        android:background="#d2f2fc"
-        android:scaleType="fitCenter"
+                    <TextView
+                        android:id="@+id/aw_activate"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
 
-        android:src="@drawable/toy_stick"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_toys" />
+                        android:textSize="13sp"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight=".33">
+
+                    <ImageButton
+                        android:id="@+id/auto_food"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="#d2f2fc"
+                        android:scaleType="fitCenter"
+
+                        android:src="@drawable/auto_food"/>
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="price: 100 coins"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/af_activate"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight=".33">
+
+                    <ImageButton
+                        android:id="@+id/auto_happy"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="#d2f2fc"
+                        android:scaleType="fitCenter"
+
+                        android:src="@drawable/auto_toy"/>
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="price: 100 coins"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/ah_activate"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_toys"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="435dp"
+
+                android:text="Toys"
+                android:textAlignment="center"
+                android:textSize="30sp"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="480dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:orientation="vertical"
+                    android:layout_weight=".33">
+
+                    <ImageButton
+                        android:id="@+id/toy1"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="#d2f2fc"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/toy_ball" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="price: 20 coins"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:orientation="vertical"
+                    android:layout_weight=".33">
+
+                    <ImageButton
+                        android:id="@+id/toy2"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="#d2f2fc"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/toy_bone" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="price: 50 coins"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:orientation="vertical"
+                    android:layout_weight=".33">
+
+                    <ImageButton
+                        android:id="@+id/toy3"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="#d2f2fc"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/toy_stick" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="price: 50 coins"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+
+        </FrameLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
