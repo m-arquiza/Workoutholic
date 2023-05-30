@@ -44,4 +44,55 @@ public class WorkoutPlans {
         }
         return output;
     }
+
+    /**
+     * Searches for a workout plan in the current list of plans
+     * using the name of the plan and adds selected exercise
+     *
+     * @param  input the name of the plan you are searching for
+     * @param  e     exercise
+     * @return List<Exercises> that coordinates to the name
+     */
+    public static List<Exercise> ChooseAdd(String input, Exercise e){
+        Iterator<WorkoutPlan> itr = workoutplans.iterator();
+        List<Exercise> output =null;
+        while(itr.hasNext()){
+            WorkoutPlan next = itr.next();
+            if(next.getName().equals(input)){
+                output = next.getList();
+                output.add(e);
+            }
+        }
+        return output;
+    }
+
+    /**
+     * Searches for a workout plan in the current list of plans
+     * using the name of the plan and removes selected exercise
+     *
+     * @param  input the name of the plan you are searching for
+     * @param  e     exercise
+     * @return List<Exercises> that coordinates to the name
+     */
+    public static List<Exercise> ChooseRemove(String input, Exercise e){
+        Iterator<WorkoutPlan> itr = workoutplans.iterator();
+        List<Exercise> output =null;
+        while(itr.hasNext()){
+            WorkoutPlan next = itr.next();
+            if(next.getName().equals(input)){
+                output = next.getList();
+                output.remove(e);
+            }
+        }
+        return output;
+    }
+
+    /**
+     * Outputs the all the workout plans so far
+     *
+     * @return List<WorkoutPlan> list of all plans
+     */
+    public List<WorkoutPlan> ViewWorkoutPlans(){
+        return workoutplans;
+    }
 }
