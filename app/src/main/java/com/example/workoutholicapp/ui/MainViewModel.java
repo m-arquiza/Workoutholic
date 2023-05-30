@@ -27,7 +27,7 @@ public class MainViewModel extends ViewModel {
     public void shopFoodClick() { // increases inventory and decreases money
         Integer food = foodStorage.getValue();
         Integer money = totalMoney.getValue();
-        if (money >= 20) {
+        if (money >= foodPrice) {
             foodStorage.setValue(food + 1);
             totalMoney.setValue(money - foodPrice);
         }
@@ -42,7 +42,7 @@ public class MainViewModel extends ViewModel {
     public void shopWaterClick() { // increases inventory and decreases money
         Integer water = waterStorage.getValue();
         Integer money = totalMoney.getValue();
-        if (money >= 10) {
+        if (money >= waterPrice) {
             waterStorage.setValue(water + 1);
             totalMoney.setValue(money - waterPrice);
         }
