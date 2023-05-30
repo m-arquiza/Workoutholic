@@ -2,6 +2,7 @@ package com.example.workoutholicapp.ui.buddy;
 
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,9 @@ import com.example.workoutholicapp.R;
 import com.example.workoutholicapp.databinding.FragmentBuddyBinding;
 import com.example.workoutholicapp.ui.MainViewModel;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class BuddyFragment extends Fragment {
 
     private FragmentBuddyBinding binding;
@@ -26,6 +30,12 @@ public class BuddyFragment extends Fragment {
     private MainActivity activity;
     private int hungerLevel; // displayed in vitals
     private int thirstLevel; // displayed in vitals
+
+    private Timer timer;
+    private Handler handler;
+    private int intervalInMillis = 24 * 60 * 60 * 1000; // 1 day in milliseconds
+    // private int intervalInMillis = 5000; // to test with
+    private int[] foodLevelImages = { R.id.hunger_bar, R.id.hunger_bar2, R.id.hunger_bar3, R.id.hunger_bar4 };
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +45,101 @@ public class BuddyFragment extends Fragment {
         hungerLevel = 0;
         thirstLevel = 0;
     }
+
+    private void scheduleHungerLevelUpdate() {
+        // Create a new timer task
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateHungerLevel();
+                    }
+                });
+            }
+        };
+
+        // Schedule the timer task to run at the specified interval
+        timer.scheduleAtFixedRate(timerTask, intervalInMillis, intervalInMillis);
+    }
+
+    private void scheduleThirstLevelUpdate() {
+        // Create a new timer task
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateThirstLevel();
+                    }
+                });
+            }
+        };
+
+        // Schedule the timer task to run at the specified interval
+        timer.scheduleAtFixedRate(timerTask, intervalInMillis, intervalInMillis);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        scheduleHungerLevelUpdate();
+        scheduleThirstLevelUpdate();
+    }
+
+    private void updateHungerLevel() {
+        // changes thirst level based on how much food dog is fed
+        View hunger = getView().findViewById(R.id.hunger_bar);
+        View hunger2 = getView().findViewById(R.id.hunger_bar2);
+        View hunger3 = getView().findViewById(R.id.hunger_bar3);
+        View hunger4 = getView().findViewById(R.id.hunger_bar4);
+        if (hungerLevel >= 0) {
+            if (hungerLevel == 3) {
+                hunger.setAlpha(0.0f);
+                hunger2.setAlpha(1.0f);
+            } else if (hungerLevel == 2) {
+                hunger2.setAlpha(0.0f);
+                hunger3.setAlpha(1.0f);
+            } else if (hungerLevel == 1) {
+                hunger3.setAlpha(0.0f);
+                hunger4.setAlpha(1.0f);
+            } else if (hungerLevel == 0){
+                hunger4.setAlpha(0.0f);
+            }
+            if (hungerLevel > 0) hungerLevel--;
+        }
+    }
+
+    private void updateThirstLevel() {
+        // changes thirst level based on how much food dog is fed
+        View thirst = getView().findViewById(R.id.thirst_bar);
+        View thirst2 = getView().findViewById(R.id.thirst_bar2);
+        View thirst3 = getView().findViewById(R.id.thirst_bar3);
+        View thirst4 = getView().findViewById(R.id.thirst_bar4);
+        if (thirstLevel >= 0) {
+            if (thirstLevel == 3) {
+                thirst.setAlpha(0.0f);
+                thirst2.setAlpha(1.0f);
+            } else if (thirstLevel == 2) {
+                thirst2.setAlpha(0.0f);
+                thirst3.setAlpha(1.0f);
+            } else if (thirstLevel == 1) {
+                thirst3.setAlpha(0.0f);
+                thirst4.setAlpha(1.0f);
+            } else if (thirstLevel == 0){
+                thirst4.setAlpha(0.0f);
+            }
+            if (thirstLevel > 0) thirstLevel--;
+        }
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        timer = new Timer();
+        handler = new Handler();
         binding = FragmentBuddyBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -46,7 +149,6 @@ public class BuddyFragment extends Fragment {
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // changes thirst level based on how much food dog is fed
                 View hunger = getView().findViewById(R.id.hunger_bar);
                 View hunger2 = getView().findViewById(R.id.hunger_bar2);
                 View hunger3 = getView().findViewById(R.id.hunger_bar3);
@@ -64,9 +166,8 @@ public class BuddyFragment extends Fragment {
                         hunger2.setAlpha(0.0f);
                         hunger.setAlpha(1.0f);
                     }
-                    hungerLevel++;
+                    if (hungerLevel < 4) hungerLevel++;
                 }
-
                 mainViewModel.buddyFoodClick();
             }
         });
@@ -92,7 +193,7 @@ public class BuddyFragment extends Fragment {
                         thirst2.setAlpha(0.0f);
                         thirst.setAlpha(1.0f);
                     }
-                    thirstLevel++;
+                    if (thirstLevel < 4) thirstLevel++;
                 }
                 mainViewModel.buddyWaterClick();
             }
@@ -227,8 +328,12 @@ public class BuddyFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        timer.cancel();
         binding = null;
     }
 
+    public int getHungerLevel() { return hungerLevel; }
+
+    public int getThirstLevel() { return thirstLevel; }
 }
 

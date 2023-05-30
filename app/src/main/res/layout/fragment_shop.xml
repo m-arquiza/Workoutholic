@@ -96,7 +96,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
 
-                        android:text="price: 5 coins"
+                        android:text="price: 10 coins"
                         android:textSize="13sp" />
 
                     <TextView

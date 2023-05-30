@@ -48,7 +48,17 @@ public class EntriesFragment extends Fragment {
     private View root;
     private EntriesViewModel entriesViewModel;
 
+    public static MainViewModel mainViewModel;
+
     private LinkedList<Log> logList;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        MainActivity activity = (MainActivity) requireActivity();
+        mainViewModel = activity.getMainViewModel();
+    }
 
     @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -65,6 +75,12 @@ public class EntriesFragment extends Fragment {
         List<Button> buttons = new ArrayList<>();
         logList = new LinkedList<>();
         this.hasEntry = false;
+
+        // updates money display
+        mainViewModel.moneyAmount().observe(getViewLifecycleOwner(), value -> {
+            TextView money = getView().findViewById(R.id.coin_text);
+            money.setText(value + " coins");
+        });
 
         Button entryButton = root.findViewById(R.id.entry_button);
         entryButton.setOnClickListener(v -> {
@@ -218,7 +234,7 @@ public class EntriesFragment extends Fragment {
                 if(muscleLogged[0] && workoutLogged[0] & repLogged[0]) {
                     popupWindow.dismiss();
 
-                    ShopFragment.mainViewModel.moneyUpdate(10);
+                    mainViewModel.workoutCoin();
                     logList.add(new Log(dateString, ex));
 
                     if(logList.size() == 1) {
