@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel;
 public class MainViewModel extends ViewModel {
     private MutableLiveData<Integer> foodStorage = new MutableLiveData<>(0);
     private MutableLiveData<Integer> waterStorage = new MutableLiveData<>(0);
-    private MutableLiveData<Integer> totalMoney = new MutableLiveData<>(0);
+    private MutableLiveData<Integer> totalMoney = new MutableLiveData<>(200);
 
 
     private MutableLiveData<boolean[]> toyStorage = new MutableLiveData<>(new boolean[3]);
@@ -18,11 +18,6 @@ public class MainViewModel extends ViewModel {
 
     private int foodPrice = 10;
     private int waterPrice = 5;
-
-    public void workoutCoin() { // increases money when you log workout
-        Integer money = totalMoney.getValue();
-        totalMoney.setValue(money + 10);
-    }
 
     public void shopFoodClick() { // increases inventory and decreases money
         Integer food = foodStorage.getValue();
@@ -61,7 +56,11 @@ public class MainViewModel extends ViewModel {
         if (money >= 50 && !toys[index]) {
             toys[index] = true;
             toyStorage.setValue(toys);
-            totalMoney.setValue(money - 50);
+            if (toyNum == 1) {
+                totalMoney.setValue(money - 20);
+            } else {
+                totalMoney.setValue(money - 50);
+            }
             return true;
         }
         return false;
@@ -69,7 +68,7 @@ public class MainViewModel extends ViewModel {
 
     public boolean buyAuto(int autoNum) {
         Integer money = totalMoney.getValue();
-        int index = autoNum-1;
+        int index = autoNum - 1;
         boolean[] auto = autos.getValue();
         if (money >= 100 && !auto[index]) {
             auto[index] = true;
@@ -97,7 +96,13 @@ public class MainViewModel extends ViewModel {
         totalMoney.setValue((totalMoney.getValue())+num);
     }
 
-    public void setMoney(int num) { totalMoney.setValue(num); } // for testing purposes
+    public LiveData<boolean[]> autoList() {
+        return autos;
+    }
+
+    public void setMoney(int num) { // mostly for testing purposes
+        totalMoney.setValue(num);
+    }
 
     public LiveData<boolean[]> toys() {
         return toyStorage;

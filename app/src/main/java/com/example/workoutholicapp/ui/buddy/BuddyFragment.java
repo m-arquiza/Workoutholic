@@ -31,11 +31,13 @@ public class BuddyFragment extends Fragment {
     private int hungerLevel; // displayed in vitals
     private int thirstLevel; // displayed in vitals
 
+    private int happinessLevel; // displayed in vitals
+
     private Timer timer;
     private Handler handler;
-    private int intervalInMillis = 24 * 60 * 60 * 1000; // 1 day in milliseconds
-    // private int intervalInMillis = 5000; // to test with
-    private int[] foodLevelImages = { R.id.hunger_bar, R.id.hunger_bar2, R.id.hunger_bar3, R.id.hunger_bar4 };
+    private final int intervalInMillis = 24 * 60 * 60 * 1000; // 1 day in milliseconds
+    //private final int intervalInMillis = 5000; // for testing/demo purposes
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,7 @@ public class BuddyFragment extends Fragment {
         mainViewModel = activity.getMainViewModel();
         hungerLevel = 0;
         thirstLevel = 0;
+        happinessLevel = 0;
     }
 
     private void scheduleHungerLevelUpdate() {
@@ -82,16 +85,35 @@ public class BuddyFragment extends Fragment {
         timer.scheduleAtFixedRate(timerTask, intervalInMillis, intervalInMillis);
     }
 
+    private void scheduleHappinessLevelUpdate() {
+        // Create a new timer task
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateHappinessLevel();
+                    }
+                });
+            }
+        };
+
+        // Schedule the timer task to run at the specified interval
+        timer.scheduleAtFixedRate(timerTask, intervalInMillis, intervalInMillis);
+    }
+
 
     @Override
     public void onResume() {
         super.onResume();
         scheduleHungerLevelUpdate();
         scheduleThirstLevelUpdate();
+        scheduleHappinessLevelUpdate();
     }
 
     private void updateHungerLevel() {
-        // changes thirst level based on how much food dog is fed
+        // decreases hunger level every time interval
         View hunger = getView().findViewById(R.id.hunger_bar);
         View hunger2 = getView().findViewById(R.id.hunger_bar2);
         View hunger3 = getView().findViewById(R.id.hunger_bar3);
@@ -114,7 +136,7 @@ public class BuddyFragment extends Fragment {
     }
 
     private void updateThirstLevel() {
-        // changes thirst level based on how much food dog is fed
+        // // decreases thirst level every time interval
         View thirst = getView().findViewById(R.id.thirst_bar);
         View thirst2 = getView().findViewById(R.id.thirst_bar2);
         View thirst3 = getView().findViewById(R.id.thirst_bar3);
@@ -136,6 +158,25 @@ public class BuddyFragment extends Fragment {
         }
     }
 
+    private void updateHappinessLevel() {
+        // decreases happiness level every time interval
+        View happy = getView().findViewById(R.id.happiness_bar);
+        View happy2 = getView().findViewById(R.id.happiness_bar2);
+        View happy3 = getView().findViewById(R.id.happiness_bar3);
+        if (happinessLevel >= 0) {
+            if (happinessLevel == 3) {
+                happy.setAlpha(0.0f);
+                happy2.setAlpha(1.0f);
+            } else if (happinessLevel == 2) {
+                happy2.setAlpha(0.0f);
+                happy3.setAlpha(1.0f);
+            } else if (happinessLevel == 1) {
+                happy3.setAlpha(0.0f);
+            }
+            if (happinessLevel > 0) happinessLevel--;
+        }
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         timer = new Timer();
@@ -149,6 +190,7 @@ public class BuddyFragment extends Fragment {
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // changes hunger level based on how much water dog is fed
                 View hunger = getView().findViewById(R.id.hunger_bar);
                 View hunger2 = getView().findViewById(R.id.hunger_bar2);
                 View hunger3 = getView().findViewById(R.id.hunger_bar3);
@@ -214,6 +256,30 @@ public class BuddyFragment extends Fragment {
             money.setText(value + " coins");
         });
 
+        mainViewModel.autoList().observe(getViewLifecycleOwner(), value -> {
+            View hunger = getView().findViewById(R.id.hunger_bar);
+            if (value[0]) {
+                hunger.setAlpha(1.0f);
+                hungerLevel = 3;
+            }
+        });
+
+        mainViewModel.autoList().observe(getViewLifecycleOwner(), value -> {
+            View thirst = getView().findViewById(R.id.thirst_bar);
+            if (value[1]) {
+                thirst.setAlpha(1.0f);
+                thirstLevel = 3;
+            }
+        });
+
+        mainViewModel.autoList().observe(getViewLifecycleOwner(), value -> {
+            View happiness = getView().findViewById(R.id.happiness_bar);
+            if (value[2]) {
+                happiness.setAlpha(1.0f);
+                happinessLevel = 2;
+            }
+        });
+
         // updates display in dog inventory
         mainViewModel.toys().observe(getViewLifecycleOwner(), value -> {
             for(int i = 0; i < value.length; i++) {
@@ -249,9 +315,10 @@ public class BuddyFragment extends Fragment {
                 if(isEnabled){
                     if (toy.getAlpha() == 0.0f) {
                         toy.setAlpha(1.0f);
-                    } else {
-                        toy.setAlpha(0.0f);
+                        changeHappiness();
                     }
+                } else  {
+                    toy.setAlpha(0.0f);
                 }
             }
         });
@@ -265,9 +332,12 @@ public class BuddyFragment extends Fragment {
                 if(isEnabled){
                     if (toy.getAlpha() == 0.0f) {
                         toy.setAlpha(1.0f);
+                        changeHappiness();
                     } else {
                         toy.setAlpha(0.0f);
                     }
+                } else {
+                    toy.setAlpha(0.0f);
                 }
             }
         });
@@ -281,14 +351,35 @@ public class BuddyFragment extends Fragment {
                 if(isEnabled){
                     if (toy.getAlpha() == 0.0f) {
                         toy.setAlpha(1.0f);
+                        changeHappiness();
                     } else {
                         toy.setAlpha(0.0f);
                     }
+                } else {
+                    toy.setAlpha(0.0f);
                 }
             }
         });
 
         return root;
+    }
+
+    public void changeHappiness() {
+        View happy = getView().findViewById(R.id.happiness_bar);
+        View happy2 = getView().findViewById(R.id.happiness_bar2);
+        View happy3 = getView().findViewById(R.id.happiness_bar3);
+        if (happinessLevel < 3) {
+            if (happinessLevel == 0) {
+                happy3.setAlpha(1.0f);
+            } else if (happinessLevel == 1) {
+                happy3.setAlpha(0.0f);
+                happy2.setAlpha(1.0f);
+            } else if (happinessLevel == 2) {
+                happy2.setAlpha(0.0f);
+                happy.setAlpha(1.0f);
+            }
+            if (happinessLevel < 3) happinessLevel++;
+        }
     }
 
     @Override
@@ -309,7 +400,7 @@ public class BuddyFragment extends Fragment {
             hunger.setAlpha(1.0f);
         }
 
-        // changes thirst level bar based on hunger value
+        // changes thirst level bar based on thirst value
         View thirst = getView().findViewById(R.id.thirst_bar);
         View thirst2 = getView().findViewById(R.id.thirst_bar2);
         View thirst3 = getView().findViewById(R.id.thirst_bar3);
@@ -323,6 +414,18 @@ public class BuddyFragment extends Fragment {
         } else if (thirstLevel == 4) {
             thirst.setAlpha(1.0f);
         }
+
+        // changes happiness level bar based on happiness value
+        View happy = getView().findViewById(R.id.happiness_bar);
+        View happy2 = getView().findViewById(R.id.happiness_bar2);
+        View happy3 = getView().findViewById(R.id.happiness_bar3);
+        if (happinessLevel == 1) {
+            happy3.setAlpha(1.0f);
+        } else if (happinessLevel == 2) {
+            happy2.setAlpha(1.0f);
+        } else if (happinessLevel == 3) {
+            happy.setAlpha(1.0f);
+        }
     }
 
     @Override
@@ -335,4 +438,6 @@ public class BuddyFragment extends Fragment {
     public int getHungerLevel() { return hungerLevel; }
 
     public int getThirstLevel() { return thirstLevel; }
+
+    public int getHappinessLevel() { return happinessLevel; }
 }

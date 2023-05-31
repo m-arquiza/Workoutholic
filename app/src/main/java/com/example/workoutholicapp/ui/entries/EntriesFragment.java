@@ -47,7 +47,17 @@ public class EntriesFragment extends Fragment {
     private View root;
     private EntriesViewModel entriesViewModel;
 
+    private MainViewModel mainViewModel;
+
     private LinkedList<Log> logList;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        MainActivity activity = (MainActivity) requireActivity();
+        mainViewModel = activity.getMainViewModel();
+    }
 
     @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -216,9 +226,7 @@ public class EntriesFragment extends Fragment {
                 if(muscleLogged[0] && workoutLogged[0] & repLogged[0]) {
                     popupWindow.dismiss();
 
-                    if(ShopFragment.mainViewModel != null) {
-                        ShopFragment.mainViewModel.moneyUpdate(10);
-                    }
+                    mainViewModel.moneyUpdate(10);
 
                     logList.add(new Log(dateString, ex));
 
