@@ -16,6 +16,9 @@ import com.example.workoutholicapp.databinding.FragmentShopBinding;
 import com.example.workoutholicapp.ui.MainViewModel;
 
 
+/*
+    Class to represent functions within the shop page of the app.
+ */
 public class ShopFragment extends Fragment {
 
     private FragmentShopBinding binding;
@@ -167,6 +170,7 @@ public class ShopFragment extends Fragment {
             }
         });
 
+
         /* On click, adds hat to inventory if nonbought and enough money.
         *  Displays hat. */
         ImageButton none = root.findViewById(R.id.hat_no);
@@ -179,6 +183,7 @@ public class ShopFragment extends Fragment {
         ImageButton daisy = root.findViewById(R.id.hat_daisy);
         ImageButton top = root.findViewById(R.id.hat_top);
 
+        // adds and displays hat
         none.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -234,6 +239,7 @@ public class ShopFragment extends Fragment {
             }
         });
 
+        // displays indicator
         mainViewModel.hats().observe(getViewLifecycleOwner(), value -> {
             TextView[] texts = {root.findViewById(R.id.text_hatno),
                                 root.findViewById(R.id.text_hatprop),
@@ -268,10 +274,6 @@ public class ShopFragment extends Fragment {
                 }
             }
         });
-
-
-
-
 
 
         if (savedInstanceState != null) {

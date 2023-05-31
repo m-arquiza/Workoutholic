@@ -8,16 +8,16 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.Arrays;
 
+/*
+    Class to hold shared variables across fragments and functions that interact with them.
+ */
 public class MainViewModel extends ViewModel {
+    // Storage variables: hold signifiers for "obtaining" certain pieces of data
     private MutableLiveData<Integer> foodStorage = new MutableLiveData<>(0);
     private MutableLiveData<Integer> waterStorage = new MutableLiveData<>(0);
-    private MutableLiveData<Integer> totalMoney = new MutableLiveData<>(150);
-
-
     private MutableLiveData<boolean[]> toyStorage = new MutableLiveData<>(new boolean[3]);
-
+    private MutableLiveData<Integer> totalMoney = new MutableLiveData<>(150);
     private MutableLiveData<boolean[]> autos = new MutableLiveData<>(new boolean[3]);
-
     private MutableLiveData<boolean[][]> hats = new MutableLiveData<>(new boolean[9][2]);
 
     public MainViewModel() {
@@ -57,6 +57,13 @@ public class MainViewModel extends ViewModel {
     }
 
 
+    /*
+        onClick function to "buy" toy item and "place" into user's storage.
+        @param toyNum index number of specified toy
+        @modifies toyStorage
+        @effects sets toyStorage at index to true if purchase successful
+        @returns true if unpurchased and purchasable, false otherwise
+     */
     public boolean buyToyClick(int toyNum) {
         Integer money = totalMoney.getValue();
         int index = toyNum-1;
@@ -70,7 +77,13 @@ public class MainViewModel extends ViewModel {
         return false;
     }
 
-
+    /*
+        onClick function to "buy" auto-health items.
+        @param autoNum index number of specified auto
+        @modifies autos
+        @effects sets autos at index to true if purchase successful
+        @returns true if unpurchased and purchasable, false otherwise
+     */
     public boolean buyAuto(int autoNum) {
         Integer money = totalMoney.getValue();
         int index = autoNum-1;
@@ -84,7 +97,15 @@ public class MainViewModel extends ViewModel {
         return false;
     }
 
-
+    /*
+        onClick function to either "buy" hat item and "place" into user's storage or
+        place hat onto dog.
+        @param hatNum index number of specified hat
+        @modifies hats
+        @effects if hat is already purchased, sets "hat on" value to true at specified index
+                 otherwise, sets "purchased" and "hat on" value to true at specified index
+        @returns true if purchased or worn, false otherwise
+     */
     public boolean buyHat(int hatNum) {
         Integer money = totalMoney.getValue();
         int index = hatNum;
@@ -92,7 +113,6 @@ public class MainViewModel extends ViewModel {
 
         // if hat already bought
         if(hat[index][0] || index == 0) {
-            Log.d("buyHat","hat alr bought:" + Arrays.deepToString(hats().getValue()));
             switchHat(index);
             return true;
         }
@@ -107,6 +127,13 @@ public class MainViewModel extends ViewModel {
         return false;
     }
 
+    /*
+        Private helper function to "switch out" current hat on dog for another hat
+        @param hatNum index number of specified hat
+        @modifies hats
+        @effects sets "hatOn" value of currently worn hat to false, sets hat at
+                 specified index to true
+     */
     private void switchHat(int hatNum) {
         boolean[][] hat = hats.getValue();
         for(int i = 0; i < hat.length; i++) {
@@ -116,25 +143,44 @@ public class MainViewModel extends ViewModel {
         }
         hat[hatNum][1] = true;
         hats.setValue(hat);
-        Log.d("switchHat","switching hat" + Arrays.deepToString(hats().getValue()));
     }
 
+    /*
+        Getter function for food count.
+        @returns foodStorage
+     */
     public LiveData<Integer> foodCount() {
         return foodStorage;
     }
 
+    /*
+        Getter function for water count.
+        @returns waterStorage
+     */
     public LiveData<Integer> waterCount() {
         return waterStorage;
     }
 
+    /*
+        Getter function for money amount.
+        @returns totalMoney
+     */
     public LiveData<Integer> moneyAmount() {
         return totalMoney;
     }
 
+    /*
+    Getter function for toys.
+    @returns toyStorage
+ */
     public LiveData<boolean[]> toys() {
         return toyStorage;
     }
 
+    /*
+        Getter function for hats.
+        @returns hats
+     */
     public LiveData<boolean[][]> hats() {
         return hats;
     }
