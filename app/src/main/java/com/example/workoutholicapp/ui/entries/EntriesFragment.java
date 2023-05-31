@@ -283,7 +283,7 @@ public class EntriesFragment extends Fragment {
                                 for(int i=0; i<logList.size(); i++) {
                                     entries.get(i).setText("Group: " + logList.get(i).getExercise().getMuscle() +
                                             " \n Workout: " + logList.get(i).getExercise().getName() +
-                                            " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
+                                            " \n Weights: " + logList.get(i).getExercise().getWeight() + " lbs" +
                                             " \n Repetitions: " + logList.get(i).getExercise().getNumberOfReps());
                                     dates.get(i).setText(logList.get(i).getDate());
                                 }
@@ -305,7 +305,7 @@ public class EntriesFragment extends Fragment {
                         newEntry.setTextSize(20);
                         newEntry.setText("Group: " + logList.get(index).getExercise().getMuscle() +
                                 " \n Workout: " + logList.get(index).getExercise().getName() +
-                                " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
+                                " \n Weights: " + logList.get(index).getExercise().getWeight() + " lbs" +
                                 " \n Repetitions: " + logList.get(index).getExercise().getNumberOfReps());
                         newEntry.setLineSpacing(entries.get(0).getLineSpacingExtra(), entries.get(0).getLineSpacingMultiplier());
 
@@ -361,7 +361,7 @@ public class EntriesFragment extends Fragment {
                             for(int j=index; j<logList.size(); j++) {
                                 entries.get(j).setText("Group: " + logList.get(j).getExercise().getMuscle() +
                                                        " \n Workout: " + logList.get(j).getExercise().getName() +
-                                                       " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
+                                                       " \n Weights: " + logList.get(j).getExercise().getWeight() + " lbs" +
                                                        " \n Repetitions: " + logList.get(j).getExercise().getNumberOfReps());
                                 dates.get(j).setText(logList.get(j).getDate());
                             }
@@ -397,7 +397,7 @@ public class EntriesFragment extends Fragment {
                     " \n Workout: " + logList.get(0).getExercise().getName() +
                     " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
                     " \n Repetitions: " + logList.get(0).getExercise().getNumberOfReps());
-            entry.setLines(3);
+            entry.setLines(4);
 
             Button deleteEntry_button = root.findViewById(R.id.deleteEntry_button);
             deleteEntry_button.setVisibility(View.VISIBLE);
@@ -417,7 +417,7 @@ public class EntriesFragment extends Fragment {
                     for (int i = 0; i < logList.size(); i++) {
                         entries.get(i).setText("Group: " + logList.get(i).getExercise().getMuscle() +
                                 " \n Workout: " + logList.get(i).getExercise().getName() +
-                                " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
+                                " \n Weights: " + logList.get(i).getExercise().getWeight() + " lbs" +
                                 " \n Repetitions: " + logList.get(i).getExercise().getNumberOfReps());
                         dates.get(i).setText(logList.get(i).getDate());
                     }
@@ -438,7 +438,7 @@ public class EntriesFragment extends Fragment {
                 newEntry.setTextSize(20);
                 newEntry.setText("Group: " + logList.get(i).getExercise().getMuscle() +
                                  " \n Workout: " + logList.get(i).getExercise().getName() +
-                                 " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
+                                 " \n Weights: " + logList.get(i).getExercise().getWeight() + " lbs" +
                                  " \n Repetitions: " + logList.get(i).getExercise().getNumberOfReps());
 
                 newEntry.setLineSpacing(entries.get(0).getLineSpacingExtra(), entries.get(0).getLineSpacingMultiplier());
@@ -496,7 +496,7 @@ public class EntriesFragment extends Fragment {
                     for (int j = finalI; j < logList.size(); j++) {
                         entries.get(j).setText("Group: " + logList.get(j).getExercise().getMuscle() +
                                                " \n Workout: " + logList.get(j).getExercise().getName() +
-                                               " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
+                                               " \n Weights: " + logList.get(j).getExercise().getWeight() + " lbs" +
                                                " \n Repetitions: " + logList.get(j).getExercise().getNumberOfReps());
                         dates.get(j).setText(logList.get(j).getDate());
                     }
@@ -528,6 +528,7 @@ public class EntriesFragment extends Fragment {
         dest.setTextColor(source.getTextColors());
         dest.setBackground(source.getBackground());
         dest.setGravity(source.getGravity());
+        dest.setTypeface(source.getTypeface());
 
         return dest;
     }
