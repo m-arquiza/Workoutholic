@@ -45,7 +45,6 @@ import okhttp3.Response;
 public class EntriesFragment extends Fragment {
     private FragmentEntriesBinding binding;
     private View root;
-    private EntriesViewModel entriesViewModel;
     private MainViewModel mainViewModel;
 
     private LinkedList<Log> logList;
@@ -53,8 +52,6 @@ public class EntriesFragment extends Fragment {
     @SuppressLint("SetTextI18n")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        entriesViewModel =
-                new ViewModelProvider(this).get(EntriesViewModel.class);
 
         binding = FragmentEntriesBinding.inflate(inflater, container, false);
         root = binding.getRoot();
@@ -71,13 +68,14 @@ public class EntriesFragment extends Fragment {
         List<TextView> entries = new ArrayList<>();
         List<TextView> dates = new ArrayList<>();
         List<Button> buttons = new ArrayList<>();
-        logList = entriesViewModel.getList();
+        logList = mainViewModel.getList();
 
         Button entryButton = root.findViewById(R.id.entry_button);
         entryButton.setOnClickListener(v -> {
             final boolean[] muscleLogged = {false};
             final boolean[] workoutLogged = {false};
             final boolean[] repLogged = {false};
+            final boolean[] weightLogged = {false};
             final List<Exercise>[] exercise = new List[]{new ArrayList<>()};
 
             Exercise ex = new Exercise();
@@ -115,7 +113,10 @@ public class EntriesFragment extends Fragment {
             List<String> repList = new ArrayList<>();
             repList.add("Select...");
 
-            // Create a Weight Drop Down Spinner
+            List<String> weightList = new ArrayList<>();
+            weightList.add("Select...");
+
+            // Create a rep Drop Down Spinner
             Spinner repSpinner = popupView.findViewById(R.id.rep_spinner);
 
             // Create a Muscle Group Drop Down Spinner
@@ -123,6 +124,9 @@ public class EntriesFragment extends Fragment {
 
             // Create a Workout Group Drop Down Spinner
             Spinner workoutSpinner = popupView.findViewById(R.id.workout_spinner);
+
+            // Create a weight Drop Down Spinner
+            Spinner weightSpinner = popupView.findViewById(R.id.weight_spinner);
 
             muscleList.addAll(ViewWorkout.muscleList());
             ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(),
@@ -196,14 +200,14 @@ public class EntriesFragment extends Fragment {
             });
 
             for(int i=1; i<=20; i++) {
-                repList.add(String.valueOf((i)));
+                repList.add(String.valueOf(i));
+                weightList.add(String.valueOf((i*10)));
             }
 
             ArrayAdapter<String> repAdapter = new ArrayAdapter<>(requireContext(),
                     android.R.layout.simple_spinner_dropdown_item, repList);
 
             repSpinner.setAdapter(repAdapter);
-
             repSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -219,10 +223,29 @@ public class EntriesFragment extends Fragment {
                 }
             });
 
+            ArrayAdapter<String> weightAdapter = new ArrayAdapter<>(requireContext(),
+                    android.R.layout.simple_spinner_dropdown_item, weightList);
+            weightSpinner.setAdapter(weightAdapter);
+            weightSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if(position == 0) {
+                        weightLogged[0] = false;
+                    } else {
+                        ex.setWeight((String) parent.getItemAtPosition(position));
+                        weightLogged[0] = true;
+                    }
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+
+
             // Confirm Button
             Button entryDoneButton = popupView.findViewById(R.id.entryDone_button);
             entryDoneButton.setOnClickListener(v2 -> {
-                if(muscleLogged[0] && workoutLogged[0] & repLogged[0]) {
+                if(muscleLogged[0] && workoutLogged[0] & repLogged[0] & weightLogged[0]) {
                     popupWindow.dismiss();
 
                     mainViewModel.moneyUpdate(10);
@@ -237,9 +260,10 @@ public class EntriesFragment extends Fragment {
                         TextView entry = root.findViewById(R.id.entry);
                         entry.setVisibility(View.VISIBLE);
                         entry.setText("Group: " + logList.get(0).getExercise().getMuscle() +
-                                " \n Workout: " + logList.get(0).getExercise().getName() +
-                                " \n Repetitions: " + logList.get(0).getExercise().getNumberOfReps());
-                        entry.setLines(3);
+                                      " \n Workout: " + logList.get(0).getExercise().getName() +
+                                      " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
+                                      " \n Repetitions: " + logList.get(0).getExercise().getNumberOfReps());
+                        entry.setLines(4);
 
                         Button deleteEntry_button = root.findViewById(R.id.deleteEntry_button);
                         deleteEntry_button.setVisibility(View.VISIBLE);
@@ -259,6 +283,7 @@ public class EntriesFragment extends Fragment {
                                 for(int i=0; i<logList.size(); i++) {
                                     entries.get(i).setText("Group: " + logList.get(i).getExercise().getMuscle() +
                                             " \n Workout: " + logList.get(i).getExercise().getName() +
+                                            " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
                                             " \n Repetitions: " + logList.get(i).getExercise().getNumberOfReps());
                                     dates.get(i).setText(logList.get(i).getDate());
                                 }
@@ -280,12 +305,13 @@ public class EntriesFragment extends Fragment {
                         newEntry.setTextSize(20);
                         newEntry.setText("Group: " + logList.get(index).getExercise().getMuscle() +
                                 " \n Workout: " + logList.get(index).getExercise().getName() +
+                                " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
                                 " \n Repetitions: " + logList.get(index).getExercise().getNumberOfReps());
                         newEntry.setLineSpacing(entries.get(0).getLineSpacingExtra(), entries.get(0).getLineSpacingMultiplier());
 
                         ConstraintLayout.LayoutParams entryLayoutParams = new ConstraintLayout.LayoutParams(
                                 dpToPixel(350),
-                                dpToPixel(100)
+                                dpToPixel(125)
                         );
 
                         entryLayoutParams.startToStart = parent.getId();
@@ -334,8 +360,9 @@ public class EntriesFragment extends Fragment {
                             android.util.Log.d("Tag123", "index is:" + index);
                             for(int j=index; j<logList.size(); j++) {
                                 entries.get(j).setText("Group: " + logList.get(j).getExercise().getMuscle() +
-                                        " \n Workout: " + logList.get(j).getExercise().getName() +
-                                        " \n Repetitions: " + logList.get(j).getExercise().getNumberOfReps());
+                                                       " \n Workout: " + logList.get(j).getExercise().getName() +
+                                                       " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
+                                                       " \n Repetitions: " + logList.get(j).getExercise().getNumberOfReps());
                                 dates.get(j).setText(logList.get(j).getDate());
                             }
 
@@ -368,6 +395,7 @@ public class EntriesFragment extends Fragment {
             entry.setVisibility(View.VISIBLE);
             entry.setText("Group: " + logList.get(0).getExercise().getMuscle() +
                     " \n Workout: " + logList.get(0).getExercise().getName() +
+                    " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
                     " \n Repetitions: " + logList.get(0).getExercise().getNumberOfReps());
             entry.setLines(3);
 
@@ -389,6 +417,7 @@ public class EntriesFragment extends Fragment {
                     for (int i = 0; i < logList.size(); i++) {
                         entries.get(i).setText("Group: " + logList.get(i).getExercise().getMuscle() +
                                 " \n Workout: " + logList.get(i).getExercise().getName() +
+                                " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
                                 " \n Repetitions: " + logList.get(i).getExercise().getNumberOfReps());
                         dates.get(i).setText(logList.get(i).getDate());
                     }
@@ -408,13 +437,15 @@ public class EntriesFragment extends Fragment {
                 newEntry.setId(View.generateViewId());
                 newEntry.setTextSize(20);
                 newEntry.setText("Group: " + logList.get(i).getExercise().getMuscle() +
-                        " \n Workout: " + logList.get(i).getExercise().getName() +
-                        " \n Repetitions: " + logList.get(i).getExercise().getNumberOfReps());
+                                 " \n Workout: " + logList.get(i).getExercise().getName() +
+                                 " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
+                                 " \n Repetitions: " + logList.get(i).getExercise().getNumberOfReps());
+
                 newEntry.setLineSpacing(entries.get(0).getLineSpacingExtra(), entries.get(0).getLineSpacingMultiplier());
 
                 ConstraintLayout.LayoutParams entryLayoutParams = new ConstraintLayout.LayoutParams(
                         dpToPixel(350),
-                        dpToPixel(100)
+                        dpToPixel(125)
                 );
 
                 entryLayoutParams.startToStart = parent.getId();
@@ -464,8 +495,9 @@ public class EntriesFragment extends Fragment {
                     android.util.Log.d("Tag123", "index is:" + finalI);
                     for (int j = finalI; j < logList.size(); j++) {
                         entries.get(j).setText("Group: " + logList.get(j).getExercise().getMuscle() +
-                                " \n Workout: " + logList.get(j).getExercise().getName() +
-                                " \n Repetitions: " + logList.get(j).getExercise().getNumberOfReps());
+                                               " \n Workout: " + logList.get(j).getExercise().getName() +
+                                               " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
+                                               " \n Repetitions: " + logList.get(j).getExercise().getNumberOfReps());
                         dates.get(j).setText(logList.get(j).getDate());
                     }
 
@@ -480,7 +512,7 @@ public class EntriesFragment extends Fragment {
             }
         }
 
-        entriesViewModel.setList(logList);
+        mainViewModel.setList(logList);
         return root;
     }
 

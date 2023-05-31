@@ -2,7 +2,9 @@ package com.example.workoutholicapp.backend.Logger;
 
 import com.example.workoutholicapp.backend.ViewWorkout.Exercise;
 
-public class Log {
+import java.io.Serializable;
+
+public class Log implements Serializable {
     private String date;
     private Exercise exercise;
 
