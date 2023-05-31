@@ -42,6 +42,7 @@ import java.util.concurrent.Future;
 
 import okhttp3.Response;
 
+
 public class EntriesFragment extends Fragment {
     private FragmentEntriesBinding binding;
     private View root;
@@ -264,7 +265,6 @@ public class EntriesFragment extends Fragment {
                                       " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
                                       " \n Repetitions: " + logList.get(0).getExercise().getNumberOfReps());
                         entry.setLines(4);
-
                         Button deleteEntry_button = root.findViewById(R.id.deleteEntry_button);
                         deleteEntry_button.setVisibility(View.VISIBLE);
 
@@ -306,7 +306,7 @@ public class EntriesFragment extends Fragment {
                         newEntry.setText("Group: " + logList.get(index).getExercise().getMuscle() +
                                 " \n Workout: " + logList.get(index).getExercise().getName() +
                                 " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
-                                " \n Repetitions: " + logList.get(index).getExercise().getNumberOfReps());
+                                " \n Repetitions: " + logList.get(index).getExercise().getNumberOfReps() + " "+ logList.size());
                         newEntry.setLineSpacing(entries.get(0).getLineSpacingExtra(), entries.get(0).getLineSpacingMultiplier());
 
                         ConstraintLayout.LayoutParams entryLayoutParams = new ConstraintLayout.LayoutParams(
@@ -362,7 +362,7 @@ public class EntriesFragment extends Fragment {
                                 entries.get(j).setText("Group: " + logList.get(j).getExercise().getMuscle() +
                                                        " \n Workout: " + logList.get(j).getExercise().getName() +
                                                        " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
-                                                       " \n Repetitions: " + logList.get(j).getExercise().getNumberOfReps());
+                                                       " \n Repetitions: " + logList.get(j).getExercise().getNumberOfReps() + logList.size());
                                 dates.get(j).setText(logList.get(j).getDate());
                             }
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.workoutholicapp.backend.Logger.Log;
 import com.example.workoutholicapp.backend.ViewWorkout.Exercise;
+import com.example.workoutholicapp.backend.WorkoutPlans.WorkoutPlan;
 
 import java.util.LinkedList;
 
@@ -20,6 +21,8 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<boolean[]> autos = new MutableLiveData<>(new boolean[3]);
 
     private LinkedList<com.example.workoutholicapp.backend.Logger.Log> logList = new LinkedList<>();
+
+    private LinkedList<com.example.workoutholicapp.backend.WorkoutPlans.WorkoutPlan> plansList = new LinkedList<>();
 
     private int foodPrice = 10;
     private int waterPrice = 5;
@@ -121,5 +124,13 @@ public class MainViewModel extends ViewModel {
 
     public LinkedList<com.example.workoutholicapp.backend.Logger.Log> getList() {
         return (LinkedList<Log>)this.logList.clone();
+    }
+
+    public void setPlans(LinkedList<com.example.workoutholicapp.backend.WorkoutPlans.WorkoutPlan> list) {
+        this.plansList = list;
+    }
+
+    public LinkedList<com.example.workoutholicapp.backend.WorkoutPlans.WorkoutPlan> getPlans() {
+        return (LinkedList<WorkoutPlan>)this.plansList.clone();
     }
 }
