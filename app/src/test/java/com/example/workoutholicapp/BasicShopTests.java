@@ -66,4 +66,19 @@ public class BasicShopTests {
         assertEquals(15, food);
     }
 
+    public void testAutoEnoughMoney() {
+        MainViewModel vm = new MainViewModel();
+        vm.setMoney(150);
+        vm.buyAuto(1);
+        int money = vm.moneyAmount().getValue();
+        assertEquals(50, money);
+    }
+
+    public void testToyEnoughMoney() {
+        MainViewModel vm = new MainViewModel();
+        vm.setMoney(150);
+        vm.buyToyClick(1);
+        int money = vm.moneyAmount().getValue();
+        assertEquals(130, money);
+    }
 }
