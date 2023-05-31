@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import com.example.workoutholicapp.ui.MainViewModel;
+import com.example.workoutholicapp.ui.buddy.BuddyFragment;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,6 +26,7 @@ public class BasicBuddyTests {
     @Test
     public void testFoodEatAfterBuy() {
         MainViewModel vm = new MainViewModel();
+        vm.setMoney(150);
         for (int i = 0; i < 3; i++) {
             vm.shopFoodClick();
         }
@@ -38,6 +40,7 @@ public class BasicBuddyTests {
     @Test
     public void testWaterDrinkAfterBuy() {
         MainViewModel vm = new MainViewModel();
+        vm.setMoney(150);
         for (int i = 0; i < 3; i++) {
             vm.shopWaterClick();
         }
@@ -62,5 +65,23 @@ public class BasicBuddyTests {
         vm.buddyWaterClick();
         int water = vm.waterCount().getValue();
         assertEquals(0, water);
+    }
+
+    @Test
+    public void testZeroHungerLevel() {
+        BuddyFragment buddy = new BuddyFragment();
+        assertEquals(0, buddy.getHungerLevel());
+    }
+
+    @Test
+    public void testZeroThirstLevel() {
+        BuddyFragment buddy = new BuddyFragment();
+        assertEquals(0, buddy.getThirstLevel());
+    }
+
+    @Test
+    public void testZeroHappinessLevel() {
+        BuddyFragment buddy = new BuddyFragment();
+        assertEquals(0, buddy.getHappinessLevel());
     }
 }

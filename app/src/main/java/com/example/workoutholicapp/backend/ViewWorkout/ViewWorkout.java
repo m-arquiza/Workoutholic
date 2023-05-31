@@ -70,7 +70,7 @@ public class ViewWorkout {
     /**
      * Maps a Json string to a list of exercises
      *
-     * @param  input A json string that woul be obtained in the View method
+     * @param  input A json string that would be obtained in the View method
      * @return       A List of exercise objects
      */
     public static List<Exercise> JSONmapper(String input){
