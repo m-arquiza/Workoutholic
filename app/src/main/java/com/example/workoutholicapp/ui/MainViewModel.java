@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class MainViewModel extends ViewModel {
     private MutableLiveData<Integer> foodStorage = new MutableLiveData<>(0);
     private MutableLiveData<Integer> waterStorage = new MutableLiveData<>(0);
-    private MutableLiveData<Integer> totalMoney = new MutableLiveData<>(150);
+    private MutableLiveData<Integer> totalMoney = new MutableLiveData<>(200);
 
 
     private MutableLiveData<boolean[]> toyStorage = new MutableLiveData<>(new boolean[3]);
@@ -25,28 +25,30 @@ public class MainViewModel extends ViewModel {
         h[0][1] = true;
         hats.setValue(h);
     }
+    private int foodPrice = 10;
+    private int waterPrice = 5;
 
     public void shopFoodClick() { // increases inventory and decreases money
         Integer food = foodStorage.getValue();
         Integer money = totalMoney.getValue();
-        if (money >= 20) {
+        if (money >= foodPrice) {
             foodStorage.setValue(food + 1);
-            totalMoney.setValue(money - 20);
+            totalMoney.setValue(money - foodPrice);
         }
     }
     public void buddyFoodClick() { // decreases inventory
         Integer food = foodStorage.getValue();
         if (food != 0) {
-            foodStorage.setValue(food-1);
+            foodStorage.setValue(food - 1);
         }
     }
 
     public void shopWaterClick() { // increases inventory and decreases money
         Integer water = waterStorage.getValue();
         Integer money = totalMoney.getValue();
-        if (money >= 10) {
+        if (money >= waterPrice) {
             waterStorage.setValue(water + 1);
-            totalMoney.setValue(money - 10);
+            totalMoney.setValue(money - waterPrice);
         }
     }
     public void buddyWaterClick() { // decreases inventory
@@ -64,7 +66,11 @@ public class MainViewModel extends ViewModel {
         if (money >= 50 && !toys[index]) {
             toys[index] = true;
             toyStorage.setValue(toys);
-            totalMoney.setValue(money - 50);
+            if (toyNum == 1) {
+                totalMoney.setValue(money - 20);
+            } else {
+                totalMoney.setValue(money - 50);
+            }
             return true;
         }
         return false;
@@ -73,7 +79,7 @@ public class MainViewModel extends ViewModel {
 
     public boolean buyAuto(int autoNum) {
         Integer money = totalMoney.getValue();
-        int index = autoNum-1;
+        int index = autoNum - 1;
         boolean[] auto = autos.getValue();
         if (money >= 100 && !auto[index]) {
             auto[index] = true;
@@ -131,12 +137,24 @@ public class MainViewModel extends ViewModel {
         return totalMoney;
     }
 
+    public void moneyUpdate(int num) {
+        totalMoney.setValue((totalMoney.getValue())+num);
+    }
+
+    public LiveData<boolean[]> autoList() {
+        return autos;
+    }
+
+    public void setMoney(int num) { // mostly for testing purposes
+        totalMoney.setValue(num);
+    }
+
     public LiveData<boolean[]> toys() {
         return toyStorage;
     }
+
 
     public LiveData<boolean[][]> hats() {
         return hats;
     }
 }
-

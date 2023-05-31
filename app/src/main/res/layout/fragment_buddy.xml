@@ -24,6 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageView
         android:id="@+id/shiba"
         android:layout_width="fill_parent"
@@ -54,7 +55,7 @@
         android:translationZ="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    
+
     <View
         android:id="@+id/hunger_bar"
         android:layout_height="15dp"
@@ -144,7 +145,7 @@
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    
+
     <View
         android:id="@+id/thirst_bar"
         android:layout_height="15dp"
@@ -230,7 +231,7 @@
         android:translationZ="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    
+
     <View
         android:id="@+id/happiness_bar"
         android:layout_height="15dp"
@@ -239,6 +240,38 @@
         android:layout_marginStart="27dp"
 
         android:layout_marginTop="100dp"
+
+        android:alpha="0.0"
+
+        android:background="#a536c7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/happiness_bar2"
+        android:layout_height="15dp"
+        android:layout_width="133dp"
+
+        android:layout_marginStart="27dp"
+
+        android:layout_marginTop="100dp"
+
+        android:alpha="0.0"
+
+        android:background="#a536c7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/happiness_bar3"
+        android:layout_height="15dp"
+        android:layout_width="67dp"
+
+        android:layout_marginStart="27dp"
+
+        android:layout_marginTop="100dp"
+
+        android:alpha="0.0"
 
         android:background="#a536c7"
         app:layout_constraintStart_toStartOf="parent"
@@ -427,6 +460,21 @@
         android:src="@drawable/toy_box"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/toy_label"-->
+    <!--        android:layout_width="100dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="-10dp"-->
+
+    <!--        android:gravity="center"-->
+    <!--        android:text="TOYS"-->
+    <!--        android:textSize="30sp"-->
+
+    <!--        app:layout_constraintEnd_toEndOf="@id/toy_box"-->
+    <!--        app:layout_constraintHorizontal_bias="0.462"-->
+    <!--        app:layout_constraintStart_toStartOf="@id/toy_box"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/toy_box" />-->
 
     />
 
