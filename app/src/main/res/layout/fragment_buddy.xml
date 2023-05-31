@@ -478,4 +478,23 @@
 
     />
 
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0.0"
+        android:gravity="center"
+        android:layout_marginBottom="180dp"
+        android:text="Wait 2 hours to play with this toy again!"
+        android:textSize="18sp"
+
+        android:textStyle="bold"
+
+
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="531dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
