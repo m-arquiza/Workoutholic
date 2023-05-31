@@ -78,4 +78,10 @@ public class BasicBuddyTests {
         BuddyFragment buddy = new BuddyFragment();
         assertEquals(0, buddy.getThirstLevel());
     }
+
+    @Test
+    public void testZeroHappinessLevel() {
+        BuddyFragment buddy = new BuddyFragment();
+        assertEquals(0, buddy.getHappinessLevel());
+    }
 }
