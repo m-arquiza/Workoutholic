@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.Arrays;
+
 public class MainViewModel extends ViewModel {
     private MutableLiveData<Integer> foodStorage = new MutableLiveData<>(0);
     private MutableLiveData<Integer> waterStorage = new MutableLiveData<>(0);
@@ -16,6 +18,13 @@ public class MainViewModel extends ViewModel {
 
     private MutableLiveData<boolean[]> autos = new MutableLiveData<>(new boolean[3]);
 
+    private MutableLiveData<boolean[][]> hats = new MutableLiveData<>(new boolean[9][2]);
+
+    public MainViewModel() {
+        boolean[][] h = hats.getValue();
+        h[0][1] = true;
+        hats.setValue(h);
+    }
 
     public void shopFoodClick() { // increases inventory and decreases money
         Integer food = foodStorage.getValue();
@@ -47,6 +56,7 @@ public class MainViewModel extends ViewModel {
         }
     }
 
+
     public boolean buyToyClick(int toyNum) {
         Integer money = totalMoney.getValue();
         int index = toyNum-1;
@@ -59,6 +69,7 @@ public class MainViewModel extends ViewModel {
         }
         return false;
     }
+
 
     public boolean buyAuto(int autoNum) {
         Integer money = totalMoney.getValue();
@@ -73,6 +84,40 @@ public class MainViewModel extends ViewModel {
         return false;
     }
 
+
+    public boolean buyHat(int hatNum) {
+        Integer money = totalMoney.getValue();
+        int index = hatNum;
+        boolean[][] hat = hats.getValue();
+
+        // if hat already bought
+        if(hat[index][0] || index == 0) {
+            Log.d("buyHat","hat alr bought:" + Arrays.deepToString(hats().getValue()));
+            switchHat(index);
+            return true;
+        }
+
+        if (money >= 50) {
+            hat[index][0] = true;
+            hats.setValue(hat);
+            totalMoney.setValue(money - 50);
+            switchHat(index);
+            return true;
+        }
+        return false;
+    }
+
+    private void switchHat(int hatNum) {
+        boolean[][] hat = hats.getValue();
+        for(int i = 0; i < hat.length; i++) {
+            if(hat[i][1]) {
+                hat[i][1] = false;
+            }
+        }
+        hat[hatNum][1] = true;
+        hats.setValue(hat);
+        Log.d("switchHat","switching hat" + Arrays.deepToString(hats().getValue()));
+    }
 
     public LiveData<Integer> foodCount() {
         return foodStorage;
@@ -90,5 +135,8 @@ public class MainViewModel extends ViewModel {
         return toyStorage;
     }
 
+    public LiveData<boolean[][]> hats() {
+        return hats;
+    }
 }
 

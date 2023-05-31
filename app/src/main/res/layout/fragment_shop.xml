@@ -356,8 +356,324 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/text_hats"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="620dp"
+
+                android:text="Hats"
+                android:textAlignment="center"
+                android:textSize="30sp"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="665dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight=".33">
+
+                    <ImageButton
+                        android:id="@+id/hat_no"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="#d2f2fc"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/hat_no" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="price: 0 coins"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/text_hatno"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="hats off!"
+
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight=".33">
+
+                    <ImageButton
+                        android:id="@+id/hat_prop"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="#d2f2fc"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/hat_prop" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="price: 50 coins"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/text_hatprop"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight=".33">
+
+                    <ImageButton
+                        android:id="@+id/hat_frog"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="#d2f2fc"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/hat_frog" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="price: 50 coins"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/text_hatfrog"
+
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:textSize="13sp"/>
+                </LinearLayout>
 
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="820dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight=".33">
+
+                    <ImageButton
+                        android:id="@+id/hat_astro"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="#d2f2fc"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/hat_astro" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="price: 50 coins"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/text_hatastro"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight=".33">
+
+                    <ImageButton
+                        android:id="@+id/hat_beanie"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="#d2f2fc"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/hat_beanie" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="price: 50 coins"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/text_hatbeanie"
+
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight=".33">
+
+                    <ImageButton
+                        android:id="@+id/hat_tiara"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="#d2f2fc"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/hat_tiara" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="price: 50 coins"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/text_hattiara"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="975dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight=".33">
+
+                    <ImageButton
+                        android:id="@+id/hat_rice"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="#d2f2fc"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/hat_rice" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="price: 50 coins"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/text_hatrice"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight=".33">
+
+                    <ImageButton
+                        android:id="@+id/hat_daisy"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="#d2f2fc"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/hat_daisy" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="price: 50 coins"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/text_hatdaisy"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight=".33">
+
+                    <ImageButton
+                        android:id="@+id/hat_top"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+
+                        android:background="#d2f2fc"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/hat_top" />
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="price: 50 coins"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/text_hattop"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:textSize="13sp"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
 
         </FrameLayout>
 

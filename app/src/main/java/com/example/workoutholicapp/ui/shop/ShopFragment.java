@@ -35,6 +35,7 @@ public class ShopFragment extends Fragment {
     private boolean autoWaterOn = false;
     private boolean autoHappyOn = false;
     private boolean[] toyOn = new boolean[3];
+    private boolean[] hatOn = new boolean[9];
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -165,6 +166,113 @@ public class ShopFragment extends Fragment {
                 }
             }
         });
+
+        /* On click, adds hat to inventory if nonbought and enough money.
+        *  Displays hat. */
+        ImageButton none = root.findViewById(R.id.hat_no);
+        ImageButton prop = root.findViewById(R.id.hat_prop);
+        ImageButton frog = root.findViewById(R.id.hat_frog);
+        ImageButton astro = root.findViewById(R.id.hat_astro);
+        ImageButton beanie = root.findViewById(R.id.hat_beanie);
+        ImageButton tiara = root.findViewById(R.id.hat_tiara);
+        ImageButton rice = root.findViewById(R.id.hat_rice);
+        ImageButton daisy = root.findViewById(R.id.hat_daisy);
+        ImageButton top = root.findViewById(R.id.hat_top);
+
+        none.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainViewModel.buyHat(0);
+            }
+        });
+        prop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainViewModel.buyHat(1);
+            }
+        });
+        frog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainViewModel.buyHat(2);
+            }
+        });
+        astro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainViewModel.buyHat(3);
+            }
+        });
+        beanie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainViewModel.buyHat(4);
+            }
+        });
+        tiara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainViewModel.buyHat(5);
+            }
+        });
+        rice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainViewModel.buyHat(6);
+            }
+        });
+        daisy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainViewModel.buyHat(7);
+            }
+        });
+        top.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainViewModel.buyHat(8);
+            }
+        });
+
+        mainViewModel.hats().observe(getViewLifecycleOwner(), value -> {
+            TextView[] texts = {root.findViewById(R.id.text_hatno),
+                                root.findViewById(R.id.text_hatprop),
+                                root.findViewById(R.id.text_hatfrog),
+                                root.findViewById(R.id.text_hatastro),
+                                root.findViewById(R.id.text_hatbeanie),
+                                root.findViewById(R.id.text_hattiara),
+                                root.findViewById(R.id.text_hatrice),
+                                root.findViewById(R.id.text_hatdaisy),
+                                root.findViewById(R.id.text_hattop)};
+            ImageButton[] buttons = {none, prop, frog, astro, beanie, tiara, rice, daisy, top};
+
+            if(!value[0][1]) {
+                (texts[0]).setAlpha(0.0f);
+                (buttons[0]).setEnabled(true);
+                (buttons[0]).setAlpha(1.0f);
+            } else{
+                (texts[0]).setAlpha(1.0f);
+                (buttons[0]).setEnabled(false);
+                (buttons[0]).setAlpha(0.5f);
+            }
+
+            for(int i = 1; i < value.length; i++) {
+                if(!value[i][1]) {
+                    (texts[i]).setText("");
+                    (buttons[i]).setEnabled(true);
+                    (buttons[i]).setAlpha(1.0f);
+                } else{
+                    (texts[i]).setText("hat on!");
+                    (buttons[i]).setEnabled(false);
+                    (buttons[i]).setAlpha(0.5f);
+                }
+            }
+        });
+
+
+
+
+
 
         if (savedInstanceState != null) {
             autoFoodOn = savedInstanceState.getBoolean("autoFoodOn");

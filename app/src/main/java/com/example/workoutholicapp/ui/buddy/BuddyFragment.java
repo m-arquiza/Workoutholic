@@ -187,8 +187,29 @@ public class BuddyFragment extends Fragment {
             }
         });
 
+        mainViewModel.hats().observe(getViewLifecycleOwner(), value -> {
+            int[] images = {R.drawable.shiba,
+                            R.drawable.shiba_prop,
+                            R.drawable.shiba_frog,
+                            R.drawable.shiba_astro,
+                            R.drawable.shiba_beanie,
+                            R.drawable.shiba_tiara,
+                            R.drawable.shiba_rice,
+                            R.drawable.shiba_daisy,
+                            R.drawable.shiba_top};
+            for(int i = 0; i < value.length; i++) {
+                if(value[i][1]) {
+                    ((ImageView) root.findViewById(R.id.shiba)).setImageResource(images[i]);
+                    return;
+                }
+            }
+        });
+
         return root;
     }
+
+
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
