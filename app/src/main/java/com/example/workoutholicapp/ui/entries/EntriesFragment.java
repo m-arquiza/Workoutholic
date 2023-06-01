@@ -276,6 +276,10 @@ public class EntriesFragment extends Fragment {
                             logList.removeFirst();
 
                             if(logList.isEmpty()) {
+                                entries.remove(entries.size()-1);
+                                dates.remove(dates.size()-1);
+                                buttons.remove(buttons.size()-1);
+
                                 root.findViewById(R.id.entryDate).setVisibility(View.GONE);
                                 root.findViewById(R.id.deleteEntry_button).setVisibility(View.GONE);
                                 root.findViewById(R.id.entry).setVisibility(View.GONE);
@@ -411,6 +415,9 @@ public class EntriesFragment extends Fragment {
                 logList.removeFirst();
 
                 if (logList.isEmpty()) {
+                    entries.remove(entries.size()-1);
+                    dates.remove(dates.size()-1);
+                    buttons.remove(buttons.size()-1);
                     root.findViewById(R.id.entryDate).setVisibility(View.GONE);
                     root.findViewById(R.id.deleteEntry_button).setVisibility(View.GONE);
                     root.findViewById(R.id.entry).setVisibility(View.GONE);
