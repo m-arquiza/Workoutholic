@@ -80,13 +80,13 @@ public class PlansFragment extends Fragment {
         Button entryButton = root.findViewById(R.id.plan_button);
         entryButton.setOnClickListener(v -> {
             currentPlan.setList(logList);
-            currentPlan.setName("Workout Plan!");
+            currentPlan.setName("Workout Plan ");
             plansList.add(currentPlan);
 
             if(plansList.size() == 1) {
                 TextView entryDate = root.findViewById(R.id.entryDate);
                 entryDate.setVisibility(View.VISIBLE);
-                entryDate.setText(plansList.get(0).getName());
+                entryDate.setText(plansList.get(0).getName() + 1);
 
                 TextView entry = root.findViewById(R.id.plan);
                 entry.setVisibility(View.VISIBLE);
@@ -102,13 +102,17 @@ public class PlansFragment extends Fragment {
                     plansList.removeFirst();
 
                     if(plansList.isEmpty()) {
+                        entries.remove(entries.size()-1);
+                        dates.remove(dates.size()-1);
+                        buttons.remove(buttons.size()-1);
+
                         root.findViewById(R.id.entryDate).setVisibility(View.GONE);
                         root.findViewById(R.id.deletePlan_button).setVisibility(View.GONE);
                         root.findViewById(R.id.plan).setVisibility(View.GONE);
                     } else {
                         for(int i=0; i<plansList.size(); i++) {
                             entries.get(i).setText(plansList.get(i).getNameList());
-                            dates.get(i).setText(plansList.get(i).getName());
+                            dates.get(i).setText("Workout Plan " + (i+1));
                         }
 
                         parent.removeView(entries.get(entries.size()-1));
@@ -137,13 +141,14 @@ public class PlansFragment extends Fragment {
                 entryLayoutParams.startToStart = parent.getId();
                 entryLayoutParams.endToEnd = parent.getId();
                 entryLayoutParams.topToBottom = entries.get(index - 1).getId();
+                android.util.Log.d("Testing", "entries.get(index-1).getId() is: " + entries.get(index - 1).getId());
                 entryLayoutParams.topMargin = dpToPixel(100);
                 newEntry.setLayoutParams(entryLayoutParams);
                 parent.addView(newEntry);
 
                 TextView newEntryDate = setTextView(dates.get(0));
                 newEntryDate.setTextSize(20);
-                newEntryDate.setText(plansList.get(index).getName());
+                newEntryDate.setText("Workout Plan " + (index+1));
 
                 ConstraintLayout.LayoutParams dateLayoutParams = new ConstraintLayout.LayoutParams(
                         dpToPixel(175),
@@ -180,7 +185,7 @@ public class PlansFragment extends Fragment {
                     android.util.Log.d("Tag123", "index is:" + index);
                     for(int j=index; j<plansList.size(); j++) {
                         entries.get(j).setText(plansList.get(j).getNameList());
-                        dates.get(j).setText(plansList.get(j).getName());
+                        dates.get(j).setText(plansList.get(j).getName() + (j+1));
                     }
 
                     parent.removeView(entries.get(entries.size()-1));
@@ -199,10 +204,9 @@ public class PlansFragment extends Fragment {
             root.findViewById(R.id.deletePlan_button).setVisibility(View.GONE);
             root.findViewById(R.id.plan).setVisibility(View.GONE);
         } else {
-
             TextView entryDate = root.findViewById(R.id.entryDate);
             entryDate.setVisibility(View.VISIBLE);
-            entryDate.setText("Workout Plan!");
+            entryDate.setText("Workout Plan 1");
 
             TextView entry = root.findViewById(R.id.plan);
             entry.setVisibility(View.VISIBLE);
@@ -219,13 +223,17 @@ public class PlansFragment extends Fragment {
                 plansList.removeFirst();
 
                 if (plansList.isEmpty()) {
+                    entries.remove(entries.size()-1);
+                    dates.remove(dates.size()-1);
+                    buttons.remove(buttons.size()-1);
+
                     root.findViewById(R.id.entryDate).setVisibility(View.GONE);
                     root.findViewById(R.id.deletePlan_button).setVisibility(View.GONE);
                     root.findViewById(R.id.plan).setVisibility(View.GONE);
                 } else {
                     for (int i = 0; i < plansList.size(); i++) {
                         entries.get(i).setText(plansList.get(i).getNameList());
-                        //dates.get(i).setText(logList.get(i).getDate());
+                        dates.get(i).setText("Workout Plan " + (i+1));
                     }
 
                     parent.removeView(entries.get(entries.size() - 1));
@@ -260,7 +268,7 @@ public class PlansFragment extends Fragment {
 
                 TextView newEntryDate = setTextView(dates.get(0));
                 newEntryDate.setTextSize(20);
-                newEntryDate.setText("Workout Plan!");
+                newEntryDate.setText("Workout Plan " + (i+1));
 
                 ConstraintLayout.LayoutParams dateLayoutParams = new ConstraintLayout.LayoutParams(
                         dpToPixel(175),
@@ -296,9 +304,9 @@ public class PlansFragment extends Fragment {
                 newDeletePlan_button.setOnClickListener(v3 -> {
                     plansList.remove(finalI);
                     android.util.Log.d("Tag123", "index is:" + finalI);
-                    for (int j = finalI; j < logList.size(); j++) {
+                    for (int j = finalI; j < plansList.size(); j++) {
                         entries.get(j).setText(plansList.get(j).getNameList());
-                        //dates.get(j).setText(logList.get(j).getDate());
+                        dates.get(j).setText("Workout Plan " + (j+1));
                     }
 
                     parent.removeView(entries.get(entries.size() - 1));
