@@ -206,7 +206,6 @@ public class MainViewModel extends ViewModel {
     public LinkedList<com.example.workoutholicapp.backend.Logger.Log> getList() {
         return (LinkedList<Log>)this.logList.clone();
     }
-}
 
     /*
         Getter function for hats.
