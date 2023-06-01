@@ -1,12 +1,10 @@
 package com.example.workoutholicapp.ui;
 
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.Arrays;
 
 public class MainViewModel extends ViewModel {
     private MutableLiveData<Integer> foodStorage = new MutableLiveData<>(0);
@@ -98,7 +96,6 @@ public class MainViewModel extends ViewModel {
 
         // if hat already bought
         if(hat[index][0] || index == 0) {
-            Log.d("buyHat","hat alr bought:" + Arrays.deepToString(hats().getValue()));
             switchHat(index);
             return true;
         }
@@ -122,7 +119,6 @@ public class MainViewModel extends ViewModel {
         }
         hat[hatNum][1] = true;
         hats.setValue(hat);
-        Log.d("switchHat","switching hat" + Arrays.deepToString(hats().getValue()));
     }
 
     public LiveData<Integer> foodCount() {
