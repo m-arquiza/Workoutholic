@@ -5,4 +5,8 @@
     <string name="title_entries">Entries</string>
     <string name="WorkoutEntry">New Workout Entry</string>
     <string name="EntryCreate">Create New Entry!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_statistics">Statistics</string>
+    <string name="no_stats_warning">Please Log Workouts To See Statistics!</string>
 </resources>

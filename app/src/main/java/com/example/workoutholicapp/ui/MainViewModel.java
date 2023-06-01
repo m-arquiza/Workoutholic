@@ -1,11 +1,11 @@
 package com.example.workoutholicapp.ui;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
+import com.example.workoutholicapp.backend.Logger.Log;
+import com.example.workoutholicapp.backend.ViewWorkout.Exercise;
+import java.util.LinkedList;
 import java.util.Arrays;
 
 /*
@@ -20,11 +20,14 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<boolean[]> autos = new MutableLiveData<>(new boolean[3]);
     private MutableLiveData<boolean[][]> hats = new MutableLiveData<>(new boolean[9][2]);
 
+    private LinkedList<com.example.workoutholicapp.backend.Logger.Log> logList = new LinkedList<>();
+
     public MainViewModel() {
         boolean[][] h = hats.getValue();
         h[0][1] = true;
         hats.setValue(h);
     }
+
     private int foodPrice = 10;
     private int waterPrice = 5;
 
@@ -194,6 +197,14 @@ public class MainViewModel extends ViewModel {
     */
     public LiveData<boolean[]> toys() {
         return toyStorage;
+    }
+
+    public void setList(LinkedList<com.example.workoutholicapp.backend.Logger.Log> list) {
+        this.logList = list;
+    }
+
+    public LinkedList<com.example.workoutholicapp.backend.Logger.Log> getList() {
+        return (LinkedList<Log>)this.logList.clone();
     }
 
     /*
