@@ -23,6 +23,10 @@ import com.example.workoutholicapp.ui.MainViewModel;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+/*
+    Class to represent functions within the buddy page of the app.
+ */
 public class BuddyFragment extends Fragment {
 
     private FragmentBuddyBinding binding;
@@ -283,6 +287,10 @@ public class BuddyFragment extends Fragment {
             }
         });
 
+        /*
+            Toy display client interactions
+         */
+
         // updates display in dog inventory
         mainViewModel.toys().observe(getViewLifecycleOwner(), value -> {
             for(int i = 0; i < value.length; i++) {
@@ -306,7 +314,8 @@ public class BuddyFragment extends Fragment {
             }
         });
 
-        // dog "plays with" ball if ball is currently selected
+
+        // dog "plays with" ball if ball is available
         ImageButton ball = root.findViewById(R.id.dog_toy1);
         TextView warning = root.findViewById(R.id.dialog_title);
         ball.setOnClickListener(new View.OnClickListener() {
@@ -367,6 +376,7 @@ public class BuddyFragment extends Fragment {
             }
         });
 
+        // dog "plays with" bone if bone is available
 
         ImageButton bone = root.findViewById(R.id.dog_toy2);
         bone.setOnClickListener(new View.OnClickListener() {
@@ -428,6 +438,7 @@ public class BuddyFragment extends Fragment {
             }
         });
 
+        // dog "plays with" stick if stick is available
         ImageButton stick = root.findViewById(R.id.dog_toy3);
         stick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -487,8 +498,33 @@ public class BuddyFragment extends Fragment {
             }
         });
 
+
+        /*
+            Hat display functions
+         */
+
+        // displays selected hat
+        mainViewModel.hats().observe(getViewLifecycleOwner(), value -> {
+            int[] images = {R.drawable.shiba,
+                            R.drawable.shiba_prop,
+                            R.drawable.shiba_frog,
+                            R.drawable.shiba_astro,
+                            R.drawable.shiba_beanie,
+                            R.drawable.shiba_tiara,
+                            R.drawable.shiba_rice,
+                            R.drawable.shiba_daisy,
+                            R.drawable.shiba_top};
+            for(int i = 0; i < value.length; i++) {
+                if(value[i][1]) {
+                    ((ImageView) root.findViewById(R.id.shiba)).setImageResource(images[i]);
+                    return;
+                }
+            }
+        });
+
         return root;
     }
+
 
     public void changeHappiness() {
         View happy = getView().findViewById(R.id.happiness_bar);
