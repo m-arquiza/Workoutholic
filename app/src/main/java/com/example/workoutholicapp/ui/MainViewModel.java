@@ -11,7 +11,6 @@ import com.example.workoutholicapp.backend.WorkoutPlans.WorkoutPlan;
 import java.util.LinkedList;
 
 
-import java.util.Arrays;
 
 /*
     Class to hold shared variables across fragments and functions that interact with them.
@@ -26,11 +25,9 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<boolean[]> autos = new MutableLiveData<>(new boolean[3]);
     private MutableLiveData<boolean[][]> hats = new MutableLiveData<>(new boolean[9][2]);
 
-
     private LinkedList<com.example.workoutholicapp.backend.Logger.Log> logList = new LinkedList<>();
 
     private LinkedList<com.example.workoutholicapp.backend.WorkoutPlans.WorkoutPlan> plansList = new LinkedList<>();
-
 
     public MainViewModel() {
         boolean[][] h = hats.getValue();
@@ -209,7 +206,6 @@ public class MainViewModel extends ViewModel {
         return toyStorage;
     }
 
-
     public void setList(LinkedList<com.example.workoutholicapp.backend.Logger.Log> list) {
         this.logList = list;
     }
@@ -217,6 +213,7 @@ public class MainViewModel extends ViewModel {
     public LinkedList<com.example.workoutholicapp.backend.Logger.Log> getList() {
         return (LinkedList<Log>)this.logList.clone();
     }
+
 
     public void setPlans(LinkedList<com.example.workoutholicapp.backend.WorkoutPlans.WorkoutPlan> list) {
         this.plansList = list;
