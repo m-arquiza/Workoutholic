@@ -23,6 +23,10 @@ import com.example.workoutholicapp.ui.MainViewModel;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+/*
+    Class to represent functions within the buddy page of the app.
+ */
 public class BuddyFragment extends Fragment {
 
     private FragmentBuddyBinding binding;
@@ -39,6 +43,7 @@ public class BuddyFragment extends Fragment {
     private final int intervalInMillis = 24 * 60 * 60 * 1000; // 1 day in milliseconds
     //private final int intervalInMillis = 5000; // for testing/demo purposes
     private boolean[] isTime;
+    private long[] timeLeftInMillis = {0, 0, 0};
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -192,7 +197,7 @@ public class BuddyFragment extends Fragment {
         foodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // changes hunger level based on how much water dog is fed
+                // changes hunger level based on how much food dog is fed
                 View hunger = getView().findViewById(R.id.hunger_bar);
                 View hunger2 = getView().findViewById(R.id.hunger_bar2);
                 View hunger3 = getView().findViewById(R.id.hunger_bar3);
@@ -282,6 +287,10 @@ public class BuddyFragment extends Fragment {
             }
         });
 
+        /*
+            Toy display client interactions
+         */
+
         // updates display in dog inventory
         mainViewModel.toys().observe(getViewLifecycleOwner(), value -> {
             for(int i = 0; i < value.length; i++) {
@@ -306,11 +315,9 @@ public class BuddyFragment extends Fragment {
         });
 
 
-
-        // dog "plays with" ball if ball is currently selected
+        // dog "plays with" ball if ball is available
         ImageButton ball = root.findViewById(R.id.dog_toy1);
         TextView warning = root.findViewById(R.id.dialog_title);
-        final long[] timeLeftInMillis = {0, 0, 0};
         ball.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -340,24 +347,28 @@ public class BuddyFragment extends Fragment {
                         };
                         timer.start();
                     } else if (toy.getAlpha() == 0.0f) {
-                        int seconds = (int) ((timeLeftInMillis[0] / 1000));
-                        String message = "";
-                        if (seconds > 3600) {
-                            message = "Wait " +  seconds / 3600 + "h " +  (seconds % 3600) / 60 + "m to play with this toy again!";
-                        } else if (seconds > 60) {
-                            message = "Wait " +  seconds / 60 + "m " + seconds % 60 +  "s to play with this toy again!";
+                        if (warning.getAlpha() == 1.0f) {
+                            warning.setAlpha(0.0f);
                         } else {
-                            message = "Wait " +  seconds + "s to play with this toy again!";
-                        }
-                        warning.setText(message);
-                        warning.setAlpha(1.0f);
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                warning.setAlpha(0.0f);
+                            int seconds = (int) ((timeLeftInMillis[0] / 1000));
+                            String message = "";
+                            if (seconds > 3600) {
+                                message = "Wait " + seconds / 3600 + "h " + (seconds % 3600) / 60 + "m to play with this toy again!";
+                            } else if (seconds > 60) {
+                                message = "Wait " + seconds / 60 + "m " + seconds % 60 + "s to play with this toy again!";
+                            } else {
+                                message = "Wait " + seconds + "s to play with this toy again!";
                             }
-                        }, 5 * 1000); // 5 seconds in milliseconds
+                            warning.setText(message);
+                            warning.setAlpha(1.0f);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    warning.setAlpha(0.0f);
+                                }
+                            }, 5 * 1000); // 5 seconds in milliseconds
+                        }
                     } else {
                         toy.setAlpha(0.0f);
                     }
@@ -365,6 +376,7 @@ public class BuddyFragment extends Fragment {
             }
         });
 
+        // dog "plays with" bone if bone is available
 
         ImageButton bone = root.findViewById(R.id.dog_toy2);
         bone.setOnClickListener(new View.OnClickListener() {
@@ -382,7 +394,7 @@ public class BuddyFragment extends Fragment {
                         changeHappiness();
                         warning.setAlpha(0.0f);
                         isTime[1] = false;
-                        CountDownTimer timer = new CountDownTimer(2 * 60 * 60 * 1000, 1000) {
+                        CountDownTimer timer2 = new CountDownTimer(2 * 60 * 60 * 1000, 1000) {
                             @Override
                             public void onTick(long millisUntilFinished) {
                                 timeLeftInMillis[1] = millisUntilFinished;
@@ -394,26 +406,31 @@ public class BuddyFragment extends Fragment {
                                 isTime[1] = true;
                             }
                         };
-                        timer.start();
+                        timer2.start();
                     } else if (toy.getAlpha() == 0.0f) {
-                        int seconds = (int) ((timeLeftInMillis[1] / 1000));
-                        String message = "";
-                        if (seconds > 3600) {
-                            message = "Wait " +  seconds / 3600 + "h " +  (seconds % 3600) / 60 + "m to play with this toy again!";
-                        } else if (seconds > 60) {
-                            message = "Wait " +  seconds / 60 + "m " + seconds % 60 +  "s to play with this toy again!";
+                        if (warning.getAlpha() == 1.0f) {
+                            warning.setAlpha(0.0f);
                         } else {
-                            message = "Wait " + seconds + "s to play with this toy again!";
-                        }
-                        warning.setText(message);
-                        warning.setAlpha(1.0f);
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                warning.setAlpha(0.0f);
+                            // shows error message if 2 hour limit not up
+                            int seconds = (int) ((timeLeftInMillis[1] / 1000));
+                            String message = "";
+                            if (seconds > 3600) {
+                                message = "Wait " + seconds / 3600 + "h " + (seconds % 3600) / 60 + "m to play with this toy again!";
+                            } else if (seconds > 60) {
+                                message = "Wait " + seconds / 60 + "m " + seconds % 60 + "s to play with this toy again!";
+                            } else {
+                                message = "Wait " + seconds + "s to play with this toy again!";
                             }
-                        }, 5 * 1000); // 5 seconds in milliseconds
+                            warning.setText(message);
+                            warning.setAlpha(1.0f);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    warning.setAlpha(0.0f);
+                                }
+                            }, 5 * 1000); // 5 seconds in milliseconds
+                        }
                     } else {
                         toy.setAlpha(0.0f);
                     }
@@ -421,6 +438,7 @@ public class BuddyFragment extends Fragment {
             }
         });
 
+        // dog "plays with" stick if stick is available
         ImageButton stick = root.findViewById(R.id.dog_toy3);
         stick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -437,7 +455,7 @@ public class BuddyFragment extends Fragment {
                         changeHappiness();
                         warning.setAlpha(0.0f);
                         isTime[2] = false;
-                        CountDownTimer timer = new CountDownTimer(2 * 60 * 60 * 1000, 1000) {
+                        CountDownTimer timer3 = new CountDownTimer(2 * 60 * 60 * 1000, 1000) {
                             @Override
                             public void onTick(long millisUntilFinished) {
                                 timeLeftInMillis[2] = millisUntilFinished;
@@ -449,26 +467,30 @@ public class BuddyFragment extends Fragment {
                                 isTime[2] = true;
                             }
                         };
-                        timer.start();
+                        timer3.start();
                     } else if (toy.getAlpha() == 0.0f) {
-                        int seconds = (int) ((timeLeftInMillis[2] / 1000));
-                        String message = "";
-                        if (seconds > 3600) {
-                            message = "Wait " +  seconds / 3600 + "h " +  (seconds % 3600) / 60 + "m to play with this toy again!";
-                        } else if (seconds > 60) {
-                            message = "Wait " +  seconds / 60 + "m " + seconds % 60 +  "s to play with this toy again!";
+                        if (warning.getAlpha() == 1.0f) {
+                            warning.setAlpha(0.0f);
                         } else {
-                            message = "Wait " + seconds + "s to play with this toy again!";
-                        }
-                        warning.setText(message);
-                        warning.setAlpha(1.0f);
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                warning.setAlpha(0.0f);
+                            int seconds = (int) ((timeLeftInMillis[2] / 1000));
+                            String message = "";
+                            if (seconds > 3600) {
+                                message = "Wait " + seconds / 3600 + "h " + (seconds % 3600) / 60 + "m to play with this toy again!";
+                            } else if (seconds > 60) {
+                                message = "Wait " + seconds / 60 + "m " + seconds % 60 + "s to play with this toy again!";
+                            } else {
+                                message = "Wait " + seconds + "s to play with this toy again!";
                             }
-                        }, 5 * 1000); // 5 seconds in milliseconds
+                            warning.setText(message);
+                            warning.setAlpha(1.0f);
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    warning.setAlpha(0.0f);
+                                }
+                            }, 5 * 1000); // 5 seconds in milliseconds
+                        }
                     } else {
                         toy.setAlpha(0.0f);
                     }
@@ -476,6 +498,12 @@ public class BuddyFragment extends Fragment {
             }
         });
 
+
+        /*
+            Hat display functions
+         */
+
+        // displays selected hat
         mainViewModel.hats().observe(getViewLifecycleOwner(), value -> {
             int[] images = {R.drawable.shiba,
                             R.drawable.shiba_prop,
@@ -518,7 +546,7 @@ public class BuddyFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        // changes hunger level bar based on hunger value
+        // sets hunger level bar based on previous hunger value
         super.onViewCreated(view, savedInstanceState);
         View hunger = getView().findViewById(R.id.hunger_bar);
         View hunger2 = getView().findViewById(R.id.hunger_bar2);
@@ -534,7 +562,7 @@ public class BuddyFragment extends Fragment {
             hunger.setAlpha(1.0f);
         }
 
-        // changes thirst level bar based on thirst value
+        // sets thirst level bar based on previous thirst value
         View thirst = getView().findViewById(R.id.thirst_bar);
         View thirst2 = getView().findViewById(R.id.thirst_bar2);
         View thirst3 = getView().findViewById(R.id.thirst_bar3);
@@ -549,7 +577,7 @@ public class BuddyFragment extends Fragment {
             thirst.setAlpha(1.0f);
         }
 
-        // changes happiness level bar based on happiness value
+        // sets happiness level bar based on previous happiness value
         View happy = getView().findViewById(R.id.happiness_bar);
         View happy2 = getView().findViewById(R.id.happiness_bar2);
         View happy3 = getView().findViewById(R.id.happiness_bar3);
@@ -567,6 +595,13 @@ public class BuddyFragment extends Fragment {
         super.onDestroyView();
         timer.cancel();
         binding = null;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // saves the amount of time until toy limits are up
+        super.onSaveInstanceState(outState);
+        outState.putLongArray("times", timeLeftInMillis);
     }
 
     public int getHungerLevel() { return hungerLevel; }
