@@ -1,8 +1,10 @@
 package com.example.workoutholicapp.ui;
 
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
 
 import com.example.workoutholicapp.backend.Logger.Log;
 import com.example.workoutholicapp.backend.ViewWorkout.Exercise;
@@ -15,7 +17,6 @@ import java.util.LinkedList;
 /*
     Class to hold shared variables across fragments and functions that interact with them.
  */
-
 public class MainViewModel extends ViewModel {
     // Storage variables: hold signifiers for "obtaining" certain pieces of data
     private MutableLiveData<Integer> foodStorage = new MutableLiveData<>(0);

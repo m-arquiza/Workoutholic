@@ -12,8 +12,8 @@ public class BasicShopTests {
 
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
-    @Test
 
+    @Test
     public void testNoFoodWater() {
         MainViewModel vm = new MainViewModel();
         int food = vm.foodCount().getValue();
@@ -30,7 +30,9 @@ public class BasicShopTests {
             vm.shopFoodClick();
         }
         int food = vm.foodCount().getValue();
+        int money = vm.moneyAmount().getValue();
         assertEquals(3, food);
+        assertEquals(120, money);
     }
 
     @Test
@@ -41,7 +43,9 @@ public class BasicShopTests {
             vm.shopWaterClick();
         }
         int water = vm.waterCount().getValue();
+        int money = vm.moneyAmount().getValue();
         assertEquals(7, water);
+        assertEquals(115, money);
     }
 
     @Test
@@ -85,11 +89,60 @@ public class BasicShopTests {
     }
 
     @Test
-    public void testToy2EnoughMoney() {
+    public void testAutoNotEnoughMoney() {
         MainViewModel vm = new MainViewModel();
-        vm.setMoney(20);
-        vm.buyToyClick(1);
+        vm.setMoney(80);
+        vm.buyAuto(3);
         int money = vm.moneyAmount().getValue();
-        assertEquals(0, money);
+        assertEquals(80, money);
+    }
+
+    @Test
+    public void testToyNotEnoughMoney() {
+        MainViewModel vm = new MainViewModel();
+        vm.setMoney(30);
+        vm.buyToyClick(3);
+        int money = vm.moneyAmount().getValue();
+        assertEquals(30, money);
+    }
+
+    @Test
+    public void testHatBuy() {
+        MainViewModel vm = new MainViewModel();
+        vm.setMoney(150);
+        vm.buyHat(3);
+        int money = vm.moneyAmount().getValue();
+        assertEquals(100, money);
+        boolean[] hat = (vm.hats().getValue())[3];
+        assertEquals(true, hat[0]);
+        assertEquals(true, hat[1]);
+    }
+
+    @Test
+    public void testHatSwitch() {
+        MainViewModel vm = new MainViewModel();
+        vm.setMoney(150);
+        vm.buyHat(3);
+        boolean[] hat1 = (vm.hats().getValue())[3];
+        assertEquals(true, hat1[0]);
+        assertEquals(true, hat1[1]);
+        vm.buyHat(7);
+        hat1 = (vm.hats().getValue())[3];
+        assertEquals(true, hat1[0]);
+        assertEquals(false, hat1[1]);
+
+    }
+
+    @Test
+    public void testRemoveHat() {
+        MainViewModel vm = new MainViewModel();
+        vm.setMoney(150);
+        vm.buyHat(3);
+        boolean[] hat1 = (vm.hats().getValue())[3];
+        assertEquals(true, hat1[0]);
+        assertEquals(true, hat1[1]);
+        vm.buyHat(0);
+        int money = vm.moneyAmount().getValue();
+        assertEquals(100, money);
     }
 }
