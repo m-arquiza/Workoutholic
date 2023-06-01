@@ -283,7 +283,7 @@ public class EntriesFragment extends Fragment {
                                 for(int i=0; i<logList.size(); i++) {
                                     entries.get(i).setText("Group: " + logList.get(i).getExercise().getMuscle() +
                                             " \n Workout: " + logList.get(i).getExercise().getName() +
-                                            " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
+                                            " \n Weights: " + logList.get(i).getExercise().getWeight() + " lbs" +
                                             " \n Repetitions: " + logList.get(i).getExercise().getNumberOfReps());
                                     dates.get(i).setText(logList.get(i).getDate());
                                 }
@@ -305,7 +305,7 @@ public class EntriesFragment extends Fragment {
                         newEntry.setTextSize(20);
                         newEntry.setText("Group: " + logList.get(index).getExercise().getMuscle() +
                                 " \n Workout: " + logList.get(index).getExercise().getName() +
-                                " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
+                                " \n Weights: " + logList.get(index).getExercise().getWeight() + " lbs" +
                                 " \n Repetitions: " + logList.get(index).getExercise().getNumberOfReps() + " "+ logList.size());
                         newEntry.setLineSpacing(entries.get(0).getLineSpacingExtra(), entries.get(0).getLineSpacingMultiplier());
 

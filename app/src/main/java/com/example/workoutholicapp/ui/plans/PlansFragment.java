@@ -79,11 +79,139 @@ public class PlansFragment extends Fragment {
 
         Button entryButton = root.findViewById(R.id.plan_button);
         entryButton.setOnClickListener(v -> {
-            if(logList.size()>0) {
-                currentPlan.setList(logList);
-                currentPlan.setName("Workout plan");
-                plansList.add(currentPlan);
+            currentPlan.setList(logList);
+            currentPlan.setName("Workout plan");
+            plansList.add(currentPlan);
+
+
+
+            if(plansList.size() == 1) {
+                TextView entryDate = root.findViewById(R.id.entryDate);
+                entryDate.setVisibility(View.VISIBLE);
+                entryDate.setText(plansList.get(0).getName());
+
+                TextView entry = root.findViewById(R.id.plan);
+                entry.setVisibility(View.VISIBLE);
+                entry.setText(plansList.get(0).getNameList());
+                entry.setLines(4);
+                Button deletePlan_button = root.findViewById(R.id.deletePlan_button);
+                deletePlan_button.setVisibility(View.VISIBLE);
+
+                entries.add(entry);
+                dates.add(entryDate);
+                buttons.add(deletePlan_button);
+
+                deletePlan_button.setOnClickListener(v1 -> {
+                    plansList.removeFirst();
+
+                    if(plansList.isEmpty()) {
+                        root.findViewById(R.id.entryDate).setVisibility(View.GONE);
+                        root.findViewById(R.id.deletePlan_button).setVisibility(View.GONE);
+                        root.findViewById(R.id.plan).setVisibility(View.GONE);
+                    } else {
+                        for(int i=0; i<plansList.size(); i++) {
+                            entries.get(i).setText(plansList.get(i).getNameList());
+                            dates.get(i).setText(plansList.get(i).getName());
+                        }
+
+                        parent.removeView(entries.get(entries.size()-1));
+                        parent.removeView(dates.get(dates.size()-1));
+                        parent.removeView(buttons.get(buttons.size()-1));
+
+                        entries.remove(entries.size()-1);
+                        dates.remove(dates.size()-1);
+                        buttons.remove(buttons.size()-1);
+                    }
+                });
+            } else {
+                int index = plansList.size()-1;
+
+                TextView newEntry = setTextView(entries.get(0));
+                newEntry.setId(View.generateViewId());
+                newEntry.setTextSize(20);
+                newEntry.setText(plansList.get(index).getNameList());
+                newEntry.setLineSpacing(entries.get(0).getLineSpacingExtra(), entries.get(0).getLineSpacingMultiplier());
+
+                ConstraintLayout.LayoutParams entryLayoutParams = new ConstraintLayout.LayoutParams(
+                        dpToPixel(350),
+                        dpToPixel(125)
+                );
+
+                entryLayoutParams.startToStart = parent.getId();
+                entryLayoutParams.endToEnd = parent.getId();
+                entryLayoutParams.topToBottom = entries.get(index - 1).getId();
+                entryLayoutParams.topMargin = dpToPixel(100);
+                newEntry.setLayoutParams(entryLayoutParams);
+                parent.addView(newEntry);
+
+                TextView newEntryDate = setTextView(dates.get(0));
+                newEntryDate.setTextSize(20);
+                newEntryDate.setText(plansList.get(index).getName());
+
+                ConstraintLayout.LayoutParams dateLayoutParams = new ConstraintLayout.LayoutParams(
+                        dpToPixel(150),
+                        dpToPixel(50)
+                );
+
+                dateLayoutParams.bottomToTop = newEntry.getId();
+                dateLayoutParams.startToStart = newEntry.getId();
+                dateLayoutParams.bottomMargin = 25;
+                newEntryDate.setLayoutParams(dateLayoutParams);
+                parent.addView(newEntryDate);
+
+                Button newDeleteEntry_button = setButton(buttons.get(0));
+                newDeleteEntry_button.setTextSize(25);
+                newDeleteEntry_button.setTextColor(Color.WHITE);
+
+                ConstraintLayout.LayoutParams buttonLayoutParams = new ConstraintLayout.LayoutParams(
+                        dpToPixel(50),
+                        dpToPixel(50)
+                );
+
+                buttonLayoutParams.bottomToTop = newEntry.getId();
+                buttonLayoutParams.endToEnd = newEntry.getId();
+                buttonLayoutParams.bottomMargin = 25;
+                newDeleteEntry_button.setLayoutParams(buttonLayoutParams);
+                parent.addView(newDeleteEntry_button);
+
+                entries.add(newEntry);
+                dates.add(newEntryDate);
+                buttons.add(newDeleteEntry_button);
+
+                newDeleteEntry_button.setOnClickListener(v3 -> {
+                    logList.remove(index);
+                    android.util.Log.d("Tag123", "index is:" + index);
+                    for(int j=index; j<plansList.size(); j++) {
+                        entries.get(j).setText(plansList.get(j).getNameList());
+                        dates.get(j).setText(plansList.get(j).getName());
+                    }
+
+                    parent.removeView(entries.get(entries.size()-1));
+                    parent.removeView(dates.get(dates.size()-1));
+                    parent.removeView(buttons.get(buttons.size()-1));
+
+                    entries.remove(entries.size()-1);
+                    dates.remove(dates.size()-1);
+                    buttons.remove(buttons.size()-1);
+                });
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         });
 
         if(plansList.isEmpty()) {
