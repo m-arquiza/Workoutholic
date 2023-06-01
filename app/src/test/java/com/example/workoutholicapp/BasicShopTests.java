@@ -89,6 +89,15 @@ public class BasicShopTests {
     }
 
     @Test
+    public void testToyJustEnoughMoney() {
+        MainViewModel vm = new MainViewModel();
+        vm.setMoney(20);
+        vm.buyToyClick(1);
+        int money = vm.moneyAmount().getValue();
+        assertEquals(20, money);
+    }
+
+    @Test
     public void testAutoNotEnoughMoney() {
         MainViewModel vm = new MainViewModel();
         vm.setMoney(80);
