@@ -20,6 +20,7 @@
         android:layout_marginStart='30dp'
         android:layout_marginBottom="316dp"
         android:text="@string/EntryCreate"
+        android:textStyle='bold'
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,6 +31,7 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
 
+        android:textStyle='bold'
         android:textSize="20sp"
         android:textColor="@color/white"
         android:gravity="center"
@@ -61,6 +63,7 @@
         android:layout_width="350dp"
         android:layout_height="125dp"
 
+        android:textStyle='bold'
         android:background="#009e60"
         android:gravity="center"
         android:lineSpacingExtra="5dp"
