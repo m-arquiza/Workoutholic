@@ -94,6 +94,21 @@ public class PlansFragment extends Fragment {
                 Button deletePlan_button = root.findViewById(R.id.deletePlan_button);
                 deletePlan_button.setVisibility(View.VISIBLE);
 
+                ConstraintLayout.LayoutParams entryLayoutParams = new ConstraintLayout.LayoutParams(
+                        dpToPixel(350),
+                        dpToPixel(125)
+                );
+
+                for(int i=0; i<(plansList.get(0).getListSize() - 4); i++) {
+                    entryLayoutParams.height += dpToPixel(25);
+                }
+
+                entryLayoutParams.startToStart = parent.getId();
+                entryLayoutParams.endToEnd = parent.getId();
+                entryLayoutParams.topToBottom = R.id.plan_button;
+                entryLayoutParams.topMargin = dpToPixel(100);
+                entry.setLayoutParams(entryLayoutParams);
+
                 entries.add(entry);
                 dates.add(entryDate);
                 buttons.add(deletePlan_button);
@@ -138,10 +153,13 @@ public class PlansFragment extends Fragment {
                         dpToPixel(125)
                 );
 
+                for(int i=0; i<(plansList.get(index).getListSize() - 4); i++) {
+                    entryLayoutParams.height += dpToPixel(25);
+                }
+
                 entryLayoutParams.startToStart = parent.getId();
                 entryLayoutParams.endToEnd = parent.getId();
                 entryLayoutParams.topToBottom = entries.get(index - 1).getId();
-                android.util.Log.d("Testing", "entries.get(index-1).getId() is: " + entries.get(index - 1).getId());
                 entryLayoutParams.topMargin = dpToPixel(100);
                 newEntry.setLayoutParams(entryLayoutParams);
                 parent.addView(newEntry);
@@ -212,6 +230,21 @@ public class PlansFragment extends Fragment {
             entry.setVisibility(View.VISIBLE);
             entry.setText(plansList.get(0).getNameList());
 
+            ConstraintLayout.LayoutParams entryLayoutParams = new ConstraintLayout.LayoutParams(
+                    dpToPixel(350),
+                    dpToPixel(125)
+            );
+
+            for(int i=0; i<(plansList.get(0).getListSize() - 4); i++) {
+                entryLayoutParams.height += dpToPixel(25);
+            }
+
+            entryLayoutParams.startToStart = parent.getId();
+            entryLayoutParams.endToEnd = parent.getId();
+            entryLayoutParams.topToBottom = R.id.plan_button;
+            entryLayoutParams.topMargin = dpToPixel(100);
+            entry.setLayoutParams(entryLayoutParams);
+
             Button deletePlan_button = root.findViewById(R.id.deletePlan_button);
             deletePlan_button.setVisibility(View.VISIBLE);
 
@@ -254,10 +287,14 @@ public class PlansFragment extends Fragment {
 
                 newEntry.setLineSpacing(entries.get(0).getLineSpacingExtra(), entries.get(0).getLineSpacingMultiplier());
 
-                ConstraintLayout.LayoutParams entryLayoutParams = new ConstraintLayout.LayoutParams(
+                entryLayoutParams = new ConstraintLayout.LayoutParams(
                         dpToPixel(350),
                         dpToPixel(125)
                 );
+
+                for(int j=0; j<(plansList.get(i).getListSize() - 4); j++) {
+                    entryLayoutParams.height += dpToPixel(25);
+                }
 
                 entryLayoutParams.startToStart = parent.getId();
                 entryLayoutParams.endToEnd = parent.getId();
