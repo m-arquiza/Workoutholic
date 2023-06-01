@@ -20,6 +20,7 @@
             android:layout_marginStart='30dp'
             android:layout_marginBottom="316dp"
             android:text="Create Plan"
+            android:textStyle='bold'
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,6 +36,7 @@
             android:gravity="center"
             android:background="#009e60"
             android:layout_marginBottom="10dp"
+            android:textStyle='bold'
 
             app:layout_constraintBottom_toTopOf="@+id/plan"
             app:layout_constraintStart_toStartOf="@+id/plan"
@@ -50,6 +52,7 @@
             android:textSize='25sp'
             android:layout_marginBottom="10dp"
             android:background="#009e60"
+            android:textStyle='bold'
 
             app:layout_constraintBottom_toTopOf="@+id/plan"
             app:layout_constraintEnd_toEndOf="@+id/plan"
@@ -66,6 +69,7 @@
             android:lineSpacingExtra="5dp"
             android:textColor="@color/white"
             android:textSize="20sp"
+            android:textStyle='bold'
 
             android:layout_marginTop="100dp"
             app:layout_constraintEnd_toEndOf="parent"
