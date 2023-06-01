@@ -21,10 +21,9 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<Integer> foodStorage = new MutableLiveData<>(0);
     private MutableLiveData<Integer> waterStorage = new MutableLiveData<>(0);
 
-    private MutableLiveData<Integer> totalMoney = new MutableLiveData<>(0);
 
     private MutableLiveData<boolean[]> toyStorage = new MutableLiveData<>(new boolean[3]);
-    private MutableLiveData<Integer> totalMoney = new MutableLiveData<>(200);
+    private MutableLiveData<Integer> totalMoney = new MutableLiveData<>(0);
     private MutableLiveData<boolean[]> autos = new MutableLiveData<>(new boolean[3]);
     private MutableLiveData<boolean[][]> hats = new MutableLiveData<>(new boolean[9][2]);
 
