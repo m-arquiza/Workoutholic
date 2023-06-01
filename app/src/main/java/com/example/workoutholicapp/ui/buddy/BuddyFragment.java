@@ -2,6 +2,7 @@ package com.example.workoutholicapp.ui.buddy;
 
 import android.media.Image;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,10 @@ import com.example.workoutholicapp.ui.MainViewModel;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+/*
+    Class to represent functions within the buddy page of the app.
+ */
 public class BuddyFragment extends Fragment {
 
     private FragmentBuddyBinding binding;
@@ -37,7 +42,7 @@ public class BuddyFragment extends Fragment {
     private Handler handler;
     private final int intervalInMillis = 24 * 60 * 60 * 1000; // 1 day in milliseconds
     //private final int intervalInMillis = 5000; // for testing/demo purposes
-
+    private boolean[] isTime;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +52,7 @@ public class BuddyFragment extends Fragment {
         hungerLevel = 0;
         thirstLevel = 0;
         happinessLevel = 0;
+        isTime = new boolean[]{true, true, true};
     }
 
     private void scheduleHungerLevelUpdate() {
@@ -280,6 +286,10 @@ public class BuddyFragment extends Fragment {
             }
         });
 
+        /*
+            Toy display client interactions
+         */
+
         // updates display in dog inventory
         mainViewModel.toys().observe(getViewLifecycleOwner(), value -> {
             for(int i = 0; i < value.length; i++) {
@@ -304,65 +314,204 @@ public class BuddyFragment extends Fragment {
         });
 
 
-
-        // dog "plays with" ball if ball is currently selected
+        // dog "plays with" ball if ball is available
         ImageButton ball = root.findViewById(R.id.dog_toy1);
+        TextView warning = root.findViewById(R.id.dialog_title);
+        final long[] timeLeftInMillis = {0, 0, 0};
         ball.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ImageView toy = getView().findViewById(R.id.toy_ball);
+                ImageView bone = getView().findViewById(R.id.toy_bone);
+                ImageView stick = getView().findViewById(R.id.toy_stick);
+                bone.setAlpha(0.0f);
+                stick.setAlpha(0.0f);
                 boolean isEnabled = mainViewModel.toys().getValue()[0];
                 if(isEnabled){
-                    if (toy.getAlpha() == 0.0f) {
+                    if (toy.getAlpha() == 0.0f && isTime[0]) {
                         toy.setAlpha(1.0f);
                         changeHappiness();
+                        warning.setAlpha(0.0f);
+                        isTime[0] = false;
+                        CountDownTimer timer = new CountDownTimer(2 * 60 * 60 * 1000, 1000) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+                                timeLeftInMillis[0] = millisUntilFinished;
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                // Timer finished, handle as needed
+                                isTime[0] = true;
+                            }
+                        };
+                        timer.start();
+                    } else if (toy.getAlpha() == 0.0f) {
+                        int seconds = (int) ((timeLeftInMillis[0] / 1000));
+                        String message = "";
+                        if (seconds > 3600) {
+                            message = "Wait " +  seconds / 3600 + "h " +  (seconds % 3600) / 60 + "m to play with this toy again!";
+                        } else if (seconds > 60) {
+                            message = "Wait " +  seconds / 60 + "m " + seconds % 60 +  "s to play with this toy again!";
+                        } else {
+                            message = "Wait " +  seconds + "s to play with this toy again!";
+                        }
+                        warning.setText(message);
+                        warning.setAlpha(1.0f);
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                warning.setAlpha(0.0f);
+                            }
+                        }, 5 * 1000); // 5 seconds in milliseconds
+                    } else {
+                        toy.setAlpha(0.0f);
                     }
-                } else  {
-                    toy.setAlpha(0.0f);
                 }
             }
         });
+
+        // dog "plays with" bone if bone is available
 
         ImageButton bone = root.findViewById(R.id.dog_toy2);
         bone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ImageView toy = getView().findViewById(R.id.toy_bone);
+                ImageView ball = getView().findViewById(R.id.toy_ball);
+                ImageView stick = getView().findViewById(R.id.toy_stick);
+                ball.setAlpha(0.0f);
+                stick.setAlpha(0.0f);
                 boolean isEnabled = mainViewModel.toys().getValue()[1];
                 if(isEnabled){
-                    if (toy.getAlpha() == 0.0f) {
+                    if (toy.getAlpha() == 0.0f && isTime[1]) {
                         toy.setAlpha(1.0f);
                         changeHappiness();
+                        warning.setAlpha(0.0f);
+                        isTime[1] = false;
+                        CountDownTimer timer = new CountDownTimer(2 * 60 * 60 * 1000, 1000) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+                                timeLeftInMillis[1] = millisUntilFinished;
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                // Timer finished, handle as needed
+                                isTime[1] = true;
+                            }
+                        };
+                        timer.start();
+                    } else if (toy.getAlpha() == 0.0f) {
+                        int seconds = (int) ((timeLeftInMillis[1] / 1000));
+                        String message = "";
+                        if (seconds > 3600) {
+                            message = "Wait " +  seconds / 3600 + "h " +  (seconds % 3600) / 60 + "m to play with this toy again!";
+                        } else if (seconds > 60) {
+                            message = "Wait " +  seconds / 60 + "m " + seconds % 60 +  "s to play with this toy again!";
+                        } else {
+                            message = "Wait " + seconds + "s to play with this toy again!";
+                        }
+                        warning.setText(message);
+                        warning.setAlpha(1.0f);
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                warning.setAlpha(0.0f);
+                            }
+                        }, 5 * 1000); // 5 seconds in milliseconds
                     } else {
                         toy.setAlpha(0.0f);
                     }
-                } else {
-                    toy.setAlpha(0.0f);
                 }
             }
         });
 
+        // dog "plays with" stick if stick is available
         ImageButton stick = root.findViewById(R.id.dog_toy3);
         stick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ImageView toy = getView().findViewById(R.id.toy_stick);
+                ImageView ball = getView().findViewById(R.id.toy_ball);
+                ImageView bone = getView().findViewById(R.id.toy_bone);
+                ball.setAlpha(0.0f);
+                bone.setAlpha(0.0f);
                 boolean isEnabled = mainViewModel.toys().getValue()[2];
-                if(isEnabled){
-                    if (toy.getAlpha() == 0.0f) {
+                if (isEnabled) {
+                    if (toy.getAlpha() == 0.0f && isTime[2]) {
                         toy.setAlpha(1.0f);
                         changeHappiness();
+                        warning.setAlpha(0.0f);
+                        isTime[2] = false;
+                        CountDownTimer timer = new CountDownTimer(2 * 60 * 60 * 1000, 1000) {
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+                                timeLeftInMillis[2] = millisUntilFinished;
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                // Timer finished, handle as needed
+                                isTime[2] = true;
+                            }
+                        };
+                        timer.start();
+                    } else if (toy.getAlpha() == 0.0f) {
+                        int seconds = (int) ((timeLeftInMillis[2] / 1000));
+                        String message = "";
+                        if (seconds > 3600) {
+                            message = "Wait " +  seconds / 3600 + "h " +  (seconds % 3600) / 60 + "m to play with this toy again!";
+                        } else if (seconds > 60) {
+                            message = "Wait " +  seconds / 60 + "m " + seconds % 60 +  "s to play with this toy again!";
+                        } else {
+                            message = "Wait " + seconds + "s to play with this toy again!";
+                        }
+                        warning.setText(message);
+                        warning.setAlpha(1.0f);
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                warning.setAlpha(0.0f);
+                            }
+                        }, 5 * 1000); // 5 seconds in milliseconds
                     } else {
                         toy.setAlpha(0.0f);
                     }
-                } else {
-                    toy.setAlpha(0.0f);
+                }
+            }
+        });
+
+
+        /*
+            Hat display functions
+         */
+
+        // displays selected hat
+        mainViewModel.hats().observe(getViewLifecycleOwner(), value -> {
+            int[] images = {R.drawable.shiba,
+                            R.drawable.shiba_prop,
+                            R.drawable.shiba_frog,
+                            R.drawable.shiba_astro,
+                            R.drawable.shiba_beanie,
+                            R.drawable.shiba_tiara,
+                            R.drawable.shiba_rice,
+                            R.drawable.shiba_daisy,
+                            R.drawable.shiba_top};
+            for(int i = 0; i < value.length; i++) {
+                if(value[i][1]) {
+                    ((ImageView) root.findViewById(R.id.shiba)).setImageResource(images[i]);
+                    return;
                 }
             }
         });
 
         return root;
     }
+
 
     public void changeHappiness() {
         View happy = getView().findViewById(R.id.happiness_bar);
