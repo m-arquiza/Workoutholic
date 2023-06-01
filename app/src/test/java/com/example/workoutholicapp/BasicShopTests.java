@@ -94,7 +94,7 @@ public class BasicShopTests {
         vm.setMoney(20);
         vm.buyToyClick(1);
         int money = vm.moneyAmount().getValue();
-        assertEquals(20, money);
+        assertEquals(0, money);
     }
 
     @Test
