@@ -82,12 +82,14 @@ public class MainViewModel extends ViewModel {
         Integer money = totalMoney.getValue();
         int index = toyNum-1;
         boolean[] toys = toyStorage.getValue();
-        if (money >= 50 && !toys[index]) {
-            toys[index] = true;
-            toyStorage.setValue(toys);
-            if (toyNum == 1) {
+        if (!toys[index]) {
+            if (money >= 20 && toyNum == 1) {
+                toys[index] = true;
+                toyStorage.setValue(toys);
                 totalMoney.setValue(money - 20);
-            } else {
+            } else if (money >= 50) {
+                toys[index] = true;
+                toyStorage.setValue(toys);
                 totalMoney.setValue(money - 50);
             }
             return true;
