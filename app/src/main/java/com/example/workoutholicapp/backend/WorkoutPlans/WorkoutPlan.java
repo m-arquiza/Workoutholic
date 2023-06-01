@@ -36,7 +36,9 @@ public class WorkoutPlan {
                 wholeplan += "\n";
             }
             Log element = input.get(indexLog);
-            wholeplan += (indexLog + 1) + ": " + element.getExercise().getName();
+            wholeplan += (indexLog + 1) + ": " + element.getExercise().getName()
+                          + ": " + element.getExercise().getWeight() + " lbs"
+                          + " " + element.getExercise().getNumberOfReps() + " reps";
             indexLog++;
         }
 
@@ -47,6 +49,18 @@ public class WorkoutPlan {
     }
     public LinkedList<Log> getList(){
         return list;
+    }
+
+    public int getWorkoutLength() {
+        int result = 0;
+        if(list.size() > 0) {
+            for(int i=0; i<list.size(); i++) {
+                if(list.get(i).getExercise().getName().length() > 25) {
+                    result++;
+                }
+            }
+        }
+        return result;
     }
 
     public String getNameList(){

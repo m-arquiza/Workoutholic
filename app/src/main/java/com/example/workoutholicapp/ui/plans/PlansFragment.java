@@ -103,6 +103,10 @@ public class PlansFragment extends Fragment {
                     entryLayoutParams.height += dpToPixel(25);
                 }
 
+                for(int i=0; i<plansList.get(0).getWorkoutLength(); i++) {
+                    entryLayoutParams.height += dpToPixel(30);
+                }
+
                 entryLayoutParams.startToStart = parent.getId();
                 entryLayoutParams.endToEnd = parent.getId();
                 entryLayoutParams.topToBottom = R.id.plan_button;
@@ -155,6 +159,10 @@ public class PlansFragment extends Fragment {
 
                 for(int i=0; i<(plansList.get(index).getListSize() - 4); i++) {
                     entryLayoutParams.height += dpToPixel(25);
+                }
+
+                for(int i=0; i<plansList.get(index).getWorkoutLength(); i++) {
+                    entryLayoutParams.height += dpToPixel(30);
                 }
 
                 entryLayoutParams.startToStart = parent.getId();
@@ -239,6 +247,10 @@ public class PlansFragment extends Fragment {
                 entryLayoutParams.height += dpToPixel(25);
             }
 
+            for(int i=0; i<plansList.get(0).getWorkoutLength(); i++) {
+                entryLayoutParams.height += dpToPixel(30);
+            }
+
             entryLayoutParams.startToStart = parent.getId();
             entryLayoutParams.endToEnd = parent.getId();
             entryLayoutParams.topToBottom = R.id.plan_button;
@@ -294,6 +306,10 @@ public class PlansFragment extends Fragment {
 
                 for(int j=0; j<(plansList.get(i).getListSize() - 4); j++) {
                     entryLayoutParams.height += dpToPixel(25);
+                }
+
+                for(int j=0; j<plansList.get(i).getWorkoutLength(); j++) {
+                    entryLayoutParams.height += dpToPixel(30);
                 }
 
                 entryLayoutParams.startToStart = parent.getId();

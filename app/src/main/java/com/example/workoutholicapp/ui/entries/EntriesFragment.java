@@ -264,7 +264,22 @@ public class EntriesFragment extends Fragment {
                                       " \n Workout: " + logList.get(0).getExercise().getName() +
                                       " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
                                       " \n Repetitions: " + logList.get(0).getExercise().getNumberOfReps());
-                        entry.setLines(4);
+
+                        ConstraintLayout.LayoutParams entryLayoutParams = new ConstraintLayout.LayoutParams(
+                                dpToPixel(350),
+                                dpToPixel(125)
+                        );
+
+                        if(logList.get(0).getExercise().getName().length() >= 25) {
+                            entryLayoutParams.height += dpToPixel(30);
+                        }
+
+                        entryLayoutParams.startToStart = parent.getId();
+                        entryLayoutParams.endToEnd = parent.getId();
+                        entryLayoutParams.topToBottom = R.id.entry_button;
+                        entryLayoutParams.topMargin = dpToPixel(100);
+                        entry.setLayoutParams(entryLayoutParams);
+
                         Button deleteEntry_button = root.findViewById(R.id.deleteEntry_button);
                         deleteEntry_button.setVisibility(View.VISIBLE);
 
@@ -318,6 +333,10 @@ public class EntriesFragment extends Fragment {
                                 dpToPixel(350),
                                 dpToPixel(125)
                         );
+
+                        if(logList.get(index).getExercise().getName().length() >= 25) {
+                            entryLayoutParams.height += dpToPixel(30);
+                        }
 
                         entryLayoutParams.startToStart = parent.getId();
                         entryLayoutParams.endToEnd = parent.getId();
@@ -402,7 +421,21 @@ public class EntriesFragment extends Fragment {
                     " \n Workout: " + logList.get(0).getExercise().getName() +
                     " \n Weights: " + logList.get(0).getExercise().getWeight() + " lbs" +
                     " \n Repetitions: " + logList.get(0).getExercise().getNumberOfReps());
-            entry.setLines(4);
+
+            ConstraintLayout.LayoutParams entryLayoutParams = new ConstraintLayout.LayoutParams(
+                    dpToPixel(350),
+                    dpToPixel(125)
+            );
+
+            if(logList.get(0).getExercise().getName().length() >= 25) {
+                entryLayoutParams.height += dpToPixel(30);
+            }
+
+            entryLayoutParams.startToStart = parent.getId();
+            entryLayoutParams.endToEnd = parent.getId();
+            entryLayoutParams.topToBottom = R.id.entry_button;
+            entryLayoutParams.topMargin = dpToPixel(100);
+            entry.setLayoutParams(entryLayoutParams);
 
             Button deleteEntry_button = root.findViewById(R.id.deleteEntry_button);
             deleteEntry_button.setVisibility(View.VISIBLE);
@@ -451,10 +484,14 @@ public class EntriesFragment extends Fragment {
 
                 newEntry.setLineSpacing(entries.get(0).getLineSpacingExtra(), entries.get(0).getLineSpacingMultiplier());
 
-                ConstraintLayout.LayoutParams entryLayoutParams = new ConstraintLayout.LayoutParams(
+                entryLayoutParams = new ConstraintLayout.LayoutParams(
                         dpToPixel(350),
                         dpToPixel(125)
                 );
+
+                if(logList.get(i).getExercise().getName().length() >= 25) {
+                    entryLayoutParams.height += dpToPixel(30);
+                }
 
                 entryLayoutParams.startToStart = parent.getId();
                 entryLayoutParams.endToEnd = parent.getId();
