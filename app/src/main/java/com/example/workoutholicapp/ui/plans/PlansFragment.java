@@ -176,7 +176,7 @@ public class PlansFragment extends Fragment {
                 buttons.add(newDeleteEntry_button);
 
                 newDeleteEntry_button.setOnClickListener(v3 -> {
-                    logList.remove(index);
+                    plansList.remove(index);
                     android.util.Log.d("Tag123", "index is:" + index);
                     for(int j=index; j<plansList.size(); j++) {
                         entries.get(j).setText(plansList.get(j).getNameList());
