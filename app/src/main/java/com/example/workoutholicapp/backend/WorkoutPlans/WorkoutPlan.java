@@ -32,8 +32,11 @@ public class WorkoutPlan {
         String wholeplan = "";
         int indexLog = 0;
         while (indexLog < input.size()) {
+            if(indexLog >= 1) {
+                wholeplan += "\n";
+            }
             Log element = input.get(indexLog);
-            wholeplan = wholeplan + "\n"+element.getExercise().getName();
+            wholeplan += (indexLog + 1) + ": " + element.getExercise().getName();
             indexLog++;
         }
         this.wholeplan = wholeplan;

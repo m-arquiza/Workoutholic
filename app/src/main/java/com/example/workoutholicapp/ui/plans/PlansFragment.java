@@ -80,10 +80,8 @@ public class PlansFragment extends Fragment {
         Button entryButton = root.findViewById(R.id.plan_button);
         entryButton.setOnClickListener(v -> {
             currentPlan.setList(logList);
-            currentPlan.setName("Workout plan");
+            currentPlan.setName("Workout Plan!");
             plansList.add(currentPlan);
-
-
 
             if(plansList.size() == 1) {
                 TextView entryDate = root.findViewById(R.id.entryDate);
@@ -93,7 +91,6 @@ public class PlansFragment extends Fragment {
                 TextView entry = root.findViewById(R.id.plan);
                 entry.setVisibility(View.VISIBLE);
                 entry.setText(plansList.get(0).getNameList());
-                entry.setLines(4);
                 Button deletePlan_button = root.findViewById(R.id.deletePlan_button);
                 deletePlan_button.setVisibility(View.VISIBLE);
 
@@ -149,7 +146,7 @@ public class PlansFragment extends Fragment {
                 newEntryDate.setText(plansList.get(index).getName());
 
                 ConstraintLayout.LayoutParams dateLayoutParams = new ConstraintLayout.LayoutParams(
-                        dpToPixel(150),
+                        dpToPixel(175),
                         dpToPixel(50)
                 );
 
@@ -195,23 +192,6 @@ public class PlansFragment extends Fragment {
                     buttons.remove(buttons.size()-1);
                 });
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         });
 
         if(plansList.isEmpty()) {
@@ -226,7 +206,7 @@ public class PlansFragment extends Fragment {
 
             TextView entry = root.findViewById(R.id.plan);
             entry.setVisibility(View.VISIBLE);
-            entry.setText(currentPlan.getNameList());
+            entry.setText(plansList.get(0).getNameList());
 
             Button deletePlan_button = root.findViewById(R.id.deletePlan_button);
             deletePlan_button.setVisibility(View.VISIBLE);
@@ -283,7 +263,7 @@ public class PlansFragment extends Fragment {
                 newEntryDate.setText("Workout Plan!");
 
                 ConstraintLayout.LayoutParams dateLayoutParams = new ConstraintLayout.LayoutParams(
-                        dpToPixel(150),
+                        dpToPixel(175),
                         dpToPixel(50)
                 );
 
@@ -331,8 +311,6 @@ public class PlansFragment extends Fragment {
                 });
             }
         }
-
-
 
         mainViewModel.setPlans(plansList);
         return root;
