@@ -6,6 +6,12 @@
     app:startDestination="@+id/navigation_buddy">
 
     <fragment
+        android:id="@+id/navigation_plans"
+        android:name="com.example.workoutholicapp.ui.plans.PlansFragment"
+        android:label="Plans"
+        tools:layout="@layout/fragment_plans" />
+
+    <fragment
         android:id="@+id/navigation_entries"
         android:name="com.example.workoutholicapp.ui.entries.EntriesFragment"
         android:label="@string/title_entries"

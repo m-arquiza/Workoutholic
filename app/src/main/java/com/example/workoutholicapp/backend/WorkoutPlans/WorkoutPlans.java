@@ -3,10 +3,12 @@ package com.example.workoutholicapp.backend.WorkoutPlans;
 import static com.example.workoutholicapp.backend.ViewWorkout.ViewWorkout.JSONmapper;
 import static com.example.workoutholicapp.backend.ViewWorkout.ViewWorkout.View;
 
+import com.example.workoutholicapp.backend.Logger.Log;
 import com.example.workoutholicapp.backend.ViewWorkout.Exercise;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class WorkoutPlans {
@@ -19,7 +21,7 @@ public class WorkoutPlans {
      * @param  inputList List of exercises to be made into a workout plan
      * @param  name the name of that plan
      */
-    public static void Create(List<Exercise> inputList, String name){
+    public static void Create(LinkedList<Log> inputList, String name){
         WorkoutPlan plan = new WorkoutPlan();
         plan.setList(inputList);
         plan.setName(name);
@@ -33,9 +35,9 @@ public class WorkoutPlans {
      * @param  input the name of the plan you are searching for
      * @return List<Exercises> that coordinates to the name
      */
-    public static List<Exercise> Choose(String input){
+    public static LinkedList<Log> Choose(String input){
         Iterator<WorkoutPlan> itr = workoutplans.iterator();
-        List<Exercise> output =null;
+        LinkedList<Log> output =null;
         while(itr.hasNext()){
             WorkoutPlan next = itr.next();
             if(next.getName().equals(input)){
@@ -53,9 +55,9 @@ public class WorkoutPlans {
      * @param  e     exercise
      * @return List<Exercises> that coordinates to the name
      */
-    public static List<Exercise> ChooseAdd(String input, Exercise e){
+    public static LinkedList<Log> ChooseAdd(String input, Log e){
         Iterator<WorkoutPlan> itr = workoutplans.iterator();
-        List<Exercise> output =null;
+        LinkedList<Log> output =null;
         while(itr.hasNext()){
             WorkoutPlan next = itr.next();
             if(next.getName().equals(input)){
@@ -74,9 +76,9 @@ public class WorkoutPlans {
      * @param  e     exercise
      * @return List<Exercises> that coordinates to the name
      */
-    public static List<Exercise> ChooseRemove(String input, Exercise e){
+    public static LinkedList<Log> ChooseRemove(String input, Log e){
         Iterator<WorkoutPlan> itr = workoutplans.iterator();
-        List<Exercise> output =null;
+        LinkedList<Log> output =null;
         while(itr.hasNext()){
             WorkoutPlan next = itr.next();
             if(next.getName().equals(input)){

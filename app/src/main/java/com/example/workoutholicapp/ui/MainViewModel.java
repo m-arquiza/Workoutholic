@@ -3,14 +3,19 @@ package com.example.workoutholicapp.ui;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
 import com.example.workoutholicapp.backend.Logger.Log;
 import com.example.workoutholicapp.backend.ViewWorkout.Exercise;
+import com.example.workoutholicapp.backend.WorkoutPlans.WorkoutPlan;
+
 import java.util.LinkedList;
-import java.util.Arrays;
+
+
 
 /*
     Class to hold shared variables across fragments and functions that interact with them.
  */
+
 public class MainViewModel extends ViewModel {
     // Storage variables: hold signifiers for "obtaining" certain pieces of data
     private MutableLiveData<Integer> foodStorage = new MutableLiveData<>(0);
@@ -21,6 +26,8 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<boolean[][]> hats = new MutableLiveData<>(new boolean[9][2]);
 
     private LinkedList<com.example.workoutholicapp.backend.Logger.Log> logList = new LinkedList<>();
+
+    private LinkedList<com.example.workoutholicapp.backend.WorkoutPlans.WorkoutPlan> plansList = new LinkedList<>();
 
     public MainViewModel() {
         boolean[][] h = hats.getValue();
@@ -207,6 +214,15 @@ public class MainViewModel extends ViewModel {
         return (LinkedList<Log>)this.logList.clone();
     }
 
+
+    public void setPlans(LinkedList<com.example.workoutholicapp.backend.WorkoutPlans.WorkoutPlan> list) {
+        this.plansList = list;
+    }
+
+    public LinkedList<com.example.workoutholicapp.backend.WorkoutPlans.WorkoutPlan> getPlans() {
+        return (LinkedList<WorkoutPlan>)this.plansList.clone();
+    }
+
     /*
         Getter function for hats.
         @returns hats
@@ -215,3 +231,4 @@ public class MainViewModel extends ViewModel {
         return hats;
     }
 }
+
