@@ -329,6 +329,7 @@ public class PlansFragment extends Fragment {
         dest.setTextColor(source.getTextColors());
         dest.setBackground(source.getBackground());
         dest.setGravity(source.getGravity());
+        dest.setTypeface(source.getTypeface());
 
         return dest;
     }

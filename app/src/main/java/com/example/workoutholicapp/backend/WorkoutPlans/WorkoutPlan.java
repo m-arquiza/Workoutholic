@@ -39,6 +39,9 @@ public class WorkoutPlan {
             wholeplan += (indexLog + 1) + ": " + element.getExercise().getName();
             indexLog++;
         }
+        if(indexLog == 0) {
+            wholeplan += "Please Log Workout To Create Plan!";
+        }
         this.wholeplan = wholeplan;
     }
     public LinkedList<Log> getList(){
